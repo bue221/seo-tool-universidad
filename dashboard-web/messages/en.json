@@ -1,0 +1,25 @@
+{
+  "Common": {
+    "appName": "SEO Custom Tool",
+    "tagline": "SEO audits with deep scraping, Insights and competitive analysis.",
+    "switchToEnglish": "Switch to English",
+    "switchToSpanish": "Switch to Spanish"
+  },
+  "HomePage": {
+    "title": "Welcome to SEO Custom Tool",
+    "intro": "<code>web-foundation</code> layer active: i18n is wired up.",
+    "ctaAudit": "Start audit",
+    "ctaDocs": "Read docs"
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "description": "The route you are looking for doesn't exist or was moved.",
+    "backHome": "Back to home"
+  },
+  "Theme": {
+    "label": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  }
+}

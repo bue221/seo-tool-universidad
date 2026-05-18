@@ -1,0 +1,25 @@
+{
+  "Common": {
+    "appName": "SEO Custom Tool",
+    "tagline": "Auditoría SEO con scraping profundo, Insights y análisis competitivo.",
+    "switchToEnglish": "Cambiar a inglés",
+    "switchToSpanish": "Cambiar a español"
+  },
+  "HomePage": {
+    "title": "Bienvenido a SEO Custom Tool",
+    "intro": "Capa <code>web-foundation</code> activa: i18n configurado.",
+    "ctaAudit": "Iniciar auditoría",
+    "ctaDocs": "Ver documentación"
+  },
+  "NotFound": {
+    "title": "Página no encontrada",
+    "description": "La ruta que buscas no existe o fue movida.",
+    "backHome": "Volver al inicio"
+  },
+  "Theme": {
+    "label": "Tema",
+    "light": "Claro",
+    "dark": "Oscuro",
+    "system": "Sistema"
+  }
+}

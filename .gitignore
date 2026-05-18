@@ -1,0 +1,29 @@
+# Node / Next.js
+node_modules/
+.next/
+out/
+dist/
+*.log
+.env
+.env.local
+.env.*.local
+
+# Go
+*.exe
+*.test
+*.out
+bin/
+vendor/
+
+# Playwright
+ms-playwright/
+test-results/
+playwright-report/
+
+# IDE / OS
+.DS_Store
+.idea/
+.vscode/
+
+# Claude / local settings (mantener .mcp.json y .claude/settings.local.json fuera del repo si tienen tokens)
+.claude/settings.local.json

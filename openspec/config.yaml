@@ -1,0 +1,21 @@
+# OpenSpec project configuration
+# Docs: https://github.com/Fission-AI/OpenSpec
+project:
+  name: seo-custom-tool
+  description: >
+    Herramienta de auditoría SEO con monorepo híbrido (Next.js + Go).
+    Combina PageSpeed Insights público con scraping profundo (Playwright)
+    para auditoría On-Page, detección GTM/GA4/Ads, densidad de keywords
+    y análisis de sentimiento.
+
+# Domains modelados como specs
+domains:
+  - audit-contract     # Contrato JSON entre dashboard-web y scraper-api
+  - dashboard-web      # Orquestador + UI + Supabase
+  - scraper-api        # Motor Go + Playwright
+
+# Convención SDD: cada cambio vive en openspec/changes/<slug>/
+# y se archiva a openspec/specs/<domain>/ al validar.
+workflow:
+  archive_dir: specs
+  changes_dir: changes
