@@ -1,0 +1,25 @@
+openspec/changes/scraper-foundation/tasks.md
+  s_e0e6a8e174ce05::t_3337e98179ab4e 1-155
+openspec/changes/scraper-foundation/proposal.md
+  s_e0e6a8e174ce05::t_1b1b432bf25520 1-123
+openspec/changes/scraper-foundation/design.md
+  s_e0e6a8e174ce05::t_eb610dcaad02ec 1-409
+openspec/changes/scraper-foundation/specs/scraper-api/spec.md
+  s_e0e6a8e174ce05::t_f391f0cb59ba0a 1-185
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.8",
+  "base_commit_sha": "eb1fd6424f587e6cdb45caf5c6710cff8ea9cd88",
+  "prompts": {},
+  "sessions": {
+    "s_e0e6a8e174ce05": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "22a13b1c-82d6-4e2e-94e3-5e74658696f9",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "cplaza <camilo.plaza@mercadolibre.com.co>"
+    }
+  }
+}
