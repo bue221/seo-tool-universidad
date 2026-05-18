@@ -1,0 +1,25 @@
+openspec/changes/analytics-dashboard/tasks.md
+  s_e0e6a8e174ce05::t_2c5510fb67bf67 1-154
+openspec/changes/analytics-dashboard/proposal.md
+  s_e0e6a8e174ce05::t_dcb7e3a63346a1 1-109
+openspec/changes/analytics-dashboard/specs/dashboard-web/spec.md
+  s_e0e6a8e174ce05::t_bea67ae1e13511 1-131
+openspec/changes/analytics-dashboard/design.md
+  s_e0e6a8e174ce05::t_002bf49e7a4f67 1-287
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.8",
+  "base_commit_sha": "c99eb89f07db6e7a9ffd3382e5406695f241c1c1",
+  "prompts": {},
+  "sessions": {
+    "s_e0e6a8e174ce05": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "22a13b1c-82d6-4e2e-94e3-5e74658696f9",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "cplaza <camilo.plaza@mercadolibre.com.co>"
+    }
+  }
+}
