@@ -1,0 +1,30 @@
+import { addReviewResponse } from '../_actions/add-review-response';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+
+export function ReviewsList({ reviews }: { reviews: Array<Record<string, string | number | null>> }) {
+  if (!reviews.length) return <p className="text-sm text-muted-foreground">No reviews yet.</p>;
+
+  return (
+    <div className="space-y-2">
+      {reviews.map((review) => (
+        <Card key={String(review.id)}>
+          <CardContent className="space-y-2 p-4">
+            <p className="font-medium">{review.author_name} · {review.rating}★</p>
+            <p className="text-sm">{review.body}</p>
+            {review.response ? (
+              <p className="text-xs text-muted-foreground">Response: {review.response}</p>
+            ) : (
+              <form action={addReviewResponse} className="flex gap-2">
+                <input type="hidden" name="id" value={String(review.id)} />
+                <Input name="response" placeholder="Write response" />
+                <Button type="submit" variant="outline">Reply</Button>
+              </form>
+            )}
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  );
+}
