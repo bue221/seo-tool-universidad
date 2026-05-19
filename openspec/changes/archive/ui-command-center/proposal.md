@@ -1,6 +1,6 @@
 # Change: ui-command-center
 
-**Status:** proposed
+**Status:** archived (2026-05-19)
 **Created:** 2026-05-19
 **Domain:** dashboard-web
 **Spec target:** `openspec/specs/dashboard-web/spec.md` (v0.7.0 → v0.8.0)

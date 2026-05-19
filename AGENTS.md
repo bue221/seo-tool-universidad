@@ -121,7 +121,7 @@ Usamos **OpenSpec** como herramienta oficial y las **skills SDD** locales como a
 | Domain | Spec | Version | Source |
 |--------|------|---------|--------|
 | `audit-contract` | [`openspec/specs/audit-contract/spec.md`](openspec/specs/audit-contract/spec.md) | v0.2.0 | `woorank-checker` (archived) |
-| `dashboard-web` | [`openspec/specs/dashboard-web/spec.md`](openspec/specs/dashboard-web/spec.md) | v0.7.0 | + `competitor-compare` (last archived) |
+| `dashboard-web` | [`openspec/specs/dashboard-web/spec.md`](openspec/specs/dashboard-web/spec.md) | v0.8.0 | + `ui-command-center` (last archived) |
 | `scraper-api` | _pendiente_ | — | parcialmente cubierto vía `audit-contract` v0.2.0 |
 
 ### Changes archivados
@@ -131,6 +131,7 @@ Usamos **OpenSpec** como herramienta oficial y las **skills SDD** locales como a
 - [`woorank-checker`](openspec/changes/archive/woorank-checker/) — 2026-05-19 — 16 chequeos técnicos SEO con score agregado (Go + tests). Bump `audit-contract` v0.2.0 (aditivo). UI tab "WooRank" en `/audit/[snapshotId]` con ring SVG + categorías.
 - [`gsc-simulator`](openspec/changes/archive/gsc-simulator/) — 2026-05-19 — Search Console simulado: 5 rutas + generador determinista (PRNG seedable por dominio) + SVG time series/donut. Sin tablas nuevas; propiedades = `DISTINCT url` de `seo_snapshots`.
 - [`competitor-compare`](openspec/changes/archive/competitor-compare/) — 2026-05-19 — Comparador on-demand de hasta 4 dominios reusando `runFullAudit`. Tabla con heatmap, radar SVG 6 ejes, keyword gap. Sin persistencia.
+- [`ui-command-center`](openspec/changes/archive/ui-command-center/) — 2026-05-19 — Rediseño visual transversal "dark enterprise command center" preservando paleta lime. 3 PRs encadenados: foundation (tokens + 6 primitives nuevos), shell (Sidebar permanente + Topbar con CommandBar inline + Clerk appearance theming), pages (landing re-layout + dashboard KPI grid + audit/compare/gsc con `PageHeader` + `GradientHeading`). Supersedes `ui-polish`.
 
 ### Próximos changes propuestos
 
