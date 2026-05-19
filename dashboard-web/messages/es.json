@@ -23,7 +23,16 @@
     "feature3Desc": "Términos top y densidad por página auditada.",
     "feature4Title": "Snapshot de sentimiento",
     "feature4Desc": "Lectura rápida de polaridad del contenido competidor.",
-    "finalCta": "¿Listo para mejorar tu visibilidad?"
+    "trust": "Diseñado para flujos SEO académicos y profesionales.",
+    "faqTitle": "Preguntas frecuentes",
+    "faq1q": "¿Necesito service accounts de Google?",
+    "faq1a": "No. LumoSEO usa la API pública de PageSpeed más scraping profundo.",
+    "faq2q": "¿Puedo auditar sitios con mucho JavaScript?",
+    "faq2a": "Sí. El scraper corre con Chromium headless vía Playwright.",
+    "faq3q": "¿Puedo guardar historial por usuario?",
+    "faq3a": "Sí. Los snapshots se persisten con aislamiento por usuario.",
+    "finalCta": "¿Listo para mejorar tu visibilidad?",
+    "footer": "LumoSEO · Plataforma de flujos SEO técnicos"
   },
   "NotFound": {
     "title": "Página no encontrada",

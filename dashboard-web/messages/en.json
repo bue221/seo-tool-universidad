@@ -23,7 +23,16 @@
     "feature3Desc": "Top terms and density by audited page.",
     "feature4Title": "Sentiment snapshot",
     "feature4Desc": "Fast polarity read for competitive content.",
-    "finalCta": "Ready to improve your visibility?"
+    "trust": "Built for academic and professional SEO workflows.",
+    "faqTitle": "Frequently asked questions",
+    "faq1q": "Do I need Google service accounts?",
+    "faq1a": "No. LumoSEO uses the public PageSpeed API plus deep scraping.",
+    "faq2q": "Can I audit JavaScript-heavy sites?",
+    "faq2a": "Yes. The scraper runs with headless Chromium via Playwright.",
+    "faq3q": "Can I keep history per user?",
+    "faq3a": "Yes. Audit snapshots are persisted with user-level isolation.",
+    "finalCta": "Ready to improve your visibility?",
+    "footer": "LumoSEO · Technical SEO workflow platform"
   },
   "NotFound": {
     "title": "Page not found",

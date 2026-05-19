@@ -10,7 +10,13 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           <LocaleSwitcher />
           <ThemeToggle />
         </div>
-        <Card className="p-6">{children}</Card>
+        <Card className="p-6">
+          <div className="mb-4 text-center">
+            <p className="text-sm font-semibold tracking-tight">LumoSEO</p>
+            <p className="text-xs text-muted-foreground">Make your visibility measurable.</p>
+          </div>
+          {children}
+        </Card>
       </div>
     </div>
   );

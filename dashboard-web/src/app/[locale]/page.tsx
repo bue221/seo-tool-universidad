@@ -40,6 +40,11 @@ export default async function HomePage({ params }: Props) {
       <header className="sticky top-0 z-10 border-b bg-background/95 px-6 py-4 backdrop-blur">
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between">
           <span className="font-semibold tracking-tight">{tc('appName')}</span>
+          <div className="hidden items-center gap-4 text-sm text-muted-foreground md:flex">
+            <a href="#features">Features</a>
+            <a href="#how">How it works</a>
+            <a href="#faq">FAQ</a>
+          </div>
           <div className="flex items-center gap-2">
             <LocaleSwitcher />
             <Separator orientation="vertical" className="h-6" />
@@ -58,14 +63,18 @@ export default async function HomePage({ params }: Props) {
           </div>
         </section>
 
-        <section className="grid gap-4 sm:grid-cols-2">
+        <section className="rounded-xl border bg-muted/30 p-4 text-center text-sm text-muted-foreground">
+          {t('trust')}
+        </section>
+
+        <section id="features" className="grid gap-4 sm:grid-cols-2">
           <Feature title={t('feature1Title')} description={t('feature1Desc')} />
           <Feature title={t('feature2Title')} description={t('feature2Desc')} />
           <Feature title={t('feature3Title')} description={t('feature3Desc')} />
           <Feature title={t('feature4Title')} description={t('feature4Desc')} />
         </section>
 
-        <section className="space-y-3 text-center">
+        <section id="how" className="space-y-3 text-center">
           <h2 className="text-2xl font-semibold">{t('howTitle')}</h2>
           <div className="grid gap-3 sm:grid-cols-3">
             <Step text={t('how1')} />
@@ -74,11 +83,24 @@ export default async function HomePage({ params }: Props) {
           </div>
         </section>
 
+        <section id="faq" className="space-y-3">
+          <h2 className="text-center text-2xl font-semibold">{t('faqTitle')}</h2>
+          <div className="grid gap-3 md:grid-cols-3">
+            <FaqItem q={t('faq1q')} a={t('faq1a')} />
+            <FaqItem q={t('faq2q')} a={t('faq2a')} />
+            <FaqItem q={t('faq3q')} a={t('faq3a')} />
+          </div>
+        </section>
+
         <section className="rounded-xl border p-8 text-center">
           <p className="mb-3 text-xl font-semibold">{t('finalCta')}</p>
           <Button asChild><Link href="/signup">{t('ctaPrimary')}</Link></Button>
         </section>
       </main>
+
+      <footer className="border-t px-6 py-5 text-center text-xs text-muted-foreground">
+        {t('footer')}
+      </footer>
     </div>
   );
 }
@@ -96,4 +118,15 @@ function Feature({ title, description }: { title: string; description: string })
 
 function Step({ text }: { text: string }) {
   return <div className="rounded-lg border p-4 text-sm">{text}</div>;
+}
+
+function FaqItem({ q, a }: { q: string; a: string }) {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle className="text-base">{q}</CardTitle>
+      </CardHeader>
+      <CardContent className="text-sm text-muted-foreground">{a}</CardContent>
+    </Card>
+  );
 }
