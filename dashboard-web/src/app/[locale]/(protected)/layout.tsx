@@ -46,6 +46,7 @@ export default async function ProtectedLayout({ children, params }: Props) {
 
   const tCommon = await getTranslations('Common');
   const tChrome = await getTranslations('Chrome');
+  const tTheme = await getTranslations('Theme');
 
   // displayName: del perfil en Supabase si está, sino local-part del email.
   // Tier es estático por ahora — cuando exista billing, viene de
@@ -59,6 +60,15 @@ export default async function ProtectedLayout({ children, params }: Props) {
         command: tChrome('Sidebar.sections.command'),
         insights: tChrome('Sidebar.sections.insights'),
       },
+      items: {
+        dashboard: tChrome('Sidebar.items.dashboard'),
+        audit: tChrome('Sidebar.items.audit'),
+        compare: tChrome('Sidebar.items.compare'),
+        gsc: tChrome('Sidebar.items.gsc'),
+        gbp: tChrome('Sidebar.items.gbp'),
+        analytics: tChrome('Sidebar.items.analytics'),
+        settings: tChrome('Sidebar.items.settings'),
+      },
       collapse: tChrome('Sidebar.collapse'),
       signOut: tChrome('Sidebar.signOut'),
     },
@@ -68,11 +78,35 @@ export default async function ProtectedLayout({ children, params }: Props) {
       notificationsEmpty: tChrome('Notifications.empty'),
       viewSwitcher: tChrome('ViewSwitcher.label'),
     },
+    commandPalette: {
+      ariaLabel: tChrome('CommandPalette.ariaLabel'),
+      description: tChrome('CommandPalette.description'),
+      placeholder: tChrome('CommandPalette.placeholder'),
+      empty: tChrome('CommandPalette.empty'),
+      groups: {
+        navigation: tChrome('CommandPalette.groups.navigation'),
+        theme: tChrome('CommandPalette.groups.theme'),
+        account: tChrome('CommandPalette.groups.account'),
+      },
+      items: {
+        dashboard: tChrome('CommandPalette.items.dashboard'),
+        audit: tChrome('CommandPalette.items.audit'),
+        gbp: tChrome('CommandPalette.items.gbp'),
+        analytics: tChrome('CommandPalette.items.analytics'),
+        settings: tChrome('CommandPalette.items.settings'),
+        signOut: tChrome('CommandPalette.items.signOut'),
+      },
+      theme: {
+        light: tTheme('light'),
+        dark: tTheme('dark'),
+        system: tTheme('system'),
+      },
+    },
   };
 
   return (
     <div className="relative flex min-h-screen text-foreground">
-      <CommandPalette locale={locale} />
+      <CommandPalette locale={locale} labels={labels.commandPalette} />
 
       <Sidebar
         brand={tCommon('appName')}

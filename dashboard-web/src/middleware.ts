@@ -1,19 +1,10 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 import createMiddleware from 'next-intl/middleware';
+import { NextResponse } from 'next/server';
 import { routing } from './i18n/routing';
 
 const intlMiddleware = createMiddleware(routing);
 
-/**
- * Rutas públicas (sin auth). Cualquier otra requiere sesión Clerk.
- *
- * Patrones:
- *   - `/` y `/{locale}` → landing pública.
- *   - `/{locale}/login(.*)` y `/{locale}/signup(.*)` → flujos Clerk (incl. sub-paths
- *     como `/login/factor-one`, `/login/sso-callback`).
- *   - `/api/*` ya está excluido por el `matcher` global, pero lo dejamos explícito
- *     para que cualquier futuro endpoint público quede cubierto.
- */
 const isPublicRoute = createRouteMatcher([
   '/',
   '/(es|en)',
@@ -21,16 +12,21 @@ const isPublicRoute = createRouteMatcher([
   '/(es|en)/signup(.*)',
 ]);
 
-/**
- * Composición:
- *   1) `clerkMiddleware` adjunta `auth()` al request y, si la ruta no es pública
- *      ni el usuario está autenticado, redirige a `NEXT_PUBLIC_CLERK_SIGN_IN_URL`.
- *   2) `intlMiddleware` reescribe/redirige según locale.
- *
- * Orden importante: Clerk primero para que la protección de ruta corra antes
- * de cualquier reescritura de URL por next-intl.
- */
+// Rutas de auth que un usuario ya autenticado NO debe ver
+const isAuthRoute = createRouteMatcher([
+  '/(es|en)/login(.*)',
+  '/(es|en)/signup(.*)',
+]);
+
 export default clerkMiddleware(async (auth, req) => {
+  const { userId } = await auth();
+
+  // Usuario ya autenticado intentando entrar a login/signup → redirigir al dashboard
+  if (userId && isAuthRoute(req)) {
+    const locale = req.nextUrl.pathname.split('/')[1] ?? 'es';
+    return NextResponse.redirect(new URL(`/${locale}/dashboard`, req.url));
+  }
+
   if (!isPublicRoute(req)) {
     await auth.protect();
   }

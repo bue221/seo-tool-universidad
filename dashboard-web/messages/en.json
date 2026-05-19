@@ -3,13 +3,27 @@
     "appName": "LumoSEO",
     "tagline": "Make your visibility measurable.",
     "switchToEnglish": "Switch to English",
-    "switchToSpanish": "Switch to Spanish"
+    "switchToSpanish": "Switch to Spanish",
+    "login": "Sign in",
+    "signOut": "Sign out",
+    "open": "Open",
+    "delete": "Delete",
+    "save": "Save"
   },
   "Chrome": {
     "Sidebar": {
       "sections": {
         "command": "Command",
         "insights": "Insights"
+      },
+      "items": {
+        "dashboard": "Nexus Panel",
+        "audit": "SEO Audit",
+        "compare": "Compare",
+        "gsc": "Search Console",
+        "gbp": "GBP",
+        "analytics": "Analytics",
+        "settings": "Settings"
       },
       "collapse": "Collapse sidebar",
       "signOut": "Sign out"
@@ -26,18 +40,45 @@
     },
     "User": {
       "tier": "Enterprise tier"
+    },
+    "CommandPalette": {
+      "ariaLabel": "Command palette",
+      "description": "Quick navigation and actions",
+      "placeholder": "Type a command or search…",
+      "empty": "No results found.",
+      "groups": {
+        "navigation": "Navigation",
+        "theme": "Theme",
+        "account": "Account"
+      },
+      "items": {
+        "dashboard": "Dashboard",
+        "audit": "Audit",
+        "gbp": "GBP",
+        "analytics": "Analytics",
+        "settings": "Settings",
+        "signOut": "Sign out"
+      }
     }
   },
   "Landing": {
     "title": "Measure your SEO visibility with confidence",
+    "titleLead": "Measure your",
+    "titleAccent": "visibility",
     "subtitle": "LumoSEO combines official Google metrics with deep on-page analysis in one professional workflow.",
-    "ctaPrimary": "Start free audit",
-    "ctaSecondary": "View dashboard",
+    "ctaPrimary": "Create free account",
+    "ctaSecondary": "I already have an account",
+    "ctaLogin": "Sign in",
+    "trustLine": "No credit card · Always free · HTTPS",
     "howTitle": "How it works",
+    "howTitleLead": "How it",
+    "howTitleAccent": "works",
     "how1": "Enter your URL",
     "how2": "Run parallel audit",
     "how3": "Review actionable insights",
     "featuresTitle": "Core capabilities",
+    "featuresTitleLead": "Core",
+    "featuresTitleAccent": "capabilities",
     "feature1Title": "Google PageSpeed",
     "feature1Desc": "Official performance and SEO signals.",
     "feature2Title": "Deep scraper",
@@ -48,6 +89,8 @@
     "feature4Desc": "Fast polarity read for competitive content.",
     "trust": "Built for academic and professional SEO workflows.",
     "faqTitle": "Frequently asked questions",
+    "faqTitleLead": "Frequently asked",
+    "faqTitleAccent": "questions",
     "faq1q": "Do I need Google service accounts?",
     "faq1a": "No. LumoSEO uses the public PageSpeed API plus deep scraping.",
     "faq2q": "Can I audit JavaScript-heavy sites?",
@@ -55,7 +98,21 @@
     "faq3q": "Can I keep history per user?",
     "faq3a": "Yes. Audit snapshots are persisted with user-level isolation.",
     "finalCta": "Ready to improve your visibility?",
-    "footer": "LumoSEO · Technical SEO workflow platform"
+    "finalCtaLead": "Ready to improve your",
+    "finalCtaAccent": "visibility?",
+    "footer": "LumoSEO · Technical SEO workflow platform",
+    "nav": {
+      "features": "Features",
+      "how": "How it works",
+      "faq": "FAQ"
+    },
+    "sections": {
+      "intelligence": "SEO intelligence",
+      "platform": "Platform",
+      "process": "Process",
+      "faq": "Common questions",
+      "cta": "Start now"
+    }
   },
   "NotFound": {
     "title": "Page not found",
@@ -69,6 +126,10 @@
     "system": "System"
   },
   "Auth": {
+    "Layout": {
+      "badge": "Secure access",
+      "tagline": "Make your visibility measurable."
+    },
     "Login": {
       "title": "Sign in",
       "email": "Email",
@@ -101,7 +162,64 @@
       "signOut": "Sign out"
     }
   },
+  "Dashboard": {
+    "title": "Command",
+    "titleAccent": "Nexus",
+    "description": "Hi {name}. Advanced SEO matrix and visibility signals in one place.",
+    "deployAudit": "Deploy audit",
+    "indicatorsAria": "Main indicators",
+    "kpi": {
+      "snapshots": "Snapshots",
+      "snapshotsHelper": "Stored audits",
+      "avgScore": "Average score",
+      "avgScoreHelper": "Recent global score",
+      "bestScore": "Best score",
+      "bestScoreHelper": "All-time global peak",
+      "lastAudit": "Last audit",
+      "lastAuditHelper": "Most recent run"
+    },
+    "quickActions": {
+      "eyebrow": "Quick actions",
+      "title": "Workspace",
+      "description": "Shortcuts to the most used flows.",
+      "newAudit": "New audit",
+      "analytics": "Analytics",
+      "gbp": "GBP Simulator",
+      "settings": "Settings"
+    },
+    "recentActivity": {
+      "eyebrow": "Recent activity",
+      "title": "Latest audits",
+      "description": "The 5 most recent snapshots.",
+      "empty": "No activity yet. Run your first audit."
+    }
+  },
   "Audit": {
+    "Page": {
+      "title": "Audit",
+      "titleAccent": "SEO",
+      "description": "Run a full technical audit and review your most recent snapshots.",
+      "deploy": {
+        "eyebrow": "New analysis",
+        "title": "Deploy audit",
+        "description": "Paste a URL and we'll run PageSpeed + scraper in parallel."
+      },
+      "history": {
+        "eyebrow": "History"
+      }
+    },
+    "Detail": {
+      "title": "Audit ·",
+      "detailsEyebrow": "Details",
+      "tabs": {
+        "pagespeed": "PageSpeed",
+        "onpage": "On-Page",
+        "woorank": "WooRank",
+        "tracking": "Tracking",
+        "keywords": "Keywords",
+        "sentiment": "Sentiment"
+      }
+    },
     "Form": {
       "label": "URL to audit",
       "placeholder": "https://example.com",
@@ -118,6 +236,18 @@
       "Common": {
         "globalScore": "Global score",
         "viewDetails": "View details"
+      },
+      "Sentiment": {
+        "unavailable": "Sentiment unavailable.",
+        "polarity": "Polarity",
+        "score": "Score"
+      },
+      "Sections": {
+        "pagespeedUnavailable": "PageSpeed unavailable.",
+        "keywordsUnavailable": "Keywords unavailable.",
+        "trackingUnavailable": "Tracking unavailable.",
+        "detected": "Detected",
+        "notDetected": "Not detected"
       },
       "Woorank": {
         "title": "WooRank Score",
@@ -161,6 +291,102 @@
       "UNAUTHORIZED": "Unauthorized",
       "UNKNOWN": "Unknown error"
     }
+  },
+  "GBP": {
+    "title": "GBP Simulator",
+    "description": "Manage your business profile, posts, reviews and insights.",
+    "tabs": {
+      "profile": "Profile",
+      "posts": "Posts",
+      "reviews": "Reviews",
+      "insights": "Insights"
+    },
+    "profileRequired": "Create a profile first.",
+    "Profile": {
+      "businessName": "Business name",
+      "category": "Category",
+      "description": "Description",
+      "address": "Address",
+      "phone": "Phone",
+      "website": "https://example.com",
+      "save": "Save profile",
+      "savedSuccess": "Profile saved",
+      "savedError": "Could not save profile"
+    },
+    "Posts": {
+      "title": "Title",
+      "body": "Body",
+      "ctaLabel": "CTA label",
+      "ctaUrl": "https://example.com",
+      "create": "Create post",
+      "createdSuccess": "Post created",
+      "createdError": "Could not create post",
+      "delete": "Delete",
+      "empty": "No posts yet."
+    },
+    "Reviews": {
+      "author": "Author",
+      "rating": "1-5",
+      "body": "Review body",
+      "create": "Create review",
+      "createdSuccess": "Review created",
+      "createdError": "Could not create review",
+      "response": "Response",
+      "responsePlaceholder": "Write response",
+      "reply": "Reply",
+      "empty": "No reviews yet."
+    },
+    "Insights": {
+      "title": "Insights",
+      "posts": "Posts",
+      "website": "Website",
+      "latestSnapshot": "Latest snapshot",
+      "none": "None"
+    }
+  },
+  "Analytics": {
+    "title": "Analytics",
+    "description": "Trends and score distribution from your latest snapshots.",
+    "empty": "No snapshots yet. Run an audit first.",
+    "kpi": {
+      "total": "Total snapshots",
+      "average": "Average score",
+      "bestWorst": "Best / Worst"
+    },
+    "trendTitle": "Score trend (latest 10)",
+    "recentTitle": "Recent snapshots",
+    "tableCaption": "Recent snapshot scores",
+    "Table": {
+      "url": "URL",
+      "date": "Date",
+      "score": "Score"
+    }
+  },
+  "Settings": {
+    "title": "Settings",
+    "description": "Manage your profile, preferences and integration defaults.",
+    "Profile": {
+      "title": "Profile",
+      "name": "Name",
+      "email": "Email",
+      "hint": "To edit account data, manage it from your Clerk profile."
+    },
+    "Preferences": {
+      "title": "Preferences",
+      "language": "Language",
+      "theme": "Theme"
+    }
+  },
+  "Onboarding": {
+    "title": "Welcome to LumoSEO",
+    "description": "Complete this quick onboarding to unlock the full workflow.",
+    "checklistTitle": "Onboarding checklist",
+    "steps": {
+      "setup": "Set workspace profile",
+      "audit": "Run your first audit",
+      "analytics": "Review trends in analytics"
+    },
+    "open": "Open"
   },
   "GSC": {
     "Common": {

@@ -1,4 +1,5 @@
 import { Sparkles } from 'lucide-react';
+import { getTranslations } from 'next-intl/server';
 
 import { LocaleSwitcher } from '@/components/i18n/LocaleSwitcher';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
@@ -15,7 +16,10 @@ import { SectionLabel } from '@/components/ui/section-label';
  *   - Selectores de locale/theme arriba a la derecha.
  *   - Fade-up on mount.
  */
-export default function AuthLayout({ children }: { children: React.ReactNode }) {
+export default async function AuthLayout({ children }: { children: React.ReactNode }) {
+  const tAuth = await getTranslations('Auth.Layout');
+  const tCommon = await getTranslations('Common');
+
   return (
     <div className="relative flex min-h-screen flex-col items-center justify-center gap-8 overflow-hidden p-6">
       {/* Grid faint detrás del card; el body ya aporta el mesh radial. */}
@@ -25,7 +29,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       />
 
       <div className="relative z-10 flex w-full max-w-md items-center justify-between gap-2 animate-in fade-in duration-500">
-        <SectionLabel>Acceso seguro</SectionLabel>
+        <SectionLabel>{tAuth('badge')}</SectionLabel>
         <div className="flex items-center gap-2">
           <LocaleSwitcher />
           <ThemeToggle />
@@ -39,9 +43,9 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         >
           <Sparkles className="size-6" strokeWidth={2.5} />
         </span>
-        <p className="font-display text-display-sm">LumoSEO</p>
+        <p className="font-display text-display-sm">{tCommon('appName')}</p>
         <p className="text-sm text-muted-foreground">
-          Hacé medible tu visibilidad.
+          {tAuth('tagline')}
         </p>
       </div>
 

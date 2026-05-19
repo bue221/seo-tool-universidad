@@ -3,9 +3,6 @@ import { ImageResponse } from 'next/og';
 export const size = { width: 180, height: 180 };
 export const contentType = 'image/png';
 
-/**
- * apple-touch-icon (iOS "Add to Home Screen"). 180x180 maskable.
- */
 export default function AppleIcon() {
   return new ImageResponse(
     (
@@ -16,15 +13,15 @@ export default function AppleIcon() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: '#0f172a',
-          color: '#22d3ee',
-          fontSize: 120,
+          background: 'linear-gradient(135deg, #4ade80 0%, #22d3ee 100%)',
+          color: '#0d1a14',
+          fontSize: 108,
           fontWeight: 800,
           fontFamily: 'system-ui',
           borderRadius: 36,
         }}
       >
-        S
+        L
       </div>
     ),
     { ...size },

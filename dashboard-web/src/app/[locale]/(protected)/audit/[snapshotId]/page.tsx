@@ -28,6 +28,7 @@ export default async function SnapshotDetailPage({ params }: Props) {
   const { snapshotId } = await params;
   const snapshot = await getSnapshot(snapshotId);
   const t = await getTranslations('Audit.Result.Common');
+  const tDetail = await getTranslations('Audit.Detail');
 
   if (!snapshot) notFound();
 
@@ -42,7 +43,7 @@ export default async function SnapshotDetailPage({ params }: Props) {
   return (
     <div className="space-y-8">
       <PageHeader
-        title="Auditoría ·"
+        title={tDetail('title')}
         accent={domain}
         size="sm"
         description={snapshot.url}
@@ -57,19 +58,19 @@ export default async function SnapshotDetailPage({ params }: Props) {
       />
 
       <SectionCard
-        eyebrow="Detalles"
+        eyebrow={tDetail('detailsEyebrow')}
         bodyClassName="p-0"
       >
         <Tabs defaultValue="pagespeed" className="w-full">
           <TabsList className="w-full justify-start overflow-x-auto rounded-none border-b border-border bg-transparent px-4">
-            <TabsTrigger value="pagespeed">PageSpeed</TabsTrigger>
-            <TabsTrigger value="onpage">On-Page</TabsTrigger>
+            <TabsTrigger value="pagespeed">{tDetail('tabs.pagespeed')}</TabsTrigger>
+            <TabsTrigger value="onpage">{tDetail('tabs.onpage')}</TabsTrigger>
             {snapshot.result.scraper?.woorank ? (
-              <TabsTrigger value="woorank">WooRank</TabsTrigger>
+              <TabsTrigger value="woorank">{tDetail('tabs.woorank')}</TabsTrigger>
             ) : null}
-            <TabsTrigger value="tracking">Tracking</TabsTrigger>
-            <TabsTrigger value="keywords">Keywords</TabsTrigger>
-            <TabsTrigger value="sentiment">Sentiment</TabsTrigger>
+            <TabsTrigger value="tracking">{tDetail('tabs.tracking')}</TabsTrigger>
+            <TabsTrigger value="keywords">{tDetail('tabs.keywords')}</TabsTrigger>
+            <TabsTrigger value="sentiment">{tDetail('tabs.sentiment')}</TabsTrigger>
           </TabsList>
           <div className="p-6">
             <TabsContent value="pagespeed">

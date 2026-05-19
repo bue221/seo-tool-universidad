@@ -18,17 +18,30 @@ import {
   CommandShortcut,
 } from '@/components/ui/command';
 
-type Props = {
-  locale: string;
+type PaletteItemKey = 'dashboard' | 'audit' | 'gbp' | 'analytics' | 'settings';
+
+export type CommandPaletteLabels = {
+  ariaLabel: string;
+  description: string;
+  placeholder: string;
+  empty: string;
+  groups: { navigation: string; theme: string; account: string };
+  items: Record<PaletteItemKey | 'signOut', string>;
+  theme: { light: string; dark: string; system: string };
 };
 
-const NAV_ITEMS = [
-  { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/audit',     label: 'Audit',     icon: ScanLine },
-  { href: '/gbp',       label: 'GBP',       icon: Store },
-  { href: '/analytics', label: 'Analytics', icon: BarChart3 },
-  { href: '/settings',  label: 'Settings',  icon: Settings },
-] as const;
+type Props = {
+  locale: string;
+  labels: CommandPaletteLabels;
+};
+
+const NAV_ITEMS: ReadonlyArray<{ href: string; key: PaletteItemKey; icon: typeof LayoutDashboard }> = [
+  { href: '/dashboard', key: 'dashboard', icon: LayoutDashboard },
+  { href: '/audit',     key: 'audit',     icon: ScanLine },
+  { href: '/gbp',       key: 'gbp',       icon: Store },
+  { href: '/analytics', key: 'analytics', icon: BarChart3 },
+  { href: '/settings',  key: 'settings',  icon: Settings },
+];
 
 /**
  * Command palette global (Cmd+K / Ctrl+K).
@@ -42,7 +55,7 @@ const NAV_ITEMS = [
  * Atajo: Cmd+K en Mac, Ctrl+K en otros. Detectado con `event.metaKey || ctrlKey`
  * para no asumir plataforma (`navigator.platform` no es confiable post-2022).
  */
-export function CommandPalette({ locale }: Props) {
+export function CommandPalette({ locale, labels }: Props) {
   const [open, setOpen] = React.useState(false);
   const router = useRouter();
   const { setTheme } = useTheme();
@@ -87,7 +100,7 @@ export function CommandPalette({ locale }: Props) {
                      data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0"
         />
         <DialogPrimitive.Content
-          aria-label="Command palette"
+          aria-label={labels.ariaLabel}
           className="fixed left-1/2 top-[20%] z-50 w-full max-w-lg -translate-x-1/2
                      overflow-hidden rounded-xl border border-border/60 bg-popover/95
                      shadow-pop backdrop-blur-xl
@@ -97,24 +110,24 @@ export function CommandPalette({ locale }: Props) {
                      data-[state=open]:slide-in-from-top-2 duration-200"
         >
           {/* Title required por Radix Dialog para accesibilidad; lo escondemos visualmente. */}
-          <DialogPrimitive.Title className="sr-only">Command palette</DialogPrimitive.Title>
+          <DialogPrimitive.Title className="sr-only">{labels.ariaLabel}</DialogPrimitive.Title>
           <DialogPrimitive.Description className="sr-only">
-            Quick navigation and actions
+            {labels.description}
           </DialogPrimitive.Description>
 
           <Command>
-            <CommandInput placeholder="Type a command or search\u2026" />
+            <CommandInput placeholder={labels.placeholder} />
             <CommandList>
-              <CommandEmpty>No results found.</CommandEmpty>
+              <CommandEmpty>{labels.empty}</CommandEmpty>
 
-              <CommandGroup heading="Navigation">
+              <CommandGroup heading={labels.groups.navigation}>
                 {NAV_ITEMS.map((item) => (
                   <CommandItem
                     key={item.href}
                     onSelect={() => run(() => router.push(`/${locale}${item.href}`))}
                   >
                     <item.icon />
-                    <span>{item.label}</span>
+                    <span>{labels.items[item.key]}</span>
                     <CommandShortcut>{`/${item.href.slice(1)}`}</CommandShortcut>
                   </CommandItem>
                 ))}
@@ -122,29 +135,29 @@ export function CommandPalette({ locale }: Props) {
 
               <CommandSeparator />
 
-              <CommandGroup heading="Theme">
+              <CommandGroup heading={labels.groups.theme}>
                 <CommandItem onSelect={() => run(() => setTheme('light'))}>
                   <Sun />
-                  <span>Light</span>
+                  <span>{labels.theme.light}</span>
                 </CommandItem>
                 <CommandItem onSelect={() => run(() => setTheme('dark'))}>
                   <Moon />
-                  <span>Dark</span>
+                  <span>{labels.theme.dark}</span>
                 </CommandItem>
                 <CommandItem onSelect={() => run(() => setTheme('system'))}>
                   <Monitor />
-                  <span>System</span>
+                  <span>{labels.theme.system}</span>
                 </CommandItem>
               </CommandGroup>
 
               <CommandSeparator />
 
-              <CommandGroup heading="Account">
+              <CommandGroup heading={labels.groups.account}>
                 <CommandItem
                   onSelect={() => run(() => signOut({ redirectUrl: `/${locale}/login` }))}
                 >
                   <LogOut />
-                  <span>Sign out</span>
+                  <span>{labels.items.signOut}</span>
                 </CommandItem>
               </CommandGroup>
             </CommandList>

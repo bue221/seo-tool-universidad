@@ -1,9 +1,13 @@
+import { getTranslations } from 'next-intl/server';
+
 import { deletePost } from '../_actions/delete-post';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 
-export function PostsList({ posts }: { posts: Array<Record<string, string>> }) {
-  if (!posts.length) return <p className="text-sm text-muted-foreground">No posts yet.</p>;
+export async function PostsList({ posts }: { posts: Array<Record<string, string>> }) {
+  const t = await getTranslations('GBP.Posts');
+
+  if (!posts.length) return <p className="text-sm text-muted-foreground">{t('empty')}</p>;
 
   return (
     <div className="space-y-2">
@@ -16,7 +20,7 @@ export function PostsList({ posts }: { posts: Array<Record<string, string>> }) {
             </div>
             <form action={deletePost}>
               <input type="hidden" name="id" value={post.id} />
-              <Button type="submit" variant="outline">Delete</Button>
+              <Button type="submit" variant="outline">{t('delete')}</Button>
             </form>
           </CardContent>
         </Card>

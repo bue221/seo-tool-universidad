@@ -33,12 +33,12 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL),
   title: {
-    default: 'SEO Custom Tool',
-    template: '%s | SEO Custom Tool',
+    default: 'LumoSEO',
+    template: '%s | LumoSEO',
   },
   description:
-    'Herramienta de auditoría SEO con scraping profundo, Insights y análisis competitivo.',
-  applicationName: 'SEO Custom Tool',
+    'Plataforma SEO con PageSpeed, scraping profundo y análisis competitivo — LumoSEO.',
+  applicationName: 'LumoSEO',
   authors: [{ name: 'cplaza' }],
   robots: env.NEXT_PUBLIC_ALLOW_INDEXING
     ? { index: true, follow: true }

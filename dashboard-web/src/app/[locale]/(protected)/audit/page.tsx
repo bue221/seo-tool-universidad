@@ -10,25 +10,26 @@ type Props = { params: Promise<{ locale: 'es' | 'en' }> };
 
 export default async function AuditPage({ params }: Props) {
   const { locale } = await params;
-  const t = await getTranslations('Audit.History');
+  const tPage = await getTranslations('Audit.Page');
+  const tHistory = await getTranslations('Audit.History');
 
   return (
     <div className="space-y-8">
       <PageHeader
-        title="Auditoría"
-        accent="SEO"
-        description="Corré una auditoría técnica completa y revisá tus snapshots más recientes."
+        title={tPage('title')}
+        accent={tPage('titleAccent')}
+        description={tPage('description')}
       />
 
       <SectionCard
-        eyebrow="Nuevo análisis"
-        title="Desplegar auditoría"
-        description="Pegá una URL y ejecutamos PageSpeed + scraper en paralelo."
+        eyebrow={tPage('deploy.eyebrow')}
+        title={tPage('deploy.title')}
+        description={tPage('deploy.description')}
       >
         <AuditForm locale={locale} />
       </SectionCard>
 
-      <SectionCard eyebrow="Histórico" title={t('title')}>
+      <SectionCard eyebrow={tPage('history.eyebrow')} title={tHistory('title')}>
         <AuditHistoryList />
       </SectionCard>
     </div>

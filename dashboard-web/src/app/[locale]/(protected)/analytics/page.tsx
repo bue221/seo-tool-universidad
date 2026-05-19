@@ -1,3 +1,5 @@
+import { getTranslations } from 'next-intl/server';
+
 import { KpiCard } from '@/components/app/KpiCard';
 import { PageHeader } from '@/components/app/PageHeader';
 import { SectionCard } from '@/components/app/SectionCard';
@@ -5,9 +7,10 @@ import { listSnapshots } from '@/lib/audit/persistence';
 
 export default async function AnalyticsPage() {
   const snapshots = await listSnapshots(30);
+  const t = await getTranslations('Analytics');
 
   if (!snapshots.length) {
-    return <p className="text-sm text-muted-foreground">No snapshots yet. Run an audit first.</p>;
+    return <p className="text-sm text-muted-foreground">{t('empty')}</p>;
   }
 
   const avg = snapshots.reduce((acc, s) => acc + Number(s.global_score), 0) / snapshots.length;
@@ -17,17 +20,17 @@ export default async function AnalyticsPage() {
   return (
     <div className="space-y-6">
       <PageHeader
-        title="Analytics"
-        description="Trends and score distribution from your latest snapshots."
+        title={t('title')}
+        description={t('description')}
       />
 
       <div className="grid gap-4 md:grid-cols-3">
-        <KpiCard title="Total snapshots" value={String(snapshots.length)} />
-        <KpiCard title="Average score" value={avg.toFixed(2)} />
-        <KpiCard title="Best / Worst" value={`${best.toFixed(1)} / ${worst.toFixed(1)}`} />
+        <KpiCard title={t('kpi.total')} value={String(snapshots.length)} />
+        <KpiCard title={t('kpi.average')} value={avg.toFixed(2)} />
+        <KpiCard title={t('kpi.bestWorst')} value={`${best.toFixed(1)} / ${worst.toFixed(1)}`} />
       </div>
 
-      <SectionCard title="Score trend (latest 10)">
+      <SectionCard title={t('trendTitle')}>
         <div className="space-y-2">
           {snapshots.slice(0, 10).reverse().map((row, idx) => {
             const score = Number(row.global_score);
@@ -44,15 +47,15 @@ export default async function AnalyticsPage() {
         </div>
       </SectionCard>
 
-      <SectionCard title="Recent snapshots">
+      <SectionCard title={t('recentTitle')}>
         <div className="overflow-x-auto rounded-lg border">
           <table className="w-full min-w-[680px] text-left text-sm">
-            <caption className="sr-only">Recent snapshot scores</caption>
+            <caption className="sr-only">{t('tableCaption')}</caption>
             <thead className="bg-muted/40 text-muted-foreground">
               <tr>
-                <th scope="col" className="px-4 py-3 font-medium">URL</th>
-                <th scope="col" className="px-4 py-3 font-medium">Date</th>
-                <th scope="col" className="px-4 py-3 font-medium">Score</th>
+                <th scope="col" className="px-4 py-3 font-medium">{t('Table.url')}</th>
+                <th scope="col" className="px-4 py-3 font-medium">{t('Table.date')}</th>
+                <th scope="col" className="px-4 py-3 font-medium">{t('Table.score')}</th>
               </tr>
             </thead>
             <tbody>

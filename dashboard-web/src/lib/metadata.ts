@@ -61,7 +61,7 @@ export function buildMetadata({
       title,
       description,
       url: canonical,
-      siteName: 'SEO Custom Tool',
+      siteName: 'LumoSEO',
       locale,
       type: 'website',
       images: ogImage ? [{ url: ogImage }] : undefined,

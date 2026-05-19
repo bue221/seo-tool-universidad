@@ -88,21 +88,24 @@ export default async function HomePage({ params }: Props) {
           </div>
           <div className="hidden items-center gap-6 text-sm text-muted-foreground md:flex">
             <a href="#features" className="transition-colors hover:text-foreground">
-              Features
+              {t('nav.features')}
             </a>
             <a href="#how" className="transition-colors hover:text-foreground">
-              How it works
+              {t('nav.how')}
             </a>
             <a href="#faq" className="transition-colors hover:text-foreground">
-              FAQ
+              {t('nav.faq')}
             </a>
           </div>
           <div className="flex items-center gap-2">
             <LocaleSwitcher />
             <Separator orientation="vertical" className="h-6" />
             <ThemeToggle />
-            <Button asChild size="sm" variant="outline">
-              <Link href="/login">Login</Link>
+            <Button asChild size="sm" variant="ghost">
+              <Link href="/login">{t('ctaLogin')}</Link>
+            </Button>
+            <Button asChild size="sm" variant="default">
+              <Link href="/signup">{t('ctaPrimary')}</Link>
             </Button>
           </div>
         </div>
@@ -113,7 +116,7 @@ export default async function HomePage({ params }: Props) {
         <section className="relative space-y-6 text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-surface-2/60 px-3 py-1 text-xs text-muted-foreground backdrop-blur-sm">
             <Sparkles className="size-3 text-primary" />
-            <SectionLabel>Inteligencia SEO</SectionLabel>
+            <SectionLabel>{t('sections.intelligence')}</SectionLabel>
             <span className="opacity-60">·</span>
             <span>{t('trust')}</span>
           </div>
@@ -121,10 +124,10 @@ export default async function HomePage({ params }: Props) {
           <GradientHeading
             as="h1"
             size="lg"
-            accent="visibilidad"
+            accent={t('titleAccent')}
             className="mx-auto max-w-4xl text-balance animate-in fade-in slide-in-from-bottom-2 duration-700"
           >
-            {t('title').replace(/visibilidad.*$/i, '').trim() || t('title')}
+            {t('titleLead')}
           </GradientHeading>
 
           <p className="mx-auto max-w-2xl text-balance text-lg text-muted-foreground animate-in fade-in slide-in-from-bottom-3 duration-700 delay-100 fill-mode-both">
@@ -133,24 +136,26 @@ export default async function HomePage({ params }: Props) {
 
           <div className="flex flex-wrap items-center justify-center gap-3 pt-2 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200 fill-mode-both">
             <Button asChild size="pill" variant="glow" className="group">
-              <Link href="/audit">
+              <Link href="/signup">
                 {t('ctaPrimary')}
                 <ArrowRight className="transition-transform group-hover:translate-x-0.5" />
               </Link>
             </Button>
             <Button asChild variant="outline" size="pill">
-              <Link href="/dashboard">{t('ctaSecondary')}</Link>
+              <Link href="/login">{t('ctaSecondary')}</Link>
             </Button>
           </div>
+          <p className="text-xs text-muted-foreground/60 animate-in fade-in duration-700 delay-300 fill-mode-both">
+            {t('trustLine')}
+          </p>
         </section>
 
         {/* Features */}
         <section id="features" className="space-y-8">
           <div className="space-y-2 text-center">
-            <SectionLabel>Plataforma</SectionLabel>
-            <GradientHeading as="h2" size="sm" accent="principales">
-              {t('featuresTitle').replace(/principales.*$/i, '').trim() ||
-                t('featuresTitle')}
+            <SectionLabel>{t('sections.platform')}</SectionLabel>
+            <GradientHeading as="h2" size="sm" accent={t('featuresTitleAccent')}>
+              {t('featuresTitleLead')}
             </GradientHeading>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
@@ -184,9 +189,9 @@ export default async function HomePage({ params }: Props) {
         {/* How it works */}
         <section id="how" className="space-y-8">
           <div className="space-y-2 text-center">
-            <SectionLabel>Proceso</SectionLabel>
-            <GradientHeading as="h2" size="sm" accent="funciona">
-              {t('howTitle').replace(/funciona.*$/i, '').trim() || t('howTitle')}
+            <SectionLabel>{t('sections.process')}</SectionLabel>
+            <GradientHeading as="h2" size="sm" accent={t('howTitleAccent')}>
+              {t('howTitleLead')}
             </GradientHeading>
           </div>
           <div className="grid gap-4 sm:grid-cols-3">
@@ -199,9 +204,9 @@ export default async function HomePage({ params }: Props) {
         {/* FAQ */}
         <section id="faq" className="space-y-8">
           <div className="space-y-2 text-center">
-            <SectionLabel>Dudas comunes</SectionLabel>
-            <GradientHeading as="h2" size="sm" accent="frecuentes">
-              {t('faqTitle').replace(/frecuentes.*$/i, '').trim() || t('faqTitle')}
+            <SectionLabel>{t('sections.faq')}</SectionLabel>
+            <GradientHeading as="h2" size="sm" accent={t('faqTitleAccent')}>
+              {t('faqTitleLead')}
             </GradientHeading>
           </div>
           <div className="grid gap-4 md:grid-cols-3">
@@ -218,16 +223,22 @@ export default async function HomePage({ params }: Props) {
             className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10"
           />
           <div className="relative space-y-6">
-            <SectionLabel>Empezá ahora</SectionLabel>
-            <GradientHeading as="p" size="sm" accent="auditoría">
-              {t('finalCta').replace(/auditor.*$/i, '').trim() || t('finalCta')}
+            <SectionLabel>{t('sections.cta')}</SectionLabel>
+            <GradientHeading as="p" size="sm" accent={t('finalCtaAccent')}>
+              {t('finalCtaLead')}
             </GradientHeading>
-            <Button asChild size="pill" variant="glow" className="group">
-              <Link href="/signup">
-                {t('ctaPrimary')}
-                <ArrowRight className="transition-transform group-hover:translate-x-0.5" />
-              </Link>
-            </Button>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <Button asChild size="pill" variant="glow" className="group">
+                <Link href="/signup">
+                  {t('ctaPrimary')}
+                  <ArrowRight className="transition-transform group-hover:translate-x-0.5" />
+                </Link>
+              </Button>
+              <Button asChild size="pill" variant="ghost">
+                <Link href="/login">{t('ctaSecondary')}</Link>
+              </Button>
+            </div>
+            <p className="text-xs text-muted-foreground/60">{t('trustLine')}</p>
           </div>
         </section>
       </main>

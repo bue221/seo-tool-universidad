@@ -1,18 +1,21 @@
+import { getTranslations } from 'next-intl/server';
+
 import { Link } from '@/i18n/navigation';
 
-export default function GbpLayout({ children }: { children: React.ReactNode }) {
+export default async function GbpLayout({ children }: { children: React.ReactNode }) {
+  const t = await getTranslations('GBP');
   const tabs = [
-    { href: '/gbp/profile', label: 'Profile' },
-    { href: '/gbp/posts', label: 'Posts' },
-    { href: '/gbp/reviews', label: 'Reviews' },
-    { href: '/gbp/insights', label: 'Insights' },
+    { href: '/gbp/profile', label: t('tabs.profile') },
+    { href: '/gbp/posts', label: t('tabs.posts') },
+    { href: '/gbp/reviews', label: t('tabs.reviews') },
+    { href: '/gbp/insights', label: t('tabs.insights') },
   ];
 
   return (
     <div className="space-y-4">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight">GBP Simulator</h1>
-        <p className="text-sm text-muted-foreground">Manage your business profile, posts, reviews and insights.</p>
+        <h1 className="text-2xl font-semibold tracking-tight">{t('title')}</h1>
+        <p className="text-sm text-muted-foreground">{t('description')}</p>
       </div>
       <nav className="flex flex-wrap gap-2 text-sm">
         {tabs.map((tab) => (

@@ -11,14 +11,14 @@ import type { MetadataRoute } from 'next';
  */
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'SEO Custom Tool',
-    short_name: 'SEO Tool',
+    name: 'LumoSEO',
+    short_name: 'LumoSEO',
     description:
-      'Herramienta de auditoría SEO con scraping profundo, Insights y análisis competitivo.',
+      'Plataforma de auditoría SEO con scraping profundo, keywords y análisis competitivo.',
     start_url: '/',
     display: 'standalone',
-    background_color: '#ffffff',
-    theme_color: '#ffffff',
+    background_color: '#0d1a14',
+    theme_color: '#0d1a14',
     icons: [
       {
         // Next.js sirve el icon.tsx en esta ruta convencional.
@@ -32,6 +32,7 @@ export default function manifest(): MetadataRoute.Manifest {
         type: 'image/png',
         purpose: 'maskable',
       },
+      { src: '/apple-icon', sizes: '192x192', type: 'image/png', purpose: 'maskable' },
     ],
   };
 }

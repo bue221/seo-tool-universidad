@@ -8,6 +8,7 @@ import {
   Timer,
   Trophy,
 } from 'lucide-react';
+import { getTranslations } from 'next-intl/server';
 
 import { Link } from '@/i18n/navigation';
 import { getCurrentUser } from '@/lib/auth';
@@ -31,6 +32,7 @@ import { Button } from '@/components/ui/button';
 export default async function DashboardPage() {
   const user = await getCurrentUser();
   const snapshots = await listSnapshots(20);
+  const t = await getTranslations('Dashboard');
   const avg = snapshots.length
     ? snapshots.reduce((acc, row) => acc + Number(row.global_score), 0) /
       snapshots.length
@@ -47,14 +49,14 @@ export default async function DashboardPage() {
   return (
     <div className="space-y-8">
       <PageHeader
-        title="Comando"
-        accent="Nexus"
-        description={`Hola ${greeting}. Matriz avanzada de SEO y señales de visibilidad en un solo lugar.`}
+        title={t('title')}
+        accent={t('titleAccent')}
+        description={t('description', { name: greeting })}
         actions={
           <Button asChild variant="glow" size="pill">
             <Link href="/audit">
               <Target className="size-4" />
-              Desplegar auditoría
+              {t('deployAudit')}
             </Link>
           </Button>
         }
@@ -62,58 +64,58 @@ export default async function DashboardPage() {
 
       {/* KPI grid — primera fila: resumen de auditorías */}
       <section
-        aria-label="Indicadores principales"
+        aria-label={t('indicatorsAria')}
         className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
       >
         <KpiCard
           icon={<ScanLine />}
           iconVariant="primary"
-          title="Snapshots"
+          title={t('kpi.snapshots')}
           value={String(snapshots.length)}
-          helper="Auditorías almacenadas"
+          helper={t('kpi.snapshotsHelper')}
         />
         <KpiCard
           icon={<ChartBar />}
           iconVariant="accent"
-          title="Score promedio"
+          title={t('kpi.avgScore')}
           value={avg.toFixed(1)}
-          helper="Global score reciente"
+          helper={t('kpi.avgScoreHelper')}
         />
         <KpiCard
           icon={<Trophy />}
           iconVariant="success"
-          title="Mejor score"
+          title={t('kpi.bestScore')}
           value={best.toFixed(1)}
-          helper="Pico global histórico"
+          helper={t('kpi.bestScoreHelper')}
         />
         <KpiCard
           icon={<Timer />}
           iconVariant="neutral"
-          title="Última auditoría"
+          title={t('kpi.lastAudit')}
           value={lastDate}
-          helper="Ejecución más reciente"
+          helper={t('kpi.lastAuditHelper')}
         />
       </section>
 
       {/* Acciones rápidas + actividad reciente */}
       <section className="grid gap-4 lg:grid-cols-2">
         <SectionCard
-          eyebrow="Acciones rápidas"
-          title="Workspace"
-          description="Atajos a los flujos más usados."
+          eyebrow={t('quickActions.eyebrow')}
+          title={t('quickActions.title')}
+          description={t('quickActions.description')}
         >
           <div className="grid gap-2 sm:grid-cols-2">
-            <ActionLink href="/audit" icon={<ScanLine className="size-4" />} label="Nueva auditoría" />
-            <ActionLink href="/analytics" icon={<Activity className="size-4" />} label="Analytics" />
-            <ActionLink href="/gbp" icon={<Crosshair className="size-4" />} label="GBP Simulator" />
-            <ActionLink href="/settings" icon={<Target className="size-4" />} label="Ajustes" />
+            <ActionLink href="/audit" icon={<ScanLine className="size-4" />} label={t('quickActions.newAudit')} />
+            <ActionLink href="/analytics" icon={<Activity className="size-4" />} label={t('quickActions.analytics')} />
+            <ActionLink href="/gbp" icon={<Crosshair className="size-4" />} label={t('quickActions.gbp')} />
+            <ActionLink href="/settings" icon={<Target className="size-4" />} label={t('quickActions.settings')} />
           </div>
         </SectionCard>
 
         <SectionCard
-          eyebrow="Actividad reciente"
-          title="Últimas auditorías"
-          description="Los 5 snapshots más recientes."
+          eyebrow={t('recentActivity.eyebrow')}
+          title={t('recentActivity.title')}
+          description={t('recentActivity.description')}
         >
           {snapshots.length ? (
             <ul className="space-y-2 text-sm">
@@ -131,7 +133,7 @@ export default async function DashboardPage() {
             </ul>
           ) : (
             <p className="text-sm text-muted-foreground">
-              Todavía no hay actividad. Corré tu primera auditoría.
+              {t('recentActivity.empty')}
             </p>
           )}
         </SectionCard>

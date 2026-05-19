@@ -29,7 +29,7 @@ export function JsonLd({ schema }: JsonLdProps) {
  * mantener consistencia (mismo url, mismo name) entre Organization y WebSite.
  */
 export function buildSiteSchemas(opts: { name?: string } = {}) {
-  const name = opts.name ?? 'SEO Custom Tool';
+  const name = opts.name ?? 'LumoSEO';
   const url = env.NEXT_PUBLIC_SITE_URL;
 
   const organization = {

@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { LayoutGrid } from 'lucide-react';
+import { LayoutGrid, Menu } from 'lucide-react';
 
 import { CommandBar } from '@/components/ui/command-bar';
 import { LocaleSwitcher } from '@/components/i18n/LocaleSwitcher';
@@ -45,12 +45,30 @@ export function Topbar({ brand, user, labels }: TopbarProps) {
     window.dispatchEvent(new CustomEvent('commandpalette:open'));
   }, []);
 
+  const openMobileDrawer = React.useCallback(() => {
+    window.dispatchEvent(new CustomEvent('sidebar:open'));
+  }, []);
+
   return (
     <header
       className={cn(
         'sticky top-0 z-30 flex h-16 items-center gap-3 border-b border-border-strong bg-surface-1/70 px-4 backdrop-blur-xl md:px-6',
       )}
     >
+      {/* Hamburguesa — solo visible en mobile */}
+      <button
+        type="button"
+        aria-label="Abrir navegación"
+        onClick={openMobileDrawer}
+        className={cn(
+          'inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground transition-colors md:hidden',
+          'hover:bg-surface-2 hover:text-foreground',
+          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+        )}
+      >
+        <Menu className="size-5" aria-hidden />
+      </button>
+
       <span className="text-sm font-semibold tracking-tight md:hidden">
         {brand}
       </span>

@@ -3,13 +3,27 @@
     "appName": "LumoSEO",
     "tagline": "Hacé medible tu visibilidad.",
     "switchToEnglish": "Cambiar a inglés",
-    "switchToSpanish": "Cambiar a español"
+    "switchToSpanish": "Cambiar a español",
+    "login": "Iniciar sesión",
+    "signOut": "Cerrar sesión",
+    "open": "Abrir",
+    "delete": "Eliminar",
+    "save": "Guardar"
   },
   "Chrome": {
     "Sidebar": {
       "sections": {
         "command": "Comando",
         "insights": "Insights"
+      },
+      "items": {
+        "dashboard": "Panel Nexus",
+        "audit": "Auditoría SEO",
+        "compare": "Comparar",
+        "gsc": "Search Console",
+        "gbp": "GBP",
+        "analytics": "Analytics",
+        "settings": "Ajustes"
       },
       "collapse": "Colapsar barra lateral",
       "signOut": "Cerrar sesión"
@@ -26,18 +40,45 @@
     },
     "User": {
       "tier": "Nivel empresarial"
+    },
+    "CommandPalette": {
+      "ariaLabel": "Paleta de comandos",
+      "description": "Navegación y acciones rápidas",
+      "placeholder": "Escribí un comando o buscá…",
+      "empty": "Sin resultados.",
+      "groups": {
+        "navigation": "Navegación",
+        "theme": "Tema",
+        "account": "Cuenta"
+      },
+      "items": {
+        "dashboard": "Panel",
+        "audit": "Auditoría",
+        "gbp": "GBP",
+        "analytics": "Analytics",
+        "settings": "Ajustes",
+        "signOut": "Cerrar sesión"
+      }
     }
   },
   "Landing": {
     "title": "Medí tu visibilidad SEO con confianza",
+    "titleLead": "Medí tu",
+    "titleAccent": "visibilidad",
     "subtitle": "LumoSEO combina métricas oficiales de Google con análisis on-page profundo en un flujo profesional.",
-    "ctaPrimary": "Iniciar auditoría gratis",
-    "ctaSecondary": "Ver dashboard",
+    "ctaPrimary": "Crear cuenta gratis",
+    "ctaSecondary": "Ya tengo cuenta",
+    "ctaLogin": "Iniciar sesión",
+    "trustLine": "Sin tarjeta de crédito · Siempre gratis · HTTPS",
     "howTitle": "Cómo funciona",
+    "howTitleLead": "Cómo",
+    "howTitleAccent": "funciona",
     "how1": "Ingresá tu URL",
     "how2": "Corré auditoría en paralelo",
     "how3": "Revisá insights accionables",
     "featuresTitle": "Capacidades principales",
+    "featuresTitleLead": "Capacidades",
+    "featuresTitleAccent": "principales",
     "feature1Title": "Google PageSpeed",
     "feature1Desc": "Señales oficiales de performance y SEO.",
     "feature2Title": "Scraper profundo",
@@ -48,6 +89,8 @@
     "feature4Desc": "Lectura rápida de polaridad del contenido competidor.",
     "trust": "Diseñado para flujos SEO académicos y profesionales.",
     "faqTitle": "Preguntas frecuentes",
+    "faqTitleLead": "Preguntas",
+    "faqTitleAccent": "frecuentes",
     "faq1q": "¿Necesito service accounts de Google?",
     "faq1a": "No. LumoSEO usa la API pública de PageSpeed más scraping profundo.",
     "faq2q": "¿Puedo auditar sitios con mucho JavaScript?",
@@ -55,7 +98,21 @@
     "faq3q": "¿Puedo guardar historial por usuario?",
     "faq3a": "Sí. Los snapshots se persisten con aislamiento por usuario.",
     "finalCta": "¿Listo para mejorar tu visibilidad?",
-    "footer": "LumoSEO · Plataforma de flujos SEO técnicos"
+    "finalCtaLead": "¿Listo para mejorar tu",
+    "finalCtaAccent": "visibilidad?",
+    "footer": "LumoSEO · Plataforma de flujos SEO técnicos",
+    "nav": {
+      "features": "Capacidades",
+      "how": "Cómo funciona",
+      "faq": "Preguntas frecuentes"
+    },
+    "sections": {
+      "intelligence": "Inteligencia SEO",
+      "platform": "Plataforma",
+      "process": "Proceso",
+      "faq": "Dudas comunes",
+      "cta": "Empezá ahora"
+    }
   },
   "NotFound": {
     "title": "Página no encontrada",
@@ -69,6 +126,10 @@
     "system": "Sistema"
   },
   "Auth": {
+    "Layout": {
+      "badge": "Acceso seguro",
+      "tagline": "Hacé medible tu visibilidad."
+    },
     "Login": {
       "title": "Iniciar sesión",
       "email": "Email",
@@ -101,7 +162,64 @@
       "signOut": "Cerrar sesión"
     }
   },
+  "Dashboard": {
+    "title": "Comando",
+    "titleAccent": "Nexus",
+    "description": "Hola {name}. Matriz avanzada de SEO y señales de visibilidad en un solo lugar.",
+    "deployAudit": "Desplegar auditoría",
+    "indicatorsAria": "Indicadores principales",
+    "kpi": {
+      "snapshots": "Snapshots",
+      "snapshotsHelper": "Auditorías almacenadas",
+      "avgScore": "Score promedio",
+      "avgScoreHelper": "Global score reciente",
+      "bestScore": "Mejor score",
+      "bestScoreHelper": "Pico global histórico",
+      "lastAudit": "Última auditoría",
+      "lastAuditHelper": "Ejecución más reciente"
+    },
+    "quickActions": {
+      "eyebrow": "Acciones rápidas",
+      "title": "Workspace",
+      "description": "Atajos a los flujos más usados.",
+      "newAudit": "Nueva auditoría",
+      "analytics": "Analytics",
+      "gbp": "Simulador GBP",
+      "settings": "Ajustes"
+    },
+    "recentActivity": {
+      "eyebrow": "Actividad reciente",
+      "title": "Últimas auditorías",
+      "description": "Los 5 snapshots más recientes.",
+      "empty": "Todavía no hay actividad. Corré tu primera auditoría."
+    }
+  },
   "Audit": {
+    "Page": {
+      "title": "Auditoría",
+      "titleAccent": "SEO",
+      "description": "Corré una auditoría técnica completa y revisá tus snapshots más recientes.",
+      "deploy": {
+        "eyebrow": "Nuevo análisis",
+        "title": "Desplegar auditoría",
+        "description": "Pegá una URL y ejecutamos PageSpeed + scraper en paralelo."
+      },
+      "history": {
+        "eyebrow": "Histórico"
+      }
+    },
+    "Detail": {
+      "title": "Auditoría ·",
+      "detailsEyebrow": "Detalles",
+      "tabs": {
+        "pagespeed": "PageSpeed",
+        "onpage": "On-Page",
+        "woorank": "WooRank",
+        "tracking": "Tracking",
+        "keywords": "Keywords",
+        "sentiment": "Sentimiento"
+      }
+    },
     "Form": {
       "label": "URL a auditar",
       "placeholder": "https://ejemplo.com",
@@ -118,6 +236,18 @@
       "Common": {
         "globalScore": "Score global",
         "viewDetails": "Ver detalle"
+      },
+      "Sentiment": {
+        "unavailable": "Análisis de sentimiento no disponible.",
+        "polarity": "Polaridad",
+        "score": "Score"
+      },
+      "Sections": {
+        "pagespeedUnavailable": "PageSpeed no disponible.",
+        "keywordsUnavailable": "Keywords no disponibles.",
+        "trackingUnavailable": "Tracking no disponible.",
+        "detected": "Detectado",
+        "notDetected": "No detectado"
       },
       "Woorank": {
         "title": "Puntaje WooRank",
@@ -161,6 +291,99 @@
       "UNAUTHORIZED": "No autorizado",
       "UNKNOWN": "Error desconocido"
     }
+  },
+  "GBP": {
+    "title": "Simulador GBP",
+    "description": "Gestioná tu perfil de negocio, posts, reseñas e insights.",
+    "tabs": {
+      "profile": "Perfil",
+      "posts": "Posts",
+      "reviews": "Reseñas",
+      "insights": "Insights"
+    },
+    "profileRequired": "Creá un perfil primero.",
+    "Profile": {
+      "businessName": "Nombre del negocio",
+      "category": "Categoría",
+      "description": "Descripción",
+      "address": "Dirección",
+      "phone": "Teléfono",
+      "website": "https://ejemplo.com",
+      "save": "Guardar perfil",
+      "savedSuccess": "Perfil guardado",
+      "savedError": "No se pudo guardar el perfil"
+    },
+    "Posts": {
+      "title": "Título",
+      "body": "Cuerpo",
+      "ctaLabel": "Texto del CTA",
+      "ctaUrl": "https://ejemplo.com",
+      "create": "Crear post",
+      "createdSuccess": "Post creado",
+      "createdError": "No se pudo crear el post",
+      "delete": "Eliminar",
+      "empty": "Todavía no hay posts."
+    },
+    "Reviews": {
+      "author": "Autor",
+      "rating": "1-5",
+      "body": "Texto de la reseña",
+      "create": "Crear reseña",
+      "createdSuccess": "Reseña creada",
+      "createdError": "No se pudo crear la reseña",
+      "response": "Respuesta",
+      "responsePlaceholder": "Escribí una respuesta",
+      "reply": "Responder",
+      "empty": "Todavía no hay reseñas."
+    },
+    "Insights": {
+      "title": "Insights",
+      "posts": "Posts",
+      "website": "Sitio web",
+      "latestSnapshot": "Último snapshot",
+      "none": "Ninguno"
+    }
+  },
+  "Analytics": {
+    "title": "Analytics",
+    "description": "Tendencias y distribución de scores de tus snapshots recientes.",
+    "empty": "Todavía no hay snapshots. Corré una auditoría primero.",
+    "kpi": {
+      "total": "Total de snapshots",
+      "average": "Score promedio",
+      "bestWorst": "Mejor / Peor"
+    },
+    "trendTitle": "Tendencia de score (últimos 10)",
+    "recentTitle": "Snapshots recientes",
+    "tableCaption": "Scores de snapshots recientes",
+    "Table": {
+      "url": "URL",
+      "date": "Fecha",
+      "score": "Score"
+    }
+  },
+  "Settings": {
+    "title": "Ajustes",
+    "description": "Gestioná el perfil de tu workspace, preferencias e integraciones por defecto.",
+    "profile": {
+      "title": "Perfil",
+      "description": "Nombre, contacto y defaults del negocio (próximamente)."
+    },
+    "preferences": {
+      "title": "Preferencias",
+      "description": "Locale, tema y preferencias de reportes (próximamente)."
+    }
+  },
+  "Onboarding": {
+    "title": "Bienvenido a LumoSEO",
+    "description": "Completá este onboarding rápido para desbloquear el flujo completo.",
+    "checklistTitle": "Checklist de onboarding",
+    "steps": {
+      "setup": "Configurá el perfil del workspace",
+      "audit": "Corré tu primera auditoría",
+      "analytics": "Revisá tendencias en analytics"
+    },
+    "open": "Abrir"
   },
   "GSC": {
     "Common": {
@@ -207,6 +430,21 @@
     },
     "Countries": {
       "header": "País"
+    }
+  },
+  "Settings": {
+    "title": "Configuración",
+    "description": "Administrá tu perfil, preferencias y valores predeterminados de integración.",
+    "Profile": {
+      "title": "Perfil",
+      "name": "Nombre",
+      "email": "Email",
+      "hint": "Para editar datos de cuenta, gestionalo desde tu perfil de Clerk."
+    },
+    "Preferences": {
+      "title": "Preferencias",
+      "language": "Idioma",
+      "theme": "Tema"
     }
   },
   "Compare": {

@@ -1,10 +1,13 @@
+import { getTranslations } from 'next-intl/server';
+
 import { Card, CardContent } from '@/components/ui/card';
 import type { AuditResult } from '@/lib/audit/types';
 import { ScoreBadge } from './ScoreBadge';
 
-export function PageSpeedSection({ result }: { result: AuditResult }) {
+export async function PageSpeedSection({ result }: { result: AuditResult }) {
+  const t = await getTranslations('Audit.Result.Sections');
   if (!result.pagespeed) {
-    return <Card className="border-destructive"><CardContent className="p-4 text-sm">PageSpeed unavailable.</CardContent></Card>;
+    return <Card className="border-destructive"><CardContent className="p-4 text-sm">{t('pagespeedUnavailable')}</CardContent></Card>;
   }
 
   const ps = result.pagespeed;
