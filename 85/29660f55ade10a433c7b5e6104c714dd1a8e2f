@@ -1,0 +1,20 @@
+dashboard-web/supabase/migrations/0001_clerk_rls_foundation.sql
+  s_7dd917f775d3f9::t_db3399c03c4e61 6,58,72,86-87,129,143,153-160
+  s_7dd917f775d3f9::t_3483f6307f6e43 1-5,7-57,59-71,73-85,88-128,130-142,144-152
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.8",
+  "base_commit_sha": "8529660f55ade10a433c7b5e6104c714dd1a8e2f",
+  "prompts": {},
+  "sessions": {
+    "s_7dd917f775d3f9": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e3fa9-f4ad-75b1-8ce5-3e91a560fcdd",
+        "model": "gpt-5.5"
+      },
+      "human_author": "cplaza <camilo.plaza@mercadolibre.com.co>"
+    }
+  }
+}
