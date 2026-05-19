@@ -1,17 +1,40 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
+
 import { CommandPalette } from '@/components/command-palette/CommandPalette';
 import { redirect } from '@/i18n/navigation';
 import { getCurrentUser } from '@/lib/auth';
-import { LocaleSwitcher } from '@/components/i18n/LocaleSwitcher';
-import { ThemeToggle } from '@/components/theme/ThemeToggle';
+
 import { Sidebar } from './_components/Sidebar';
-import { UserMenu } from './_components/UserMenu';
+import { Topbar } from './_components/Topbar';
 
 type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 };
 
+/**
+ * ProtectedLayout — shell command-center (PR-2 / ui-cc-shell).
+ *
+ * Estructura:
+ *   ┌────────────┬───────────────────────────────────────┐
+ *   │            │ Topbar (CommandBar + bell + UserPill) │
+ *   │  Sidebar   ├───────────────────────────────────────┤
+ *   │ (sticky)   │                                       │
+ *   │            │  Main (children)                      │
+ *   │            │                                       │
+ *   └────────────┴───────────────────────────────────────┘
+ *
+ * - Sidebar es `sticky h-screen` y se renderiza fuera del max-w para llegar
+ *   al borde izquierdo del viewport (look industrial de las refs).
+ * - Topbar `sticky top-0 z-30`, encima del scroll del main.
+ * - Main scrolla independientemente con `max-w-7xl` interno por contenido.
+ *
+ * El CommandPalette se monta una vez acá; se abre con ⌘K global o vía el
+ * trigger `<CommandBar>` del Topbar (CustomEvent `commandpalette:open`).
+ *
+ * Auth: `getCurrentUser()` delega a Clerk; si no hay sesión, redirect al login
+ * con el locale actual preservado.
+ */
 export default async function ProtectedLayout({ children, params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
@@ -21,40 +44,61 @@ export default async function ProtectedLayout({ children, params }: Props) {
     redirect({ href: '/login', locale: locale as 'es' | 'en' });
   }
 
-  const t = await getTranslations('Common');
+  const tCommon = await getTranslations('Common');
+  const tChrome = await getTranslations('Chrome');
+
+  // displayName: del perfil en Supabase si está, sino local-part del email.
+  // Tier es estático por ahora — cuando exista billing, viene de
+  // user.publicMetadata.tier o de la tabla `profiles`.
+  const displayName =
+    user.displayName?.trim() || user.email.split('@')[0] || 'Usuario';
+
+  const labels = {
+    sidebar: {
+      sections: {
+        command: tChrome('Sidebar.sections.command'),
+        insights: tChrome('Sidebar.sections.insights'),
+      },
+      collapse: tChrome('Sidebar.collapse'),
+      signOut: tChrome('Sidebar.signOut'),
+    },
+    topbar: {
+      commandPlaceholder: tChrome('CommandBar.placeholder'),
+      notificationsTitle: tChrome('Notifications.title'),
+      notificationsEmpty: tChrome('Notifications.empty'),
+      viewSwitcher: tChrome('ViewSwitcher.label'),
+    },
+  };
 
   return (
-    <div className="relative min-h-screen text-foreground">
-      {/* Cmd+K palette \u2014 montado una sola vez para toda la zona protegida. */}
+    <div className="relative flex min-h-screen text-foreground">
       <CommandPalette locale={locale} />
 
-      {/* Header flotante: blur fuerte + border casi invisible sobre el mesh del body. */}
-      <header className="sticky top-0 z-20 border-b border-border/40 bg-background/70 backdrop-blur-xl">
-        <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-3">
-          <div className="flex items-center gap-3">
-            <span className="text-sm font-semibold tracking-tight">{t('appName')}</span>
-            {/* Hint del shortcut \u2014 mostramos \u2318 para ambos OS, es el patr\u00f3n m\u00e1s reconocible. */}
-            <kbd className="hidden items-center gap-1 rounded-md border border-border/60 bg-muted/50 px-2 py-0.5 text-[10px] font-mono text-muted-foreground sm:inline-flex">
-              <span>⌘</span><span>K</span>
-            </kbd>
-          </div>
-          <div className="flex items-center gap-2">
-            <LocaleSwitcher />
-            <ThemeToggle />
-            <UserMenu email={user.email} locale={locale} />
-          </div>
-        </div>
-      </header>
+      <Sidebar
+        brand={tCommon('appName')}
+        user={{
+          name: displayName,
+          email: user.email,
+          tier: tChrome('User.tier'),
+          locale,
+        }}
+        labels={labels.sidebar}
+      />
 
-      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-6 px-6 py-6 lg:grid-cols-[220px_minmax(0,1fr)]">
-        <Sidebar />
+      <div className="flex min-w-0 flex-1 flex-col">
+        <Topbar
+          brand={tCommon('appName')}
+          user={{ name: displayName, tier: tChrome('User.tier') }}
+          labels={labels.topbar}
+        />
 
-        {/* Main con on-mount fade-up (CSS via tailwindcss-animate). */}
         <main
-          className="animate-in fade-in slide-in-from-bottom-2 duration-500 space-y-6"
           aria-live="polite"
+          className="flex-1 animate-in fade-in slide-in-from-bottom-2 duration-500"
         >
-          {children}
+          <div className="mx-auto w-full max-w-7xl space-y-6 px-4 py-6 md:px-8 md:py-8">
+            {children}
+          </div>
         </main>
       </div>
     </div>

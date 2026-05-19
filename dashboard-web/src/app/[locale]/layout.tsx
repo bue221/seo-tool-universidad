@@ -85,7 +85,42 @@ export default async function LocaleLayout({ children, params }: Props) {
          * `localization` se elige por locale activo: Clerk renderiza sus
          * componentes (SignIn/SignUp/UserButton) traducidos.
          */}
-        <ClerkProvider localization={locale === 'es' ? esES : enUS}>
+        {/*
+         * Clerk appearance — mapeado a tokens del design system (PR-2 /
+         * ui-cc-shell). Usamos solo `variables` (no `baseTheme`) para evitar
+         * sumar `@clerk/themes` como dep; la rampa de surface + radius se
+         * aplica de forma consistente con el resto de la app.
+         *
+         * Light vs dark: Clerk no consume CSS vars dinámicas, así que estos
+         * valores reflejan la rampa DARK (modo primario del rediseño). En light
+         * mode los formularios Clerk seguirán con fondo oscuro — trade-off
+         * aceptable: login/signup priorizan look unificado del producto.
+         */}
+        <ClerkProvider
+          localization={locale === 'es' ? esES : enUS}
+          appearance={{
+            variables: {
+              colorPrimary: 'hsl(142 70% 55%)',
+              colorBackground: 'hsl(150 22% 11%)',
+              colorInputBackground: 'hsl(150 16% 14%)',
+              colorInputText: 'hsl(140 25% 97%)',
+              colorText: 'hsl(140 25% 97%)',
+              colorTextSecondary: 'hsl(140 8% 62%)',
+              colorDanger: 'hsl(0 72% 52%)',
+              colorSuccess: 'hsl(142 70% 55%)',
+              borderRadius: '1rem',
+              fontFamily: 'var(--font-sans), system-ui, sans-serif',
+            },
+            elements: {
+              card: 'bg-transparent shadow-none border-0',
+              formButtonPrimary:
+                'bg-primary text-primary-foreground hover:bg-primary/90 shadow-glow',
+              socialButtonsBlockButton:
+                'border border-border bg-surface-2 hover:bg-surface-3',
+              footerActionLink: 'text-primary hover:text-primary/80',
+            },
+          }}
+        >
           <ThemeProvider
             attribute="class"
             defaultTheme="system"

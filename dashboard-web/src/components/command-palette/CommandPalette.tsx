@@ -59,6 +59,18 @@ export function CommandPalette({ locale }: Props) {
     return () => document.removeEventListener('keydown', handler);
   }, []);
 
+  /*
+   * Trigger inline desde `<CommandBar>` (Topbar) u otros consumidores externos.
+   * Usamos un CustomEvent en vez de Context para mantener la API plana: el
+   * palette ya es un singleton montado en el layout protegido y no necesita
+   * conocer a sus triggers.
+   */
+  React.useEffect(() => {
+    const open = () => setOpen(true);
+    window.addEventListener('commandpalette:open', open);
+    return () => window.removeEventListener('commandpalette:open', open);
+  }, []);
+
   // Helper: ejecutar acci\u00f3n y cerrar palette en el mismo tick.
   const run = React.useCallback((fn: () => void) => {
     setOpen(false);

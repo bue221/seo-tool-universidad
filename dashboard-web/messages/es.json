@@ -5,6 +5,29 @@
     "switchToEnglish": "Cambiar a inglés",
     "switchToSpanish": "Cambiar a español"
   },
+  "Chrome": {
+    "Sidebar": {
+      "sections": {
+        "command": "Comando",
+        "insights": "Insights"
+      },
+      "collapse": "Colapsar barra lateral",
+      "signOut": "Cerrar sesión"
+    },
+    "CommandBar": {
+      "placeholder": "Analizar URL, dominio o propiedad digital…"
+    },
+    "Notifications": {
+      "title": "Notificaciones",
+      "empty": "Sin novedades por ahora."
+    },
+    "ViewSwitcher": {
+      "label": "Cambiar de vista"
+    },
+    "User": {
+      "tier": "Nivel empresarial"
+    }
+  },
   "Landing": {
     "title": "Medí tu visibilidad SEO con confianza",
     "subtitle": "LumoSEO combina métricas oficiales de Google con análisis on-page profundo en un flujo profesional.",
