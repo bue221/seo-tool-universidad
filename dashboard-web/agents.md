@@ -59,7 +59,7 @@ Capa fundacional que soporta a todos los módulos del agente. Detalles completos
 *   **i18n:** next-intl 4
 *   **Theme:** next-themes 0.4 + Tailwind 3.4 `darkMode: 'class'`
 *   **Env validation:** zod 3
-*   **Base de Datos y Auth:** Supabase (PostgreSQL) — *pendiente del change `auth-foundation`*
+*   **Base de Datos y Auth:** Supabase (PostgreSQL) — SSR auth en progreso (`auth-foundation`).
 *   **Componentes de UI:** Tailwind CSS + Shadcn/ui + Recharts — *Shadcn pendiente del change `ui-foundation`*
 *   **Despliegue:** Vercel (Serverless)
 
@@ -69,7 +69,7 @@ Capa fundacional que soporta a todos los módulos del agente. Detalles completos
 |--------|--------|------------|
 | `web-foundation` | ✅ Archivado (2026-05-18) | i18n + theme + SEO + env + PWA básica |
 | `ui-foundation` | ✅ Código completo, smoke pendiente de `pnpm install` | Shadcn/ui (16 primitives) + lucide + sonner + react-hook-form + cva |
-| `auth-foundation` | Pendiente | Supabase client + SSR auth + login + protected routes |
+| `auth-foundation` | 🚧 En progreso | Supabase client + SSR auth + login + protected routes |
 | `audit-runner` | Pendiente | Página que consume PageSpeed API + scraper-api en paralelo (ver [`../openspec/specs/audit-contract/spec.md`](../openspec/specs/audit-contract/spec.md)) |
 | `gbp-simulator` | Pendiente | Panel My Business simulado contra Supabase |
 | `analytics-dashboard` | Pendiente | Gráficos Recharts con histórico de `seo_snapshots` |

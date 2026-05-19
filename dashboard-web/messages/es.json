@@ -21,5 +21,38 @@
     "light": "Claro",
     "dark": "Oscuro",
     "system": "Sistema"
+  },
+  "Auth": {
+    "Login": {
+      "title": "Iniciar sesión",
+      "email": "Email",
+      "password": "Contraseña",
+      "submit": "Continuar"
+    },
+    "Signup": {
+      "title": "Crear cuenta",
+      "displayName": "Nombre a mostrar",
+      "email": "Email",
+      "password": "Contraseña",
+      "submit": "Crear cuenta"
+    },
+    "ForgotPassword": {
+      "title": "¿Olvidaste tu contraseña?",
+      "email": "Email",
+      "submit": "Enviar enlace"
+    },
+    "ResetPassword": {
+      "title": "Definí una nueva contraseña",
+      "password": "Nueva contraseña",
+      "confirmPassword": "Confirmar contraseña",
+      "submit": "Actualizar contraseña"
+    },
+    "Dashboard": {
+      "title": "Panel",
+      "welcome": "Hola {name}, tu cuenta está lista."
+    },
+    "UserMenu": {
+      "signOut": "Cerrar sesión"
+    }
   }
 }

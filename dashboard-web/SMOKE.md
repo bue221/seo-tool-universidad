@@ -177,6 +177,16 @@ Una vez deployado a un dominio accesible públicamente:
 - [Google Rich Results Test](https://search.google.com/test/rich-results) — verificar JSON-LD.
 - [Google Mobile-Friendly Test](https://search.google.com/test/mobile-friendly).
 
+## 8. Auth foundation smoke
+
+Con env Supabase cargado en `.env.local`:
+
+- Abrir `/dashboard` sin sesión → redirect a `/login`.
+- Signup en `/signup` con usuario nuevo.
+- Login en `/login` y acceso a `/dashboard`.
+- Ejecutar sign out desde `UserMenu`.
+- Validar que `public.profiles` tenga fila por usuario (trigger `handle_new_user`).
+
 ## Criterio de "smoke pasa"
 
-Si las secciones **1–5** pasan, la foundation está saludable. Lighthouse (sección 6) y validadores externos (sección 7) son polish — útiles pero no bloqueantes para considerar el change archivable.
+Si las secciones **1–5** pasan, la foundation está saludable. Lighthouse (sección 6), validadores externos (sección 7) y auth smoke (sección 8) completan la verificación pre-archive.

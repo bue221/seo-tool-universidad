@@ -21,5 +21,38 @@
     "light": "Light",
     "dark": "Dark",
     "system": "System"
+  },
+  "Auth": {
+    "Login": {
+      "title": "Sign in",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Continue"
+    },
+    "Signup": {
+      "title": "Create account",
+      "displayName": "Display name",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Create account"
+    },
+    "ForgotPassword": {
+      "title": "Forgot your password?",
+      "email": "Email",
+      "submit": "Send reset link"
+    },
+    "ResetPassword": {
+      "title": "Set a new password",
+      "password": "New password",
+      "confirmPassword": "Confirm password",
+      "submit": "Update password"
+    },
+    "Dashboard": {
+      "title": "Dashboard",
+      "welcome": "Hi {name}, your account is ready."
+    },
+    "UserMenu": {
+      "signOut": "Sign out"
+    }
   }
 }

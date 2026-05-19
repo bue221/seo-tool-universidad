@@ -12,6 +12,9 @@ export default defineConfig({
       NEXT_PUBLIC_SITE_URL: 'https://test.example.com',
       NEXT_PUBLIC_ALLOW_INDEXING: 'false',
       NEXT_PUBLIC_DEFAULT_LOCALE: 'es',
+      NEXT_PUBLIC_SUPABASE_URL: 'https://example.supabase.co',
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: 'anon_key_12345678901234567890',
+      SUPABASE_SERVICE_ROLE_KEY: 'service_role_key_12345678901234567890',
     },
   },
   resolve: {
