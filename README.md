@@ -72,3 +72,5 @@ Detalle del razonamiento en [`AGENTS.md`](./AGENTS.md).
 
 - **MCP Supabase** está deshabilitado en `.claude/settings.local.json`. Habilitarlo manualmente cuando se vaya a trabajar con el esquema (cambiar `disabledMcpjsonServers` → `enabledMcpjsonServers`).
 - **OpenSpec CLI** no se pudo instalar por restricciones del registry corporativo; la carpeta `openspec/` está creada a mano siguiendo la convención oficial. Cuando haya red, `npx -y @fission-ai/openspec update` sincroniza.
+
+# seo-tool-universidad
