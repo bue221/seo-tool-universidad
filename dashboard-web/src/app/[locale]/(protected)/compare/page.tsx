@@ -1,4 +1,7 @@
 import { getTranslations } from 'next-intl/server';
+
+import { PageHeader } from '@/components/app/PageHeader';
+
 import { CompareView } from './_components/CompareView';
 
 export default async function ComparePage() {
@@ -10,11 +13,12 @@ export default async function ComparePage() {
   const tTabs = await getTranslations('Compare.Tabs');
 
   return (
-    <div className="space-y-6">
-      <header>
-        <h1 className="text-2xl font-semibold tracking-tight">{tCommon('title')}</h1>
-        <p className="text-sm text-muted-foreground">{tCommon('subtitle')}</p>
-      </header>
+    <div className="space-y-8">
+      <PageHeader
+        title={tCommon('title')}
+        description={tCommon('subtitle')}
+        size="sm"
+      />
 
       <CompareView
         formLabels={{

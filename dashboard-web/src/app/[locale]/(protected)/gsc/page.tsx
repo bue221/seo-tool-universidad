@@ -1,5 +1,7 @@
 import { ScanLine } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
+
+import { PageHeader } from '@/components/app/PageHeader';
 import { Button } from '@/components/ui/button';
 import { Link } from '@/i18n/navigation';
 import { getCurrentUser } from '@/lib/auth';
@@ -18,11 +20,12 @@ export default async function GscLandingPage() {
   const properties = await listUserProperties(user.id);
 
   return (
-    <div className="space-y-6">
-      <header className="space-y-1">
-        <h1 className="text-2xl font-semibold tracking-tight">{t('title')}</h1>
-        <p className="text-sm text-muted-foreground">{t('subtitle')}</p>
-      </header>
+    <div className="space-y-8">
+      <PageHeader
+        title={t('title')}
+        description={t('subtitle')}
+        size="sm"
+      />
 
       {properties.length === 0 ? <EmptyState t={t} /> : <PropertyGrid properties={properties} />}
     </div>

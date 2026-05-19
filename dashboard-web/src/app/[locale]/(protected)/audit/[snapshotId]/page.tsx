@@ -1,7 +1,11 @@
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
+
+import { PageHeader } from '@/components/app/PageHeader';
+import { SectionCard } from '@/components/app/SectionCard';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { getSnapshot } from '@/lib/audit/persistence';
+
 import { KeywordsSection } from '../_components/KeywordsSection';
 import { OnPageSection } from '../_components/OnPageSection';
 import { PageSpeedSection } from '../_components/PageSpeedSection';
@@ -12,6 +16,14 @@ import { WoorankSection } from '../_components/WoorankSection';
 
 type Props = { params: Promise<{ snapshotId: string }> };
 
+/**
+ * Audit detail page (ui-cc-pages).
+ *
+ * - Header con PageHeader (sin accent — el dominio es texto plano) + score
+ *   global como action a la derecha.
+ * - Tabs envueltas en SectionCard surface para que respeten el lenguaje
+ *   visual; el contenido interno de cada sección se conserva tal cual.
+ */
 export default async function SnapshotDetailPage({ params }: Props) {
   const { snapshotId } = await params;
   const snapshot = await getSnapshot(snapshotId);
@@ -19,48 +31,70 @@ export default async function SnapshotDetailPage({ params }: Props) {
 
   if (!snapshot) notFound();
 
-  return (
-    <div className="space-y-4">
-      <div className="rounded-lg border bg-muted/20 p-4">
-        <p className="text-sm text-muted-foreground">{snapshot.url}</p>
-        <div className="mt-2 flex items-center gap-3">
-          <span className="text-sm">{t('globalScore')}</span>
-          <ScoreBadge score={Number(snapshot.global_score)} />
-        </div>
-      </div>
+  // Display-friendly del URL: dominio sin protocolo, sin trailing slash.
+  let domain = snapshot.url;
+  try {
+    domain = new URL(snapshot.url).hostname.replace(/^www\./, '');
+  } catch {
+    /* Fallback al URL crudo si no parsea. */
+  }
 
-      <Tabs defaultValue="pagespeed">
-        <TabsList className="w-full justify-start overflow-x-auto">
-          <TabsTrigger value="pagespeed">PageSpeed</TabsTrigger>
-          <TabsTrigger value="onpage">On-Page</TabsTrigger>
-          {snapshot.result.scraper?.woorank ? (
-            <TabsTrigger value="woorank">WooRank</TabsTrigger>
-          ) : null}
-          <TabsTrigger value="tracking">Tracking</TabsTrigger>
-          <TabsTrigger value="keywords">Keywords</TabsTrigger>
-          <TabsTrigger value="sentiment">Sentiment</TabsTrigger>
-        </TabsList>
-        <TabsContent value="pagespeed">
-          <PageSpeedSection result={snapshot.result} />
-        </TabsContent>
-        <TabsContent value="onpage">
-          <OnPageSection result={snapshot.result} />
-        </TabsContent>
-        {snapshot.result.scraper?.woorank ? (
-          <TabsContent value="woorank">
-            <WoorankSection result={snapshot.result} />
-          </TabsContent>
-        ) : null}
-        <TabsContent value="tracking">
-          <TrackingSection result={snapshot.result} />
-        </TabsContent>
-        <TabsContent value="keywords">
-          <KeywordsSection result={snapshot.result} />
-        </TabsContent>
-        <TabsContent value="sentiment">
-          <SentimentSection result={snapshot.result} />
-        </TabsContent>
-      </Tabs>
+  return (
+    <div className="space-y-8">
+      <PageHeader
+        title="Auditoría ·"
+        accent={domain}
+        size="sm"
+        description={snapshot.url}
+        actions={
+          <div className="flex items-center gap-2">
+            <span className="text-xs uppercase tracking-tracked-label text-muted-foreground">
+              {t('globalScore')}
+            </span>
+            <ScoreBadge score={Number(snapshot.global_score)} />
+          </div>
+        }
+      />
+
+      <SectionCard
+        eyebrow="Detalles"
+        bodyClassName="p-0"
+      >
+        <Tabs defaultValue="pagespeed" className="w-full">
+          <TabsList className="w-full justify-start overflow-x-auto rounded-none border-b border-border bg-transparent px-4">
+            <TabsTrigger value="pagespeed">PageSpeed</TabsTrigger>
+            <TabsTrigger value="onpage">On-Page</TabsTrigger>
+            {snapshot.result.scraper?.woorank ? (
+              <TabsTrigger value="woorank">WooRank</TabsTrigger>
+            ) : null}
+            <TabsTrigger value="tracking">Tracking</TabsTrigger>
+            <TabsTrigger value="keywords">Keywords</TabsTrigger>
+            <TabsTrigger value="sentiment">Sentiment</TabsTrigger>
+          </TabsList>
+          <div className="p-6">
+            <TabsContent value="pagespeed">
+              <PageSpeedSection result={snapshot.result} />
+            </TabsContent>
+            <TabsContent value="onpage">
+              <OnPageSection result={snapshot.result} />
+            </TabsContent>
+            {snapshot.result.scraper?.woorank ? (
+              <TabsContent value="woorank">
+                <WoorankSection result={snapshot.result} />
+              </TabsContent>
+            ) : null}
+            <TabsContent value="tracking">
+              <TrackingSection result={snapshot.result} />
+            </TabsContent>
+            <TabsContent value="keywords">
+              <KeywordsSection result={snapshot.result} />
+            </TabsContent>
+            <TabsContent value="sentiment">
+              <SentimentSection result={snapshot.result} />
+            </TabsContent>
+          </div>
+        </Tabs>
+      </SectionCard>
     </div>
   );
 }

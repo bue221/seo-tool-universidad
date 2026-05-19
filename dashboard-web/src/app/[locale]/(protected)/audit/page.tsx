@@ -1,4 +1,8 @@
 import { getTranslations } from 'next-intl/server';
+
+import { PageHeader } from '@/components/app/PageHeader';
+import { SectionCard } from '@/components/app/SectionCard';
+
 import { AuditForm } from './_components/AuditForm';
 import { AuditHistoryList } from './_components/AuditHistoryList';
 
@@ -9,16 +13,24 @@ export default async function AuditPage({ params }: Props) {
   const t = await getTranslations('Audit.History');
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-semibold tracking-tight">SEO Audit Runner</h1>
-        <p className="text-sm text-muted-foreground">Run a technical audit and review your latest snapshots.</p>
-      </div>
-      <AuditForm locale={locale} />
-      <section className="space-y-3 rounded-lg border p-4">
-        <h2 className="text-lg font-semibold">{t('title')}</h2>
+    <div className="space-y-8">
+      <PageHeader
+        title="Auditoría"
+        accent="SEO"
+        description="Corré una auditoría técnica completa y revisá tus snapshots más recientes."
+      />
+
+      <SectionCard
+        eyebrow="Nuevo análisis"
+        title="Desplegar auditoría"
+        description="Pegá una URL y ejecutamos PageSpeed + scraper en paralelo."
+      >
+        <AuditForm locale={locale} />
+      </SectionCard>
+
+      <SectionCard eyebrow="Histórico" title={t('title')}>
         <AuditHistoryList />
-      </section>
+      </SectionCard>
     </div>
   );
 }
