@@ -20,7 +20,7 @@ export default async function SnapshotDetailPage({ params }: Props) {
 
   return (
     <div className="space-y-4">
-      <div className="rounded-lg border p-4">
+      <div className="rounded-lg border bg-muted/20 p-4">
         <p className="text-sm text-muted-foreground">{snapshot.url}</p>
         <div className="mt-2 flex items-center gap-3">
           <span className="text-sm">{t('globalScore')}</span>
@@ -29,7 +29,7 @@ export default async function SnapshotDetailPage({ params }: Props) {
       </div>
 
       <Tabs defaultValue="pagespeed">
-        <TabsList>
+        <TabsList className="w-full justify-start overflow-x-auto">
           <TabsTrigger value="pagespeed">PageSpeed</TabsTrigger>
           <TabsTrigger value="onpage">On-Page</TabsTrigger>
           <TabsTrigger value="tracking">Tracking</TabsTrigger>

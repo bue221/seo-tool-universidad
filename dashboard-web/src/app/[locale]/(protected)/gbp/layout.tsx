@@ -10,9 +10,13 @@ export default function GbpLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="space-y-4">
-      <nav className="flex gap-4 text-sm">
+      <div>
+        <h1 className="text-2xl font-semibold tracking-tight">GBP Simulator</h1>
+        <p className="text-sm text-muted-foreground">Manage your business profile, posts, reviews and insights.</p>
+      </div>
+      <nav className="flex flex-wrap gap-2 text-sm">
         {tabs.map((tab) => (
-          <Link key={tab.href} href={tab.href} className="underline">
+          <Link key={tab.href} href={tab.href} className="rounded-md border px-3 py-1.5 hover:bg-muted">
             {tab.label}
           </Link>
         ))}

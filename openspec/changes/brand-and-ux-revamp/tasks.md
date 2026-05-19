@@ -22,8 +22,8 @@
 
 - [x] Unificar navegación y encabezados en rutas protegidas.
 - [x] Mejorar Dashboard como hub (entry points claros a módulos).
-- [ ] Pulir `/audit` y detalle de snapshot con estados más claros.
-- [ ] Pulir consistencia visual en `/gbp/*` y `/analytics`.
+- [x] Pulir `/audit` y detalle de snapshot con estados más claros.
+- [x] Pulir consistencia visual en `/gbp/*` y `/analytics`.
 
 ## QA / Validation
 

@@ -10,16 +10,28 @@ export default async function AnalyticsPage() {
 
   const avg = snapshots.reduce((acc, s) => acc + Number(s.global_score), 0) / snapshots.length;
 
+  const best = Math.max(...snapshots.map((s) => Number(s.global_score)));
+
   return (
-    <div className="grid gap-4 md:grid-cols-2">
-      <Card>
-        <CardHeader><CardTitle>Total snapshots</CardTitle></CardHeader>
-        <CardContent>{snapshots.length}</CardContent>
-      </Card>
-      <Card>
-        <CardHeader><CardTitle>Average score</CardTitle></CardHeader>
-        <CardContent>{avg.toFixed(2)}</CardContent>
-      </Card>
+    <div className="space-y-4">
+      <div>
+        <h1 className="text-2xl font-semibold tracking-tight">Analytics</h1>
+        <p className="text-sm text-muted-foreground">Quick KPI view from your latest SEO snapshots.</p>
+      </div>
+      <div className="grid gap-4 md:grid-cols-3">
+        <Card>
+          <CardHeader><CardTitle>Total snapshots</CardTitle></CardHeader>
+          <CardContent>{snapshots.length}</CardContent>
+        </Card>
+        <Card>
+          <CardHeader><CardTitle>Average score</CardTitle></CardHeader>
+          <CardContent>{avg.toFixed(2)}</CardContent>
+        </Card>
+        <Card>
+          <CardHeader><CardTitle>Best score</CardTitle></CardHeader>
+          <CardContent>{best.toFixed(2)}</CardContent>
+        </Card>
+      </div>
     </div>
   );
 }
