@@ -1,30 +1,36 @@
 # scraper-api
 
-Motor de auditoría SEO en Go (Fiber + Playwright-Go). Ver [`agents.md`](./agents.md) para el contrato del agente.
+SEO audit engine in Go (Fiber + Playwright).
 
-## Setup (placeholder)
+## Quickstart
 
 ```bash
-# Cuando estés listo:
-go get github.com/gofiber/fiber/v2
-go get github.com/playwright-community/playwright-go
+cd scraper-api
+go mod tidy
 go run github.com/playwright-community/playwright-go/cmd/playwright install --with-deps chromium
+go run ./cmd/server
 ```
 
-## Endpoint principal
+Service runs on `http://localhost:8080`.
 
-```
-POST /api/audit
-Content-Type: application/json
+## Endpoints
 
-{ "url": "https://ejemplo.com" }
-```
+- `GET /health`
+- `POST /api/audit` with body `{ "url": "https://example.com" }`
 
-Respuesta: ver contrato JSON en `openspec/specs/audit-contract/` (root del monorepo).
+## Environment variables
 
-## Variables de entorno
-
-```
+```bash
 PORT=8080
 PLAYWRIGHT_HEADLESS=true
+ALLOWED_ORIGIN=*
+BROWSER_POOL_SIZE=3
+LOG_LEVEL=info
+VERSION=v0.1.0
+```
+
+## Tests
+
+```bash
+go test ./...
 ```
