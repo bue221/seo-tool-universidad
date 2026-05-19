@@ -17,6 +17,13 @@ const config: Config = {
       colors: {
         background: 'hsl(var(--background) / <alpha-value>)',
         foreground: 'hsl(var(--foreground) / <alpha-value>)',
+        // Surface ramp semántica — sidebar/topbar/card/popover.
+        // Definida en globals.css por light/dark.
+        'surface-1': 'hsl(var(--surface-1) / <alpha-value>)',
+        'surface-2': 'hsl(var(--surface-2) / <alpha-value>)',
+        'surface-3': 'hsl(var(--surface-3) / <alpha-value>)',
+        'border-strong': 'hsl(var(--border-strong) / <alpha-value>)',
+        'primary-soft': 'hsl(var(--primary-soft) / <alpha-value>)',
         card: {
           DEFAULT: 'hsl(var(--card) / <alpha-value>)',
           foreground: 'hsl(var(--card-foreground) / <alpha-value>)',
@@ -53,6 +60,18 @@ const config: Config = {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
+        '2xl': '1.25rem',
+        '3xl': '1.75rem',
+      },
+      fontSize: {
+        // Display H1: clamp responsive, line-height apretado, tracking negativo.
+        // Pareado con `font-display` para H1 hero / page heading.
+        display: ['clamp(2.5rem, 5vw, 4.5rem)', { lineHeight: '1.02', letterSpacing: '-0.03em', fontWeight: '700' }],
+        'display-sm': ['clamp(1.75rem, 3vw, 2.5rem)', { lineHeight: '1.1', letterSpacing: '-0.02em', fontWeight: '700' }],
+      },
+      letterSpacing: {
+        // Label uppercase tracked — sidebar section, KPI label, tier badge.
+        'tracked-label': '0.14em',
       },
       keyframes: {
         'accordion-down': {

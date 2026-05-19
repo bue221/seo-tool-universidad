@@ -24,11 +24,18 @@ const buttonVariants = cva(
           'bg-secondary text-secondary-foreground shadow-soft hover:bg-secondary/80 hover:shadow-card',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
+        // `glow`: CTA primario "command center" — primary plano + ring-glow
+        // permanente (no sólo hover). Reservar para el CTA principal de hero
+        // / despliegue de auditoría. No usar más de uno por viewport.
+        glow:
+          'bg-primary text-primary-foreground ring-glow hover:bg-primary/95 hover:shadow-glow',
       },
       size: {
         default: 'h-10 px-4 py-2',
         sm: 'h-9 rounded-md px-3',
         lg: 'h-11 rounded-md px-8',
+        // `pill`: alto fijo + radius full para CTAs estilo refs.
+        pill: 'h-11 rounded-full px-6',
         icon: 'h-10 w-10',
       },
     },

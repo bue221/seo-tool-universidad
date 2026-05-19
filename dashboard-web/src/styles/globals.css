@@ -37,10 +37,17 @@
     --destructive-foreground: 0 0% 100%;
 
     --border: 140 22% 84%;
+    --border-strong: 140 22% 74%;
     --input: 140 22% 84%;
     --ring: 142 72% 34%;
 
-    --radius: 0.75rem;
+    /* Surface ramp en light: blanco → verde-gris muy claro. Mantiene aire respirado. */
+    --surface-1: 140 30% 98%;
+    --surface-2: 0 0% 100%;
+    --surface-3: 140 25% 96%;
+    --primary-soft: 142 65% 48%;
+
+    --radius: 1rem;
 
     /* Shadow tokens — escalan con interactividad. */
     --shadow-soft: 0 1px 2px hsl(150 30% 12% / 0.04),
@@ -53,44 +60,58 @@
                    0 8px 24px hsl(var(--primary) / 0.28);
   }
 
+  /*
+   * Dark mode — "command center".
+   * Rampa near-black con tinte verde sutil (manteniendo marca lime).
+   * `surface-1/2/3` son nuevos tokens semánticos para sidebar/topbar/cards.
+   */
   .dark {
-    --background: 150 30% 8%;
-    --foreground: 140 30% 96%;
+    --background: 150 30% 5%;     /* canvas casi negro */
+    --foreground: 140 25% 97%;
 
-    --card: 150 26% 12%;
-    --card-foreground: 140 30% 96%;
+    --surface-1: 150 24% 8%;      /* sidebar / topbar */
+    --surface-2: 150 22% 11%;     /* card fill */
+    --surface-3: 150 20% 14%;     /* card hover / popover */
 
-    --popover: 150 26% 12%;
-    --popover-foreground: 140 30% 96%;
+    --card: 150 22% 11%;
+    --card-foreground: 140 25% 97%;
 
-    --primary: 142 65% 55%;
-    --primary-foreground: 150 40% 8%;
+    --popover: 150 20% 14%;
+    --popover-foreground: 140 25% 97%;
 
-    --secondary: 150 18% 20%;
-    --secondary-foreground: 140 30% 96%;
+    --primary: 142 70% 55%;
+    --primary-soft: 142 70% 70%;  /* segundo stop del gradient brand */
+    --primary-foreground: 150 40% 6%;
 
-    --muted: 150 16% 18%;
-    --muted-foreground: 140 10% 68%;
+    --secondary: 150 18% 16%;
+    --secondary-foreground: 140 25% 97%;
 
-    --accent: 84 70% 58%;
-    --accent-foreground: 150 40% 8%;
+    --muted: 150 16% 14%;
+    --muted-foreground: 140 8% 62%;
 
-    --destructive: 0 66% 45%;
-    --destructive-foreground: 140 30% 96%;
+    --accent: 84 78% 60%;         /* lime amarillento */
+    --accent-foreground: 150 40% 6%;
 
-    --border: 150 14% 24%;
-    --input: 150 14% 24%;
-    --ring: 142 65% 55%;
+    --destructive: 0 72% 52%;
+    --destructive-foreground: 140 25% 97%;
 
-    /* En dark las sombras necesitan más opacidad para ser visibles sobre fondo oscuro. */
-    --shadow-soft: 0 1px 2px hsl(0 0% 0% / 0.40),
-                   0 1px 1px hsl(0 0% 0% / 0.25);
-    --shadow-card: 0 4px 12px hsl(0 0% 0% / 0.45),
-                   0 1px 3px hsl(0 0% 0% / 0.30);
-    --shadow-pop:  0 12px 32px hsl(0 0% 0% / 0.55),
-                   0 4px 8px hsl(0 0% 0% / 0.35);
-    --shadow-glow: 0 0 0 1px hsl(var(--primary) / 0.40),
-                   0 8px 28px hsl(var(--primary) / 0.40);
+    --border: 150 12% 18%;        /* hairline */
+    --border-strong: 150 14% 26%; /* separadores sidebar */
+    --input: 150 16% 14%;
+    --ring: 142 70% 55%;
+
+    /*
+     * Sombras recalibradas para near-black: privilegiamos `inset hairline` para
+     * definir bordes de cards en lugar de drop-shadow (que en dark se pierde).
+     */
+    --shadow-soft: 0 1px 0 hsl(0 0% 100% / 0.02),
+                   0 1px 2px hsl(0 0% 0% / 0.40);
+    --shadow-card: inset 0 0 0 1px hsl(var(--border) / 0.6),
+                   0 1px 0 hsl(0 0% 100% / 0.02);
+    --shadow-pop:  0 24px 48px hsl(0 0% 0% / 0.60),
+                   0 2px 4px hsl(0 0% 0% / 0.40);
+    --shadow-glow: 0 0 0 1px hsl(var(--primary) / 0.45),
+                   0 0 28px hsl(var(--primary) / 0.35);
   }
 
   * {
@@ -100,14 +121,21 @@
   body {
     @apply bg-background text-foreground;
     /*
-     * Background base: tres radiales lime/accent en esquinas para crear el "mesh".
-     * Posiciones fijas para no romper SSR.
+     * Mesh radial sutil. En light usa lime saturado; en dark baja a 0.06 para
+     * no contaminar el near-black y mantener el aire "command center".
      */
     background-image:
       radial-gradient(at 15% -10%,  hsl(var(--primary) / 0.14) 0px, transparent 50%),
       radial-gradient(at 85% 0%,    hsl(var(--accent)  / 0.12) 0px, transparent 45%),
       radial-gradient(at 50% 110%,  hsl(var(--primary) / 0.08) 0px, transparent 55%);
     background-attachment: fixed;
+  }
+
+  .dark body {
+    background-image:
+      radial-gradient(at 12% -5%,  hsl(var(--primary) / 0.06) 0px, transparent 55%),
+      radial-gradient(at 88% 8%,   hsl(var(--accent)  / 0.05) 0px, transparent 50%),
+      radial-gradient(at 50% 110%, hsl(var(--primary) / 0.04) 0px, transparent 60%);
   }
 }
 
@@ -149,5 +177,52 @@
   /* Glow ring que escala con `--primary`. Útil en focus/hover de CTAs. */
   .ring-glow {
     box-shadow: var(--shadow-glow);
+  }
+
+  /*
+   * Gradient text de marca: primary → accent (lime → lime-amarillo).
+   * Aplicar a `<span>` dentro de un heading para resaltar la palabra-acento.
+   * El padre conserva el color base del foreground.
+   */
+  .text-gradient-brand {
+    background-image: linear-gradient(
+      90deg,
+      hsl(var(--primary))   0%,
+      hsl(var(--accent))    100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    /* Evita clipping vertical de descendentes (g, p, y) cuando se aplica clip. */
+    padding-bottom: 0.05em;
+  }
+
+  /*
+   * Grid faint: cuadrícula 64px con máscara radial para hero de marketing y
+   * secciones destacadas. Sutil — solo aprovecha el `--border` actual.
+   */
+  .bg-grid-faint {
+    background-image:
+      linear-gradient(to right,  hsl(var(--border) / 0.4) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border) / 0.4) 1px, transparent 1px);
+    background-size: 64px 64px;
+    -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%);
+            mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%);
+  }
+
+  /*
+   * Anillo de "item activo" para sidebar nav y tabs. Borde izquierdo sólido en
+   * `--primary` + halo difuso al 18%. No usar en cards (overkill).
+   */
+  .ring-active {
+    box-shadow:
+      inset 2px 0 0 hsl(var(--primary)),
+      0 0 20px hsl(var(--primary) / 0.18);
+  }
+
+  /* Tabular nums para columnas de KPI / métricas alineadas. */
+  .nums-tabular {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum';
   }
 }

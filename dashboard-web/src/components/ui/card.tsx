@@ -9,21 +9,45 @@ import { cn } from '@/lib/utils';
  * Usar en cualquier card que sea link, button o tenga acción principal al click.
  * No usar en cards puramente informativas (hover sin feedback confunde).
  */
+/**
+ * Variants:
+ * - `default`: card estándar con bg-card/80 + shadow-soft. Compatible con el
+ *    look pre-command-center (no rompe consumidores existentes).
+ * - `surface`: card command-center — surface-2/80, border/60, shadow-card,
+ *    radius 2xl. Útil para KPIs, charts, secciones de detalle.
+ * - `elevated`: surface-3 + shadow-pop, sin backdrop. Para modales inline /
+ *    cards con peso visual extra.
+ * - `ghost`: sin bg ni border, solo padding. Para wrappers que solo aportan
+ *    estructura semántica.
+ */
+type CardVariant = 'default' | 'surface' | 'elevated' | 'ghost';
+
 type CardProps = React.HTMLAttributes<HTMLDivElement> & {
   interactive?: boolean;
+  variant?: CardVariant;
+};
+
+const variantClasses: Record<CardVariant, string> = {
+  default:
+    'rounded-lg border border-border/60 bg-card/80 text-card-foreground shadow-soft backdrop-blur-sm',
+  surface:
+    'rounded-2xl border border-border/60 bg-surface-2/80 text-card-foreground shadow-card backdrop-blur-sm',
+  elevated:
+    'rounded-2xl border border-border bg-surface-3 text-card-foreground shadow-pop',
+  ghost: 'rounded-2xl text-card-foreground',
 };
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, interactive = false, ...props }, ref) => (
+  ({ className, interactive = false, variant = 'default', ...props }, ref) => (
     <div
       ref={ref}
       className={cn(
-        // Border casi invisible + sombra suave + blur en fondo para profundidad.
-        // `bg-card/80` permite que el mesh del body se note debajo.
-        'rounded-lg border border-border/60 bg-card/80 text-card-foreground shadow-soft',
-        'backdrop-blur-sm transition-all duration-200',
+        variantClasses[variant],
+        'transition-all duration-200',
         interactive &&
-          'cursor-pointer hover:-translate-y-0.5 hover:border-border hover:shadow-card hover:bg-card',
+          'cursor-pointer hover:-translate-y-0.5 hover:border-border hover:shadow-card',
+        interactive && variant === 'default' && 'hover:bg-card',
+        interactive && variant === 'surface' && 'hover:bg-surface-3/80',
         className,
       )}
       {...props}

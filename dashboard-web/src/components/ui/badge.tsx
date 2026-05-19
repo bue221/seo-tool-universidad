@@ -15,6 +15,16 @@ const badgeVariants = cva(
         destructive:
           'border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80',
         outline: 'text-foreground',
+        // `tier`: badge de nivel/plan — uppercase tracked, ghost con tinte primary.
+        // Uso: user pill ("NIVEL EMPRESARIAL"), planes en pricing.
+        tier:
+          'border-primary/30 bg-primary/10 text-primary uppercase tracking-tracked-label text-[10px] font-semibold',
+        // `metricUp` / `metricDown`: variantes de Badge para deltas inline en
+        // tablas / listas donde no entra un TrendPill con icono.
+        metricUp:
+          'border-transparent bg-emerald-500/10 text-emerald-400 dark:text-emerald-300 nums-tabular',
+        metricDown:
+          'border-transparent bg-rose-500/10 text-rose-400 dark:text-rose-300 nums-tabular',
       },
     },
     defaultVariants: {
