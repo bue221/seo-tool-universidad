@@ -1,4 +1,7 @@
 import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import { ClerkProvider } from '@clerk/nextjs';
+import { enUS, esES } from '@clerk/localizations';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
@@ -9,6 +12,17 @@ import { TooltipProvider } from '@/components/ui/tooltip';
 import { routing } from '@/i18n/routing';
 import { env } from '@/lib/env';
 import '@/styles/globals.css';
+
+/**
+ * Inter variable — self-hosted vía next/font, sin request a Google en runtime.
+ * `--font-sans` se inyecta como CSS var y se referencia desde tailwind.config.ts
+ * (`fontFamily.sans` / `fontFamily.display`).
+ */
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-sans',
+  display: 'swap',
+});
 
 /**
  * Metadata global heredada por todas las páginas del segmento [locale].
@@ -59,23 +73,31 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages();
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={locale} className={inter.variable} suppressHydrationWarning>
       <head>
         <meta name="color-scheme" content="light dark" />
         <JsonLd schema={buildSiteSchemas()} />
       </head>
-      <body className="bg-background text-foreground antialiased">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <NextIntlClientProvider messages={messages}>
-            <TooltipProvider delayDuration={200}>{children}</TooltipProvider>
-          </NextIntlClientProvider>
-          <Toaster richColors closeButton position="bottom-right" />
-        </ThemeProvider>
+      <body className="bg-background font-sans text-foreground antialiased">
+        {/*
+         * ClerkProvider envuelve TODO porque sus hooks (useUser, useSession)
+         * deben estar disponibles tanto en (auth) como en (protected).
+         * `localization` se elige por locale activo: Clerk renderiza sus
+         * componentes (SignIn/SignUp/UserButton) traducidos.
+         */}
+        <ClerkProvider localization={locale === 'es' ? esES : enUS}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <NextIntlClientProvider messages={messages}>
+              <TooltipProvider delayDuration={200}>{children}</TooltipProvider>
+            </NextIntlClientProvider>
+            <Toaster richColors closeButton position="bottom-right" />
+          </ThemeProvider>
+        </ClerkProvider>
       </body>
     </html>
   );

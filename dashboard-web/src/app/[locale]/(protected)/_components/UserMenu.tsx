@@ -1,6 +1,6 @@
+import { SignOutButton } from '@clerk/nextjs';
 import { LogOut } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
-import { signOut } from '@/app/[locale]/(auth)/_actions/sign-out';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -9,7 +9,12 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-export async function UserMenu({ email }: { email: string }) {
+/**
+ * Menú del usuario en el header de rutas protegidas.
+ * Sign-out via `<SignOutButton>` de Clerk: limpia la sesión en el cliente
+ * y redirige a `redirectUrl`. No requiere server action propia.
+ */
+export async function UserMenu({ email, locale }: { email: string; locale: string }) {
   const t = await getTranslations('Auth.UserMenu');
 
   return (
@@ -21,12 +26,12 @@ export async function UserMenu({ email }: { email: string }) {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem asChild>
-          <form action={signOut}>
-            <button className="flex w-full items-center gap-2" type="submit">
+          <SignOutButton redirectUrl={`/${locale}/login`}>
+            <button className="flex w-full items-center gap-2" type="button">
               <LogOut className="h-4 w-4" />
               {t('signOut')}
             </button>
-          </form>
+          </SignOutButton>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -32,10 +32,20 @@ const publicEnvSchema = z.object({
 
   /** Debe coincidir con `routing.defaultLocale` en src/i18n/routing.ts. */
   NEXT_PUBLIC_DEFAULT_LOCALE: z.enum(['es', 'en']).default('es'),
+
+  /** Clerk publishable key (pk_test_/pk_live_). Inyectado al cliente. */
+  NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().min(20),
+
+  /** URLs de login/signup pre-localizadas. Si el usuario navega en otro locale,
+   *  next-intl corrige el redirect. Default `es` por ser locale primario. */
+  NEXT_PUBLIC_CLERK_SIGN_IN_URL: z.string().startsWith('/').default('/es/login'),
+  NEXT_PUBLIC_CLERK_SIGN_UP_URL: z.string().startsWith('/').default('/es/signup'),
 });
 
 const serverEnvSchema = z.object({
   SUPABASE_SERVICE_ROLE_KEY: z.string().min(20),
+  /** Clerk secret key (sk_test_/sk_live_). Server-only. */
+  CLERK_SECRET_KEY: z.string().min(20),
   PAGESPEED_API_KEY: z.string().min(20).optional(),
   SCRAPER_API_URL: z
     .string()
@@ -52,6 +62,9 @@ function parseEnv() {
     NEXT_PUBLIC_DEFAULT_LOCALE: process.env.NEXT_PUBLIC_DEFAULT_LOCALE,
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
     NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
+    NEXT_PUBLIC_CLERK_SIGN_IN_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL,
+    NEXT_PUBLIC_CLERK_SIGN_UP_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_UP_URL,
   });
 
   if (!parsed.success) {
@@ -70,6 +83,7 @@ function parseEnv() {
 function parseServerEnv() {
   const parsed = serverEnvSchema.safeParse({
     SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
+    CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
     PAGESPEED_API_KEY: process.env.PAGESPEED_API_KEY,
     SCRAPER_API_URL: process.env.SCRAPER_API_URL,
   });

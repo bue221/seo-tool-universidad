@@ -1,22 +1,25 @@
-import { getTranslations } from 'next-intl/server';
-import { signIn } from '../_actions/sign-in';
-import { Link } from '@/i18n/navigation';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { SignIn } from '@clerk/nextjs';
 
-export default async function LoginPage() {
-  const t = await getTranslations('Auth.Login');
+type Props = { params: Promise<{ locale: string }> };
 
+/**
+ * Login page — delegada a Clerk.
+ *
+ * `path` + `routing="path"` hace que Clerk maneje los sub-paths internos
+ * (`/login/factor-one`, `/login/sso-callback`, etc.) sin que tengamos que
+ * declarar route segments adicionales.
+ *
+ * Providers OAuth (Google, Microsoft, etc.) se configuran en Clerk dashboard
+ * → User & Authentication → Social Connections. No requiere código acá.
+ */
+export default async function LoginPage({ params }: Props) {
+  const { locale } = await params;
   return (
-    <form action={signIn} className="space-y-3">
-      <h1 className="text-xl font-semibold">{t('title')}</h1>
-      <Input name="email" type="email" placeholder={t('email')} required />
-      <Input name="password" type="password" placeholder={t('password')} required />
-      <Button type="submit" className="w-full">{t('submit')}</Button>
-      <div className="flex justify-between text-xs text-muted-foreground">
-        <Link href="/signup" className="underline">Create account</Link>
-        <Link href="/forgot-password" className="underline">Forgot password</Link>
-      </div>
-    </form>
+    <SignIn
+      path={`/${locale}/login`}
+      routing="path"
+      signUpUrl={`/${locale}/signup`}
+      forceRedirectUrl={`/${locale}/dashboard`}
+    />
   );
 }
