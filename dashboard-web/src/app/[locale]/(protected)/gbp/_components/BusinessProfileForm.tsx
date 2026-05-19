@@ -15,10 +15,15 @@ export function BusinessProfileForm({ profile }: { profile: Record<string, unkno
     <form
       className="space-y-3 rounded-lg border p-4"
       action={(fd) => {
-        startTransition(async () => {
-          const result = await upsertProfile(fd);
-          if (!result.ok) return toast.error(t('savedError'));
-          toast.success(t('savedSuccess'));
+        startTransition(() => {
+          void (async () => {
+            const result = await upsertProfile(fd);
+            if (!result.ok) {
+              toast.error(t('savedError'));
+              return;
+            }
+            toast.success(t('savedSuccess'));
+          })();
         });
       }}
     >

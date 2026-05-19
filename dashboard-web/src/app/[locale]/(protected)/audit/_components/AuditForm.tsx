@@ -44,7 +44,7 @@ export function AuditForm({ locale }: { locale: 'es' | 'en' }) {
       }
 
       toast.success(t('success'));
-      router.push({ href: `/audit/${result.snapshotId}`, locale });
+      router.push(`/audit/${result.snapshotId}`, { locale });
       router.refresh();
     });
   }

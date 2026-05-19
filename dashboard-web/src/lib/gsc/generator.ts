@@ -1,6 +1,6 @@
 import 'server-only';
 
-import { mulberry32, randInt, randRange, seedFromDomain, shuffle } from './prng';
+import { mulberry32, randRange, seedFromDomain, shuffle } from './prng';
 import { countriesForTLD, tldOf } from './tld-map';
 import type {
   GscCountryRow,

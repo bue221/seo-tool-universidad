@@ -1,0 +1,14 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`getGscDataset > matches snapshot for a known input 1`] = `
+{
+  "firstCountry": "US",
+  "firstSeriesDate": "2026-05-12",
+  "lastSeriesDate": "2026-05-18",
+  "property": "example.com",
+  "range": 7,
+  "seriesLen": 7,
+  "topPage": "/",
+  "topQuery": "example",
+}
+`;

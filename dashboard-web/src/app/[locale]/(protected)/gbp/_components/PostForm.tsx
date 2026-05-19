@@ -14,10 +14,15 @@ export function PostForm({ profileId }: { profileId: string }) {
   return (
     <form className="space-y-3 rounded-lg border p-4" action={(fd) => {
       fd.set('profile_id', profileId);
-      startTransition(async () => {
-        const result = await createPost(fd);
-        if (!result.ok) return toast.error(t('createdError'));
-        toast.success(t('createdSuccess'));
+      startTransition(() => {
+        void (async () => {
+          const result = await createPost(fd);
+          if (!result.ok) {
+            toast.error(t('createdError'));
+            return;
+          }
+          toast.success(t('createdSuccess'));
+        })();
       });
     }}>
       <Input name="title" placeholder={t('title')} />

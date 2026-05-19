@@ -42,6 +42,7 @@ export default async function ProtectedLayout({ children, params }: Props) {
   const user = await getCurrentUser();
   if (!user) {
     redirect({ href: '/login', locale: locale as 'es' | 'en' });
+    return null;
   }
 
   const tCommon = await getTranslations('Common');
