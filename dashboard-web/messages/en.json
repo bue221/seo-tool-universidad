@@ -95,6 +95,38 @@
       "Common": {
         "globalScore": "Global score",
         "viewDetails": "View details"
+      },
+      "Woorank": {
+        "title": "WooRank Score",
+        "subtitle": "Technical SEO hygiene checklist (16 checks).",
+        "categories": {
+          "meta": "Meta",
+          "headings": "Headings",
+          "mobile": "Mobile",
+          "security": "Security",
+          "indexing": "Indexing",
+          "social": "Social",
+          "schema": "Structured data",
+          "a11y": "Accessibility"
+        },
+        "checks": {
+          "title": "Title tag length (30–70 chars)",
+          "metaDescription": "Meta description length (70–160 chars)",
+          "h1Single": "Exactly one H1",
+          "headingHierarchy": "Heading hierarchy (no skipped levels)",
+          "viewport": "Mobile viewport meta tag",
+          "charset": "Charset declared (UTF-8)",
+          "https": "Served over HTTPS",
+          "langAttr": "<html lang> attribute",
+          "canonical": "Canonical link",
+          "robotsTxt": "robots.txt reachable",
+          "sitemapXml": "sitemap.xml reachable",
+          "favicon": "Favicon declared",
+          "openGraph": "Open Graph tags (og:title/description/image)",
+          "twitterCard": "Twitter card meta",
+          "structuredData": "Structured data (JSON-LD)",
+          "imageAltCoverage": "Image alt coverage"
+        }
       }
     },
     "Errors": {
@@ -105,6 +137,115 @@
       "INVALID_URL": "Invalid URL",
       "UNAUTHORIZED": "Unauthorized",
       "UNKNOWN": "Unknown error"
+    }
+  },
+  "GSC": {
+    "Common": {
+      "range7d": "Last 7 days",
+      "range28d": "Last 28 days",
+      "range90d": "Last 3 months",
+      "backToProperties": "All properties",
+      "property": "Property"
+    },
+    "Landing": {
+      "title": "Search Console",
+      "subtitle": "Verified properties derived from your recent audits (simulated dataset).",
+      "empty": {
+        "body": "You don't have any audited properties yet. Run an audit first and come back.",
+        "cta": "Run an audit"
+      }
+    },
+    "Tabs": {
+      "overview": "Overview",
+      "queries": "Queries",
+      "pages": "Pages",
+      "devices": "Devices",
+      "countries": "Countries"
+    },
+    "Overview": {
+      "metrics": {
+        "clicks": "Clicks",
+        "impressions": "Impressions",
+        "ctr": "CTR",
+        "position": "Position"
+      },
+      "timeSeriesTitle": "Clicks and impressions over time"
+    },
+    "Queries": {
+      "header": "Query"
+    },
+    "Pages": {
+      "header": "Page"
+    },
+    "Devices": {
+      "mobile": "Mobile",
+      "desktop": "Desktop",
+      "tablet": "Tablet"
+    },
+    "Countries": {
+      "header": "Country"
+    }
+  },
+  "Compare": {
+    "Common": {
+      "title": "Competitor compare",
+      "subtitle": "Run your audit against up to 3 competitor URLs in parallel. Results are not persisted.",
+      "ranAt": "Comparison ran at"
+    },
+    "Form": {
+      "yours": "Your site",
+      "competitor": "Competitor",
+      "submit": "Compare",
+      "submitting": "Comparing…",
+      "errors": {
+        "invalid": "Enter a valid URL for your site and at least one competitor.",
+        "duplicate": "URLs must be different from each other.",
+        "unauthorized": "You need to be logged in."
+      }
+    },
+    "Tabs": {
+      "table": "Table",
+      "radar": "Radar",
+      "keywords": "Keyword gap"
+    },
+    "Table": {
+      "metric": "Metric",
+      "you": "You",
+      "error": "Error",
+      "rows": {
+        "psiPerformance": "PSI Performance",
+        "psiAccessibility": "PSI Accessibility",
+        "psiBestPractices": "PSI Best Practices",
+        "psiSeo": "PSI SEO",
+        "titleScore": "Title length score",
+        "metaDescScore": "Meta description score",
+        "h1Count": "H1 count",
+        "altCoverage": "Image alt coverage",
+        "gtm": "GTM detected",
+        "ga4": "GA4 detected",
+        "googleAds": "Google Ads detected",
+        "woorank": "WooRank score",
+        "sentimentPolarity": "Sentiment",
+        "sentimentScore": "Sentiment score",
+        "topKeyword": "Top keyword"
+      }
+    },
+    "Radar": {
+      "axes": {
+        "psiPerformance": "Performance",
+        "psiSeo": "SEO",
+        "woorank": "WooRank",
+        "altCoverage": "Alt coverage",
+        "titleScore": "Title",
+        "metaDescScore": "Meta desc."
+      }
+    },
+    "Keywords": {
+      "title": "Keyword gap",
+      "yoursOnly": "Only on your site",
+      "shared": "Shared",
+      "competitorsOnly": "Only on competitors",
+      "empty": "Nothing here."
     }
   }
 }

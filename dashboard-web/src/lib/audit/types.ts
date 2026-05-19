@@ -37,6 +37,35 @@ export type ScraperAudit = {
   };
   keywords: { top: Array<{ term: string; density: number }> };
   sentiment: { polarity: 'positive' | 'neutral' | 'negative'; score: number };
+  /** WooRank-style technical SEO checks. Optional: contract v0.2.0+. */
+  woorank?: WoorankResult;
+};
+
+export type WoorankStatus = 'pass' | 'warn' | 'fail';
+
+export type WoorankCategory =
+  | 'meta'
+  | 'headings'
+  | 'mobile'
+  | 'indexing'
+  | 'security'
+  | 'social'
+  | 'schema'
+  | 'a11y';
+
+export type WoorankCheck = {
+  id: string;
+  label: string;
+  category: WoorankCategory;
+  status: WoorankStatus;
+  evidence?: string;
+  weight: number;
+};
+
+export type WoorankResult = {
+  /** Aggregated score in [0, 1]. */
+  score: number;
+  checks: WoorankCheck[];
 };
 
 export type AuditResult = {

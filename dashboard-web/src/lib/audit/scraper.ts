@@ -21,6 +21,31 @@ const scraperSchema: z.ZodType<ScraperAudit> = z.object({
     polarity: z.enum(['positive', 'neutral', 'negative']),
     score: z.number(),
   }),
+  // Optional: present from audit-contract v0.2.0 onwards.
+  woorank: z
+    .object({
+      score: z.number(),
+      checks: z.array(
+        z.object({
+          id: z.string(),
+          label: z.string(),
+          category: z.enum([
+            'meta',
+            'headings',
+            'mobile',
+            'indexing',
+            'security',
+            'social',
+            'schema',
+            'a11y',
+          ]),
+          status: z.enum(['pass', 'warn', 'fail']),
+          evidence: z.string().optional(),
+          weight: z.number(),
+        }),
+      ),
+    })
+    .optional(),
 });
 
 function mapStatus(status: number): PartialFailureCode {

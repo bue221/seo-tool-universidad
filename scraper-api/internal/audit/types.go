@@ -52,13 +52,37 @@ type Sentiment struct {
 	Score    float64 `json:"score"`
 }
 
+// WooRank-style technical SEO hygiene checks. See openspec/changes/woorank-checker.
+type WoorankStatus string
+
+const (
+	WoorankPass WoorankStatus = "pass"
+	WoorankWarn WoorankStatus = "warn"
+	WoorankFail WoorankStatus = "fail"
+)
+
+type WoorankCheck struct {
+	ID       string        `json:"id"`
+	Label    string        `json:"label"`
+	Category string        `json:"category"`
+	Status   WoorankStatus `json:"status"`
+	Evidence string        `json:"evidence,omitempty"`
+	Weight   float64       `json:"weight"`
+}
+
+type WoorankResult struct {
+	Score  float64        `json:"score"`
+	Checks []WoorankCheck `json:"checks"`
+}
+
 type Response struct {
-	URL       string    `json:"url"`
-	FetchedAt string    `json:"fetchedAt"`
-	OnPage    OnPage    `json:"onPage"`
-	Tracking  Tracking  `json:"tracking"`
-	Keywords  Keywords  `json:"keywords"`
-	Sentiment Sentiment `json:"sentiment"`
+	URL       string         `json:"url"`
+	FetchedAt string         `json:"fetchedAt"`
+	OnPage    OnPage         `json:"onPage"`
+	Tracking  Tracking       `json:"tracking"`
+	Keywords  Keywords       `json:"keywords"`
+	Sentiment Sentiment      `json:"sentiment"`
+	Woorank   *WoorankResult `json:"woorank,omitempty"`
 }
 
 type ErrorResponse struct {

@@ -120,19 +120,18 @@ Usamos **OpenSpec** como herramienta oficial y las **skills SDD** locales como a
 
 | Domain | Spec | Version | Source |
 |--------|------|---------|--------|
-| `audit-contract` | [`openspec/specs/audit-contract/spec.md`](openspec/specs/audit-contract/spec.md) | v0.1.0 | Inicial |
-| `dashboard-web` | [`openspec/specs/dashboard-web/spec.md`](openspec/specs/dashboard-web/spec.md) | v0.2.0 | `web-foundation` + `ui-foundation` (ambos archived) |
-| `scraper-api` | _pendiente_ | — | — |
+| `audit-contract` | [`openspec/specs/audit-contract/spec.md`](openspec/specs/audit-contract/spec.md) | v0.2.0 | `woorank-checker` (archived) |
+| `dashboard-web` | [`openspec/specs/dashboard-web/spec.md`](openspec/specs/dashboard-web/spec.md) | v0.7.0 | + `competitor-compare` (last archived) |
+| `scraper-api` | _pendiente_ | — | parcialmente cubierto vía `audit-contract` v0.2.0 |
 
 ### Changes archivados
 
 - [`web-foundation`](openspec/changes/archive/web-foundation/) — 2026-05-18 — i18n + theme + SEO foundation para `dashboard-web`. PR draft en [`PR_DRAFT.md`](openspec/changes/archive/web-foundation/PR_DRAFT.md).
 - [`ui-foundation`](openspec/changes/archive/ui-foundation/) — 2026-05-18 — Shadcn/ui (16 primitives) + lucide + sonner + react-hook-form. Migró ThemeToggle/LocaleSwitcher a ToggleGroup. PR draft en [`PR_DRAFT.md`](openspec/changes/archive/ui-foundation/PR_DRAFT.md).
+- [`woorank-checker`](openspec/changes/archive/woorank-checker/) — 2026-05-19 — 16 chequeos técnicos SEO con score agregado (Go + tests). Bump `audit-contract` v0.2.0 (aditivo). UI tab "WooRank" en `/audit/[snapshotId]` con ring SVG + categorías.
+- [`gsc-simulator`](openspec/changes/archive/gsc-simulator/) — 2026-05-19 — Search Console simulado: 5 rutas + generador determinista (PRNG seedable por dominio) + SVG time series/donut. Sin tablas nuevas; propiedades = `DISTINCT url` de `seo_snapshots`.
+- [`competitor-compare`](openspec/changes/archive/competitor-compare/) — 2026-05-19 — Comparador on-demand de hasta 4 dominios reusando `runFullAudit`. Tabla con heatmap, radar SVG 6 ejes, keyword gap. Sin persistencia.
 
-### Próximos changes propuestos (orden sugerido)
+### Próximos changes propuestos
 
-1. `auth-foundation` — Supabase SSR auth + protected routes (usa `Form` de ui-foundation).
-2. `audit-runner` — UI que consume PageSpeed + scraper-api en paralelo.
-3. `scraper-foundation` — bootstrap del módulo Go con Fiber + Playwright.
-4. `gbp-simulator` — panel My Business simulado.
-5. `analytics-dashboard` — gráficos Recharts con histórico.
+Ningún change propuesto pendiente que afecte el enunciado académico — los tres bloques nuevos están archivados. Changes históricos sin aplicar (no bloquean el alcance): `auth-foundation`, `audit-runner`, `scraper-foundation`, `gbp-simulator`, `analytics-dashboard`.

@@ -27,3 +27,5 @@ playwright-report/
 
 # Claude / local settings (mantener .mcp.json y .claude/settings.local.json fuera del repo si tienen tokens)
 .claude/settings.local.json
+# Local Pi runtime state
+.atl/

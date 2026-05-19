@@ -2,19 +2,34 @@ import * as React from 'react';
 
 import { cn } from '@/lib/utils';
 
-const Card = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      'rounded-lg border bg-card text-card-foreground shadow-sm',
-      className,
-    )}
-    {...props}
-  />
-));
+/**
+ * Card primitive.
+ *
+ * `interactive`: aplica hover-lift (translate -2px) + shadow ramp soft → card.
+ * Usar en cualquier card que sea link, button o tenga acción principal al click.
+ * No usar en cards puramente informativas (hover sin feedback confunde).
+ */
+type CardProps = React.HTMLAttributes<HTMLDivElement> & {
+  interactive?: boolean;
+};
+
+const Card = React.forwardRef<HTMLDivElement, CardProps>(
+  ({ className, interactive = false, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn(
+        // Border casi invisible + sombra suave + blur en fondo para profundidad.
+        // `bg-card/80` permite que el mesh del body se note debajo.
+        'rounded-lg border border-border/60 bg-card/80 text-card-foreground shadow-soft',
+        'backdrop-blur-sm transition-all duration-200',
+        interactive &&
+          'cursor-pointer hover:-translate-y-0.5 hover:border-border hover:shadow-card hover:bg-card',
+        className,
+      )}
+      {...props}
+    />
+  ),
+);
 Card.displayName = 'Card';
 
 const CardHeader = React.forwardRef<

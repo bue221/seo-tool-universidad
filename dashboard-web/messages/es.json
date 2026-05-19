@@ -95,6 +95,38 @@
       "Common": {
         "globalScore": "Score global",
         "viewDetails": "Ver detalle"
+      },
+      "Woorank": {
+        "title": "Puntaje WooRank",
+        "subtitle": "Checklist de higiene técnica SEO (16 chequeos).",
+        "categories": {
+          "meta": "Meta",
+          "headings": "Encabezados",
+          "mobile": "Mobile",
+          "security": "Seguridad",
+          "indexing": "Indexación",
+          "social": "Social",
+          "schema": "Datos estructurados",
+          "a11y": "Accesibilidad"
+        },
+        "checks": {
+          "title": "Largo del título (30–70 caracteres)",
+          "metaDescription": "Largo de meta description (70–160 caracteres)",
+          "h1Single": "Exactamente un H1",
+          "headingHierarchy": "Jerarquía de encabezados (sin saltos)",
+          "viewport": "Meta viewport mobile",
+          "charset": "Charset declarado (UTF-8)",
+          "https": "Servido sobre HTTPS",
+          "langAttr": "Atributo <html lang>",
+          "canonical": "Link canónico",
+          "robotsTxt": "robots.txt accesible",
+          "sitemapXml": "sitemap.xml accesible",
+          "favicon": "Favicon declarado",
+          "openGraph": "Etiquetas Open Graph (og:title/description/image)",
+          "twitterCard": "Meta Twitter card",
+          "structuredData": "Datos estructurados (JSON-LD)",
+          "imageAltCoverage": "Cobertura de alt en imágenes"
+        }
       }
     },
     "Errors": {
@@ -105,6 +137,115 @@
       "INVALID_URL": "URL inválida",
       "UNAUTHORIZED": "No autorizado",
       "UNKNOWN": "Error desconocido"
+    }
+  },
+  "GSC": {
+    "Common": {
+      "range7d": "Últimos 7 días",
+      "range28d": "Últimos 28 días",
+      "range90d": "Últimos 3 meses",
+      "backToProperties": "Todas las propiedades",
+      "property": "Propiedad"
+    },
+    "Landing": {
+      "title": "Search Console",
+      "subtitle": "Propiedades verificadas derivadas de tus auditorías recientes (dataset simulado).",
+      "empty": {
+        "body": "Todavía no tenés propiedades auditadas. Corré una auditoría primero y volvé.",
+        "cta": "Correr auditoría"
+      }
+    },
+    "Tabs": {
+      "overview": "Resumen",
+      "queries": "Queries",
+      "pages": "Páginas",
+      "devices": "Dispositivos",
+      "countries": "Países"
+    },
+    "Overview": {
+      "metrics": {
+        "clicks": "Clicks",
+        "impressions": "Impresiones",
+        "ctr": "CTR",
+        "position": "Posición"
+      },
+      "timeSeriesTitle": "Clicks e impresiones en el tiempo"
+    },
+    "Queries": {
+      "header": "Query"
+    },
+    "Pages": {
+      "header": "Página"
+    },
+    "Devices": {
+      "mobile": "Mobile",
+      "desktop": "Desktop",
+      "tablet": "Tablet"
+    },
+    "Countries": {
+      "header": "País"
+    }
+  },
+  "Compare": {
+    "Common": {
+      "title": "Comparar competidores",
+      "subtitle": "Corré tu auditoría contra hasta 3 URLs de competidores en paralelo. Los resultados no se persisten.",
+      "ranAt": "Comparación ejecutada"
+    },
+    "Form": {
+      "yours": "Tu sitio",
+      "competitor": "Competidor",
+      "submit": "Comparar",
+      "submitting": "Comparando…",
+      "errors": {
+        "invalid": "Ingresá una URL válida para tu sitio y al menos un competidor.",
+        "duplicate": "Las URLs tienen que ser distintas entre sí.",
+        "unauthorized": "Necesitás iniciar sesión."
+      }
+    },
+    "Tabs": {
+      "table": "Tabla",
+      "radar": "Radar",
+      "keywords": "Gap de keywords"
+    },
+    "Table": {
+      "metric": "Métrica",
+      "you": "Vos",
+      "error": "Error",
+      "rows": {
+        "psiPerformance": "PSI Performance",
+        "psiAccessibility": "PSI Accesibilidad",
+        "psiBestPractices": "PSI Best Practices",
+        "psiSeo": "PSI SEO",
+        "titleScore": "Score de título",
+        "metaDescScore": "Score de meta descripción",
+        "h1Count": "Cantidad de H1",
+        "altCoverage": "Cobertura alt en imágenes",
+        "gtm": "GTM detectado",
+        "ga4": "GA4 detectado",
+        "googleAds": "Google Ads detectado",
+        "woorank": "Score WooRank",
+        "sentimentPolarity": "Sentimiento",
+        "sentimentScore": "Score de sentimiento",
+        "topKeyword": "Top keyword"
+      }
+    },
+    "Radar": {
+      "axes": {
+        "psiPerformance": "Performance",
+        "psiSeo": "SEO",
+        "woorank": "WooRank",
+        "altCoverage": "Cobertura alt",
+        "titleScore": "Título",
+        "metaDescScore": "Meta desc."
+      }
+    },
+    "Keywords": {
+      "title": "Gap de keywords",
+      "yoursOnly": "Solo en tu sitio",
+      "shared": "Compartidas",
+      "competitorsOnly": "Solo en competidores",
+      "empty": "Nada por acá."
     }
   }
 }

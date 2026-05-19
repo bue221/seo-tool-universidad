@@ -1,0 +1,13 @@
+# Supabase CLI config — solo lo relevante para dev local.
+# Doc: https://supabase.com/docs/guides/local-development/cli/config
+
+project_id = "qjfnizfeikphlmteuuda"
+
+# ─── Third-party auth: Clerk ──────────────────────────────────────────────
+# Habilita que Supabase acepte JWTs de Clerk para RLS.
+# El dominio se obtiene en Clerk dashboard → Domains → Frontend API URL
+# (algo del estilo `xxx.clerk.accounts.dev` o tu prod).
+# Reemplazá el placeholder antes de `supabase start`.
+[auth.third_party.clerk]
+enabled = true
+domain = "REPLACE_WITH_YOUR_CLERK_FRONTEND_API_DOMAIN"

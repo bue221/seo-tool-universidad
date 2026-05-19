@@ -8,6 +8,7 @@ import { PageSpeedSection } from '../_components/PageSpeedSection';
 import { ScoreBadge } from '../_components/ScoreBadge';
 import { SentimentSection } from '../_components/SentimentSection';
 import { TrackingSection } from '../_components/TrackingSection';
+import { WoorankSection } from '../_components/WoorankSection';
 
 type Props = { params: Promise<{ snapshotId: string }> };
 
@@ -32,6 +33,9 @@ export default async function SnapshotDetailPage({ params }: Props) {
         <TabsList className="w-full justify-start overflow-x-auto">
           <TabsTrigger value="pagespeed">PageSpeed</TabsTrigger>
           <TabsTrigger value="onpage">On-Page</TabsTrigger>
+          {snapshot.result.scraper?.woorank ? (
+            <TabsTrigger value="woorank">WooRank</TabsTrigger>
+          ) : null}
           <TabsTrigger value="tracking">Tracking</TabsTrigger>
           <TabsTrigger value="keywords">Keywords</TabsTrigger>
           <TabsTrigger value="sentiment">Sentiment</TabsTrigger>
@@ -42,6 +46,11 @@ export default async function SnapshotDetailPage({ params }: Props) {
         <TabsContent value="onpage">
           <OnPageSection result={snapshot.result} />
         </TabsContent>
+        {snapshot.result.scraper?.woorank ? (
+          <TabsContent value="woorank">
+            <WoorankSection result={snapshot.result} />
+          </TabsContent>
+        ) : null}
         <TabsContent value="tracking">
           <TrackingSection result={snapshot.result} />
         </TabsContent>

@@ -77,6 +77,11 @@ func (h *Handler) PostAudit(c *fiber.Ctx) error {
 
 	text := strings.TrimSpace(doc.Text())
 
+	finalURL := page.URL()
+	if finalURL == "" {
+		finalURL = req.URL
+	}
+
 	resp, _ := Run(c.Context(), RawInput{
 		URL: req.URL,
 		Text: text,
@@ -84,5 +89,15 @@ func (h *Handler) PostAudit(c *fiber.Ctx) error {
 		OnPageRaw: OnPageRaw{Title: title, MetaDescription: metaDesc, H1Values: h1s, ImagesTotal: total, ImagesWithAlt: withAlt},
 	})
 	resp.FetchedAt = time.Now().UTC().Format(time.RFC3339)
+
+	// Run WooRank in-line: it reuses the parsed DOM and issues 3 short
+	// parallel sub-requests for robots/sitemap/favicon (timeout 5s each).
+	resp.Woorank = RunWoorank(c.Context(), WoorankInput{
+		FinalURL:    finalURL,
+		Document:    doc,
+		RawHTML:     html,
+		AltCoverage: resp.OnPage.Images.AltCoverage,
+	})
+
 	return c.JSON(resp)
 }

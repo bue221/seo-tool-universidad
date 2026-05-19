@@ -1,10 +1,12 @@
 # Spec: dashboard-web
 
 **Domain:** Frontend / orquestador del análisis SEO.
-**Status:** ACTIVE (v0.2.0)
+**Status:** ACTIVE (v0.4.0)
 **History:**
 - `web-foundation` (archived 2026-05-18) — introdujo i18n, theme, SEO, env, PWA básica.
 - `ui-foundation` (archived 2026-05-18) — agregó Shadcn/ui (16 primitives), lucide-react, sonner, react-hook-form, cva. MODIFICÓ ThemeToggle y LocaleSwitcher a ToggleGroup.
+- `auth-clerk-migration` (in-progress 2026-05-19) — ADDED auth con Clerk + Supabase como third-party. REMOVED server actions de Supabase Auth (sign-in/up, forgot/reset). MODIFIED paleta a Lime.
+- `ui-polish` (in-progress 2026-05-19) — ADDED shadow tokens, bg-mesh/bg-dots utilities, shimmer skeleton, Cmd+K palette, sidebar active indicator, hero on-mount animations, Inter display font. MODIFIED Card (`interactive`), Button (gradient + glow).
 
 ---
 
@@ -138,6 +140,10 @@ Variables validadas en `src/lib/env.ts` con `zod` (fallar al build si faltan o s
 | `NEXT_PUBLIC_SITE_URL` | URL absoluta (sin trailing `/`) | — | Origin. Usado por metadata, sitemap, JSON-LD, OG. |
 | `NEXT_PUBLIC_ALLOW_INDEXING` | `"true" \| "false"` | `"false"` | Habilita indexing en prod. Coerced a boolean. |
 | `NEXT_PUBLIC_DEFAULT_LOCALE` | `"es" \| "en"` | `"es"` | Debe coincidir con `routing.defaultLocale`. |
+| `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` | `pk_...` | — | Clerk publishable key, inyectada al cliente. |
+| `CLERK_SECRET_KEY` | `sk_...` | — | Clerk secret, server-only. |
+| `NEXT_PUBLIC_CLERK_SIGN_IN_URL` | path absoluto | `/es/login` | Redirect target cuando falta sesión. |
+| `NEXT_PUBLIC_CLERK_SIGN_UP_URL` | path absoluto | `/es/signup` | Redirect target para registro. |
 
 Plantilla en `.env.local.example`. Schema testeable importando `publicEnvSchema` (no expuesto público hoy — agregar export si se necesita testear).
 
@@ -269,9 +275,156 @@ Spec satisfecha cuando ✓:
 
 ---
 
+## Capability: Authentication (Clerk + Supabase third-party)
+
+### Stack
+
+- **Clerk** (`@clerk/nextjs`) es el proveedor de identidad: maneja sign-in, sign-up,
+  password reset, MFA y OAuth providers (Google, Microsoft, GitHub, etc.) configurados
+  desde Clerk dashboard → Social Connections.
+- **Supabase** acepta el JWT de Clerk vía la integración oficial third-party
+  (no la deprecada de JWT templates). El claim `role: "authenticated"` se setea
+  en Clerk session tokens; Supabase lo lee para aplicar RLS.
+- Dev local: `supabase/config.toml` declara `[auth.third_party.clerk]` con el dominio
+  de Clerk.
+
+### Componentes
+
+| Ruta | Componente | Notas |
+|------|-----------|-------|
+| `/{locale}/login(.*)` | `<SignIn />` de Clerk | `routing="path"` para sub-paths internos. |
+| `/{locale}/signup(.*)` | `<SignUp />` de Clerk | idem. |
+| `(protected)/*` | `auth.protect()` en middleware | Redirige a `NEXT_PUBLIC_CLERK_SIGN_IN_URL` si no hay sesión. |
+
+### Helpers
+
+- `getCurrentUser()` en `src/lib/auth.ts` combina `auth()` + `currentUser()` de Clerk
+  con `profiles.display_name` desde Supabase. Retorna `{ id, email, displayName }`.
+  `id` es Clerk user id (`user_xxx`, **no UUID**).
+- `createClient()` en `src/lib/supabase/server.ts` usa `@supabase/supabase-js` plano
+  con `accessToken: () => auth().getToken()`.
+- `useSupabase()` hook en `src/lib/supabase/browser.ts` para Client Components.
+
+### Middleware
+
+```ts
+clerkMiddleware(async (auth, req) => {
+  if (!isPublicRoute(req)) await auth.protect();
+  return intlMiddleware(req);
+});
+```
+
+Orden: Clerk primero (protección), luego next-intl (rewrite por locale).
+
+### Sign-out
+
+- UI: `<SignOutButton redirectUrl="/{locale}/login">` dentro de `UserMenu`.
+- Sin server action propia (la antigua queda como stub vacío para retrocompat).
+
+### Migration notes
+
+- `profiles.user_id` debe ser `text` (no `uuid`) para aceptar Clerk IDs.
+- RLS policies deben usar `auth.jwt() ->> 'sub'` (no `auth.uid()`) para identificar al user.
+- No quedan dependencias de `@supabase/ssr` en runtime (sigue como dep transitiva).
+
+### Invariantes
+
+1. Nuevas server actions que querean Supabase **deben** usar `createClient()` de
+   `@/lib/supabase/server` para que el JWT Clerk viaje.
+2. Client components que querean Supabase **deben** usar `useSupabase()` y manejar
+   `null` mientras la sesión Clerk no está cargada.
+3. **Prohibido** llamar `supabase.auth.signIn*` / `signUp` / `getUser` — esos métodos
+   referencian Supabase Auth, que ya no se usa.
+
+---
+
+## Capability: UI Polish (visual layer)
+
+### Shadow tokens
+
+CSS variables en `globals.css`, expuestas como utilities Tailwind:
+
+| Token | Utility | Uso |
+|-------|---------|-----|
+| `--shadow-soft` | `shadow-soft` | Cards estáticas, inputs, sidebar. |
+| `--shadow-card` | `shadow-card` | Cards en hover, popovers nivel 1. |
+| `--shadow-pop`  | `shadow-pop`  | Dialogs, command palette, modales. |
+| `--shadow-glow` | `shadow-glow` | Primary CTA en hover/focus (tinte primary). |
+
+Valores escalan automáticamente con light/dark (en dark suben opacidad).
+
+### Background utilities
+
+- `.bg-mesh` — tres radiales lime/accent. Usar en hero/CTAs/auth wrapper.
+- `.bg-dots` — dot grid `24x24`. SOLO marketing/hero. Distrae en app shell.
+- `body` ya tiene mesh base con `background-attachment: fixed`.
+
+### Animations
+
+Keyframes custom (sumadas a `tailwindcss-animate`):
+
+| Animation | Uso |
+|-----------|-----|
+| `animate-shimmer` | Skeleton sweep (1.6s linear infinite). |
+| `animate-glow-pulse` | CTA pulsante — usar con MUCHA moderación. |
+| `animate-in fade-in slide-in-from-bottom-*` | Page on-mount (CSS de tailwindcss-animate). |
+
+**Invariante:** prohibido scroll-reveal (AOS, framer scroll triggers) en rutas `(protected)`.
+On-mount fade-up `≤ 500ms` está permitido y se recomienda.
+
+### Typography
+
+- Inter variable via `next/font/google` (self-hosted, sin runtime request).
+- CSS var `--font-sans` referenciada desde `fontFamily.sans` y `fontFamily.display`.
+- Utility `.text-display` aplica `letter-spacing: -0.025em; line-height: 1.05;` + ligaduras.
+  Usar en H1/H2 de landing y headings prominentes.
+
+### Primitives modificadas
+
+- **Card**: nueva prop `interactive`. Aplica `hover:-translate-y-0.5 hover:shadow-card`.
+  Base ahora usa `border-border/60 bg-card/80 shadow-soft backdrop-blur-sm`.
+- **Button** variant `default`: gradient `from-primary to-primary/85`, sombra soft → glow on hover.
+  `active:scale-[0.98]` para feedback táctil. `transition-all` (no solo colors).
+- **Skeleton**: shimmer via `::before` pseudo + `animate-shimmer`. Reemplaza `animate-pulse`.
+
+### Command Palette (Cmd+K)
+
+- Componente `<CommandPalette>` en `src/components/command-palette/`.
+- Primitives base: `src/components/ui/command.tsx` (wrapper de `cmdk`).
+- Montado en `(protected)/layout.tsx` — NO disponible en landing/auth.
+- Hotkey: `event.metaKey || event.ctrlKey` + `k`.
+- Acciones: navegación (NAV_ITEMS), theme switch, sign out (Clerk).
+- Dialog con `bg-popover/95 backdrop-blur-xl shadow-pop`.
+
+### App shell
+
+- **Header**: `border-b border-border/40 bg-background/70 backdrop-blur-xl`.
+  Hint visual `⌘K` en badge `<kbd>` (sm+).
+- **Sidebar** (`Sidebar.tsx` client): items con `data-active` derivado de `usePathname()`.
+  Active styles: tint `bg-accent/20`, barra acentuada izquierda (opacity transition 200ms),
+  icono en `text-primary`. **No** sliding pill (limitación CSS-only documentada).
+- **Main**: `animate-in fade-in slide-in-from-bottom-2 duration-500` on mount.
+
+### Invariantes nuevas (ui-polish)
+
+1. Cards interactivas (que linkean o disparan acción) **deben** usar `<Card interactive>`.
+   Cards puramente informativas NO usan `interactive` (hover sin feedback confunde).
+2. Sombras **solo** vía utilities `shadow-{soft,card,pop,glow}`. Prohibido
+   `shadow-sm/md/lg/xl` (Tailwind defaults) y `style={{ boxShadow }}` inline.
+3. `.bg-dots` reservado para marketing/landing. Nunca en app shell interno.
+4. H1/H2 de landing usan `.text-display`. H1 de app shell pueden omitirlo (más funcional).
+5. Animaciones on-mount limitadas a 500ms. Scroll-reveal prohibido en `(protected)`.
+
+---
+
 ## Histórico de cambios
 
 | Versión | Fecha       | Cambio | Source |
 |---------|-------------|--------|--------|
 | v0.1.0  | 2026-05-18  | Spec inicial. ADDED i18n, Theme, SEO, Env config, Public surface. | [`changes/archive/web-foundation/`](../../changes/archive/web-foundation/) |
 | v0.2.0  | 2026-05-18  | ADDED UI System (Shadcn + 16 primitives, lucide, sonner, forms). MODIFIED ThemeToggle y LocaleSwitcher → ToggleGroup. | [`changes/archive/ui-foundation/`](../../changes/archive/ui-foundation/) |
+| v0.3.0  | 2026-05-19  | ADDED Authentication (Clerk + Supabase third-party). REMOVED server actions Supabase Auth. MODIFIED paleta tokens a Lime. | [`changes/auth-clerk-migration/`](../../changes/auth-clerk-migration/) |
+| v0.4.0  | 2026-05-19  | ADDED shadow tokens, mesh/dots utilities, shimmer, Cmd+K palette, sidebar active indicator, Inter display font, on-mount animations. MODIFIED Card (`interactive`), Button (gradient/glow), Skeleton (shimmer). | [`changes/ui-polish/`](../../changes/ui-polish/) |
+| v0.5.0  | 2026-05-19  | ADDED WooRank tab en `/audit/[snapshotId]`: `WoorankSection` con score ring SVG + 16 chequeos agrupados por categoría. Render condicional cuando `scraper.woorank` está presente. Zod schema extendido (campo opcional). i18n `Audit.Result.Woorank`. | [`changes/archive/woorank-checker/`](../../changes/archive/woorank-checker/) |
+| v0.6.0  | 2026-05-19  | ADDED sección Search Console simulada en `/gsc/*` con 5 rutas (landing + overview/queries/pages/devices/countries por propiedad). Generador determinista `src/lib/gsc/*` (PRNG mulberry32 + SHA-256 seed) sin tablas nuevas — propiedades derivadas de `seo_snapshots`. SVG puro para time series y donut (cero deps de chart). i18n `GSC.*`. Sidebar nav extendida con "Search Console". | [`changes/archive/gsc-simulator/`](../../changes/archive/gsc-simulator/) |
+| v0.7.0  | 2026-05-19  | ADDED `/compare` (3 tabs: tabla con heatmap, radar SVG, keyword gap). Server action `runComparison` corre hasta 4 audits en paralelo con timeout 30s c/u, sin persistencia. Refactor: extraído `src/lib/audit/run.ts` reusado por `run-audit` y `run-comparison`. Sidebar nav extendida con "Compare". i18n `Compare.*`. | [`changes/archive/competitor-compare/`](../../changes/archive/competitor-compare/) |
