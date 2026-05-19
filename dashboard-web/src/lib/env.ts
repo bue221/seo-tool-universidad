@@ -36,6 +36,13 @@ const publicEnvSchema = z.object({
 
 const serverEnvSchema = z.object({
   SUPABASE_SERVICE_ROLE_KEY: z.string().min(20),
+  PAGESPEED_API_KEY: z.string().min(20).optional(),
+  SCRAPER_API_URL: z
+    .string()
+    .url()
+    .refine((v) => !v.endsWith('/'), {
+      message: 'SCRAPER_API_URL no debe terminar en "/"',
+    }),
 });
 
 function parseEnv() {
@@ -63,6 +70,8 @@ function parseEnv() {
 function parseServerEnv() {
   const parsed = serverEnvSchema.safeParse({
     SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
+    PAGESPEED_API_KEY: process.env.PAGESPEED_API_KEY,
+    SCRAPER_API_URL: process.env.SCRAPER_API_URL,
   });
 
   if (!parsed.success) {
@@ -78,7 +87,10 @@ function parseServerEnv() {
 }
 
 export const env = parseEnv();
-export const serverEnv = parseServerEnv();
+export const serverEnv =
+  typeof window === 'undefined'
+    ? parseServerEnv()
+    : ({} as z.infer<typeof serverEnvSchema>);
 
 export type PublicEnv = z.infer<typeof publicEnvSchema>;
 export type ServerEnv = z.infer<typeof serverEnvSchema>;

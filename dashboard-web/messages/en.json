@@ -54,5 +54,34 @@
     "UserMenu": {
       "signOut": "Sign out"
     }
+  },
+  "Audit": {
+    "Form": {
+      "label": "URL to audit",
+      "placeholder": "https://example.com",
+      "submit": "Run audit",
+      "submitting": "Running...",
+      "loading": "Running audit...",
+      "success": "Audit completed"
+    },
+    "History": {
+      "title": "Latest snapshots",
+      "empty": "No snapshots yet"
+    },
+    "Result": {
+      "Common": {
+        "globalScore": "Global score",
+        "viewDetails": "View details"
+      }
+    },
+    "Errors": {
+      "TIMEOUT": "Timeout calling upstream service",
+      "UPSTREAM_PAGESPEED": "PageSpeed unavailable",
+      "UPSTREAM_SCRAPER": "Scraper unavailable",
+      "UPSTREAM_BOTH_FAILED": "Both upstream services failed",
+      "INVALID_URL": "Invalid URL",
+      "UNAUTHORIZED": "Unauthorized",
+      "UNKNOWN": "Unknown error"
+    }
   }
 }

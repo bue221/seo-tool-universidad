@@ -15,6 +15,8 @@ export default defineConfig({
       NEXT_PUBLIC_SUPABASE_URL: 'https://example.supabase.co',
       NEXT_PUBLIC_SUPABASE_ANON_KEY: 'anon_key_12345678901234567890',
       SUPABASE_SERVICE_ROLE_KEY: 'service_role_key_12345678901234567890',
+      SCRAPER_API_URL: 'http://localhost:8080',
+      PAGESPEED_API_KEY: 'pagespeed_key_12345678901234567890',
     },
   },
   resolve: {

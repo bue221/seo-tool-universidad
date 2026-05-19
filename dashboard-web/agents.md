@@ -70,6 +70,6 @@ Capa fundacional que soporta a todos los módulos del agente. Detalles completos
 | `web-foundation` | ✅ Archivado (2026-05-18) | i18n + theme + SEO + env + PWA básica |
 | `ui-foundation` | ✅ Código completo, smoke pendiente de `pnpm install` | Shadcn/ui (16 primitives) + lucide + sonner + react-hook-form + cva |
 | `auth-foundation` | 🚧 En progreso | Supabase client + SSR auth + login + protected routes |
-| `audit-runner` | Pendiente | Página que consume PageSpeed API + scraper-api en paralelo (ver [`../openspec/specs/audit-contract/spec.md`](../openspec/specs/audit-contract/spec.md)) |
+| `audit-runner` | 🚧 En progreso | Página que consume PageSpeed API + scraper-api en paralelo (ver [`../openspec/specs/audit-contract/spec.md`](../openspec/specs/audit-contract/spec.md)) |
 | `gbp-simulator` | Pendiente | Panel My Business simulado contra Supabase |
 | `analytics-dashboard` | Pendiente | Gráficos Recharts con histórico de `seo_snapshots` |

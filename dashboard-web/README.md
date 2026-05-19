@@ -16,6 +16,7 @@ Ver también:
 | `web-foundation` (archived) | ✅ Código + tests + docs. Smoke pendiente de `pnpm install`. |
 | `ui-foundation` (active) | ✅ 16 primitives Shadcn + migración Toggles + Toaster + Form. Smoke pendiente de `pnpm install`. |
 | `auth-foundation` (active) | ✅ Supabase SSR clients + auth routes/actions + protected layout. Smoke pendiente de `pnpm install` + Supabase env. |
+| `audit-runner` (active) | ✅ `/audit` flow con PageSpeed + scraper en paralelo, snapshot persistido y vista detalle por tabs. |
 
 > Los archivos fueron **scaffolded a mano** (sin correr `pnpm create next-app`)
 > porque la red corporativa de MELI bloquea el registry público y el artifactory

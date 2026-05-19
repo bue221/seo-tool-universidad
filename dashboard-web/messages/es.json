@@ -54,5 +54,34 @@
     "UserMenu": {
       "signOut": "Cerrar sesión"
     }
+  },
+  "Audit": {
+    "Form": {
+      "label": "URL a auditar",
+      "placeholder": "https://ejemplo.com",
+      "submit": "Auditar",
+      "submitting": "Auditando...",
+      "loading": "Corriendo auditoría...",
+      "success": "Auditoría completa"
+    },
+    "History": {
+      "title": "Últimos snapshots",
+      "empty": "Todavía no hay snapshots"
+    },
+    "Result": {
+      "Common": {
+        "globalScore": "Score global",
+        "viewDetails": "Ver detalle"
+      }
+    },
+    "Errors": {
+      "TIMEOUT": "Timeout llamando servicios upstream",
+      "UPSTREAM_PAGESPEED": "PageSpeed no disponible",
+      "UPSTREAM_SCRAPER": "Scraper no disponible",
+      "UPSTREAM_BOTH_FAILED": "Fallaron ambos upstream",
+      "INVALID_URL": "URL inválida",
+      "UNAUTHORIZED": "No autorizado",
+      "UNKNOWN": "Error desconocido"
+    }
   }
 }

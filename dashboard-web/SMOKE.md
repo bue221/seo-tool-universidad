@@ -177,7 +177,14 @@ Una vez deployado a un dominio accesible públicamente:
 - [Google Rich Results Test](https://search.google.com/test/rich-results) — verificar JSON-LD.
 - [Google Mobile-Friendly Test](https://search.google.com/test/mobile-friendly).
 
-## 8. Auth foundation smoke
+## 8. Audit runner smoke
+
+- Abrir `/audit` autenticado.
+- Probar URL válida y confirmar redirección a `/audit/[snapshotId]`.
+- Validar vista con tabs y score.
+- Forzar caída de `SCRAPER_API_URL` y verificar resultado parcial.
+
+## 9. Auth foundation smoke
 
 Con env Supabase cargado en `.env.local`:
 
