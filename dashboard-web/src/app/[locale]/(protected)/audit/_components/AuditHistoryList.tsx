@@ -15,12 +15,13 @@ export async function AuditHistoryList() {
   return (
     <div className="overflow-x-auto rounded-lg border">
       <table className="w-full min-w-[720px] text-left text-sm">
+        <caption className="sr-only">Latest audit snapshots</caption>
         <thead className="bg-muted/40 text-muted-foreground">
           <tr>
-            <th className="px-4 py-3 font-medium">URL</th>
-            <th className="px-4 py-3 font-medium">Date</th>
-            <th className="px-4 py-3 font-medium">Score</th>
-            <th className="px-4 py-3 font-medium">Action</th>
+            <th scope="col" className="px-4 py-3 font-medium">URL</th>
+            <th scope="col" className="px-4 py-3 font-medium">Date</th>
+            <th scope="col" className="px-4 py-3 font-medium">Score</th>
+            <th scope="col" className="px-4 py-3 font-medium">Action</th>
           </tr>
         </thead>
         <tbody>

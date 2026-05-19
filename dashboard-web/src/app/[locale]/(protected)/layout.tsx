@@ -43,13 +43,13 @@ export default async function ProtectedLayout({ children, params }: Props) {
       </header>
 
       <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-6 px-6 py-6 lg:grid-cols-[220px_minmax(0,1fr)]">
-        <aside className="rounded-xl border bg-muted/20 p-3">
-          <nav className="space-y-1 text-sm">
+        <aside className="overflow-x-auto rounded-xl border bg-muted/20 p-3">
+          <nav aria-label="Primary" className="space-y-1 text-sm">
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="block rounded-md px-3 py-2 text-muted-foreground transition hover:bg-muted hover:text-foreground"
+                className="block rounded-md px-3 py-2 text-muted-foreground transition hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 {item.label}
               </Link>
@@ -57,7 +57,7 @@ export default async function ProtectedLayout({ children, params }: Props) {
           </nav>
         </aside>
 
-        <main className="space-y-6">{children}</main>
+        <main className="space-y-6" aria-live="polite">{children}</main>
       </div>
     </div>
   );

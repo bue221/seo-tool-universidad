@@ -22,7 +22,7 @@
 
 - [x] Update color tokens in `globals.css` for non-flat visual language.
 - [x] Add elevation/gradient/hover states across core pages.
-- [ ] Final responsive and accessibility pass.
+- [x] Final responsive and accessibility pass.
 
 ## Validation
 
