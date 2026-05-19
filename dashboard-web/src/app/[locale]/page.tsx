@@ -1,24 +1,16 @@
 import type { Metadata } from 'next';
 import { hasLocale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-
 import { LocaleSwitcher } from '@/components/i18n/LocaleSwitcher';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
+import { Link } from '@/i18n/navigation';
 import { routing, type Locale } from '@/i18n/routing';
 import { buildMetadata } from '@/lib/metadata';
 
-type Props = {
-  params: Promise<{ locale: string }>;
-};
+type Props = { params: Promise<{ locale: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -26,14 +18,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ? locale
     : routing.defaultLocale;
 
-  const t = await getTranslations({ locale: validLocale, namespace: 'HomePage' });
-  const tc = await getTranslations({ locale: validLocale, namespace: 'Common' });
+  const t = await getTranslations({ locale: validLocale, namespace: 'Landing' });
 
   return buildMetadata({
     locale: validLocale,
     path: '/',
-    title: t('title'),
-    description: tc('tagline'),
+    title: 'LumoSEO',
+    description: t('subtitle'),
   });
 }
 
@@ -41,74 +32,68 @@ export default async function HomePage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const t = await getTranslations('HomePage');
+  const t = await getTranslations('Landing');
   const tc = await getTranslations('Common');
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <header className="flex items-center justify-between border-b border-border px-6 py-4">
-        <span className="text-sm font-semibold tracking-tight">
-          {tc('appName')}
-        </span>
-        <div className="flex items-center gap-2">
-          <LocaleSwitcher />
-          <Separator orientation="vertical" className="h-6" />
-          <ThemeToggle />
+    <div className="min-h-screen bg-background text-foreground">
+      <header className="sticky top-0 z-10 border-b bg-background/95 px-6 py-4 backdrop-blur">
+        <div className="mx-auto flex w-full max-w-6xl items-center justify-between">
+          <span className="font-semibold tracking-tight">{tc('appName')}</span>
+          <div className="flex items-center gap-2">
+            <LocaleSwitcher />
+            <Separator orientation="vertical" className="h-6" />
+            <ThemeToggle />
+          </div>
         </div>
       </header>
 
-      <main className="flex flex-1 flex-col items-center justify-center gap-6 p-8 text-center">
-        <h1 className="max-w-3xl text-balance text-5xl font-bold tracking-tight">
-          {t('title')}
-        </h1>
+      <main className="mx-auto flex w-full max-w-6xl flex-col gap-12 px-6 py-12">
+        <section className="space-y-5 text-center">
+          <h1 className="text-balance text-4xl font-bold sm:text-5xl">{t('title')}</h1>
+          <p className="mx-auto max-w-2xl text-muted-foreground">{t('subtitle')}</p>
+          <div className="flex items-center justify-center gap-3">
+            <Button asChild size="lg"><Link href="/audit">{t('ctaPrimary')}</Link></Button>
+            <Button asChild variant="outline" size="lg"><Link href="/dashboard">{t('ctaSecondary')}</Link></Button>
+          </div>
+        </section>
 
-        <p className="max-w-xl text-balance text-muted-foreground">
-          {t.rich('intro', {
-            code: (chunks) => (
-              <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-sm">
-                {chunks}
-              </code>
-            ),
-          })}
-        </p>
+        <section className="grid gap-4 sm:grid-cols-2">
+          <Feature title={t('feature1Title')} description={t('feature1Desc')} />
+          <Feature title={t('feature2Title')} description={t('feature2Desc')} />
+          <Feature title={t('feature3Title')} description={t('feature3Desc')} />
+          <Feature title={t('feature4Title')} description={t('feature4Desc')} />
+        </section>
 
-        <p className="max-w-xl text-sm text-muted-foreground">{tc('tagline')}</p>
+        <section className="space-y-3 text-center">
+          <h2 className="text-2xl font-semibold">{t('howTitle')}</h2>
+          <div className="grid gap-3 sm:grid-cols-3">
+            <Step text={t('how1')} />
+            <Step text={t('how2')} />
+            <Step text={t('how3')} />
+          </div>
+        </section>
 
-        <div className="mt-2 flex flex-wrap items-center justify-center gap-3">
-          <Button size="lg">{t('ctaAudit')}</Button>
-          <Button size="lg" variant="outline">
-            {t('ctaDocs')}
-          </Button>
-        </div>
-
-        <Card className="mt-8 max-w-2xl">
-          <CardHeader>
-            <CardTitle className="text-base">web-foundation · ui-foundation</CardTitle>
-            <CardDescription>
-              i18n · theme · SEO · Shadcn primitives activos
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="grid grid-cols-2 gap-x-8 gap-y-1 text-xs text-muted-foreground sm:grid-cols-4">
-            <DemoStat label="locale" value={locale} />
-            <DemoStat label="default" value={routing.defaultLocale} />
-            <DemoStat label="prefix" value={String(routing.localePrefix ?? 'as-needed')} />
-            <DemoStat label="locales" value={routing.locales.join(', ')} />
-          </CardContent>
-        </Card>
+        <section className="rounded-xl border p-8 text-center">
+          <p className="mb-3 text-xl font-semibold">{t('finalCta')}</p>
+          <Button asChild><Link href="/signup">{t('ctaPrimary')}</Link></Button>
+        </section>
       </main>
-
-      <footer className="border-t border-border px-6 py-3 text-center text-xs text-muted-foreground">
-        web-foundation · ui-foundation · next steps: auth-foundation → audit-runner
-      </footer>
     </div>
   );
 }
 
-function DemoStat({ label, value }: { label: string; value: string }) {
+function Feature({ title, description }: { title: string; description: string }) {
   return (
-    <div className="flex flex-col items-center">
-      <span className="font-mono text-foreground">{value}</span>
-      <span className="text-[10px] uppercase tracking-wide">{label}</span>
-    </div>
+    <Card>
+      <CardHeader>
+        <CardTitle className="text-lg">{title}</CardTitle>
+      </CardHeader>
+      <CardContent className="text-sm text-muted-foreground">{description}</CardContent>
+    </Card>
   );
+}
+
+function Step({ text }: { text: string }) {
+  return <div className="rounded-lg border p-4 text-sm">{text}</div>;
 }

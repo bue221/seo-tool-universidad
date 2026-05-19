@@ -1,15 +1,29 @@
 {
   "Common": {
-    "appName": "SEO Custom Tool",
-    "tagline": "Auditoría SEO con scraping profundo, Insights y análisis competitivo.",
+    "appName": "LumoSEO",
+    "tagline": "Hacé medible tu visibilidad.",
     "switchToEnglish": "Cambiar a inglés",
     "switchToSpanish": "Cambiar a español"
   },
-  "HomePage": {
-    "title": "Bienvenido a SEO Custom Tool",
-    "intro": "Capa <code>web-foundation</code> activa: i18n configurado.",
-    "ctaAudit": "Iniciar auditoría",
-    "ctaDocs": "Ver documentación"
+  "Landing": {
+    "title": "Medí tu visibilidad SEO con confianza",
+    "subtitle": "LumoSEO combina métricas oficiales de Google con análisis on-page profundo en un flujo profesional.",
+    "ctaPrimary": "Iniciar auditoría gratis",
+    "ctaSecondary": "Ver dashboard",
+    "howTitle": "Cómo funciona",
+    "how1": "Ingresá tu URL",
+    "how2": "Corré auditoría en paralelo",
+    "how3": "Revisá insights accionables",
+    "featuresTitle": "Capacidades principales",
+    "feature1Title": "Google PageSpeed",
+    "feature1Desc": "Señales oficiales de performance y SEO.",
+    "feature2Title": "Scraper profundo",
+    "feature2Desc": "On-page, scripts de tracking y señales de contenido.",
+    "feature3Title": "Inteligencia de keywords",
+    "feature3Desc": "Términos top y densidad por página auditada.",
+    "feature4Title": "Snapshot de sentimiento",
+    "feature4Desc": "Lectura rápida de polaridad del contenido competidor.",
+    "finalCta": "¿Listo para mejorar tu visibilidad?"
   },
   "NotFound": {
     "title": "Página no encontrada",
