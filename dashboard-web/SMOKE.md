@@ -184,7 +184,14 @@ Una vez deployado a un dominio accesible públicamente:
 - Validar vista con tabs y score.
 - Forzar caída de `SCRAPER_API_URL` y verificar resultado parcial.
 
-## 9. Auth foundation smoke
+## 9. GBP + Analytics smoke
+
+- Abrir `/gbp/profile` y guardar profile.
+- Crear post en `/gbp/posts`.
+- Crear review y responder en `/gbp/reviews`.
+- Abrir `/analytics` y verificar KPIs cargados.
+
+## 10. Auth foundation smoke
 
 Con env Supabase cargado en `.env.local`:
 

@@ -14,9 +14,9 @@ export default async function DashboardPage() {
       <CardContent className="space-y-2 text-sm text-muted-foreground">
         <p>{t('welcome', { name: user?.displayName ?? user?.email ?? 'there' })}</p>
         <ul className="list-disc pl-4">
-          <li>/audit</li>
-          <li>/gbp</li>
-          <li>/analytics</li>
+          <li><a className="underline" href="/audit">/audit</a></li>
+          <li><a className="underline" href="/gbp">/gbp</a></li>
+          <li><a className="underline" href="/analytics">/analytics</a></li>
         </ul>
       </CardContent>
     </Card>
