@@ -1,0 +1,12 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.8",
+  "base_commit_sha": "66cdd70907d24ac53fbdefd38e8cab8f263a00d9",
+  "prompts": {},
+  "humans": {
+    "h_1fbfe28b518553": {
+      "author": "bue221 <camiloplaza3@gmail.com>"
+    }
+  }
+}
