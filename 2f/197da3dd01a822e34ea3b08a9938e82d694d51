@@ -1,0 +1,66 @@
+dashboard-web/.dockerignore
+  s_3a8de285f24107::t_f537cbdf43b941 1-34
+dashboard-web/Dockerfile
+  s_3a8de285f24107::t_c81cc06b5cb41e 1-47
+scraper-api/internal/config/config.go
+  s_648728913b2931::t_fd3375e083d498 16
+scraper-api/internal/audit/handler_test.go
+  s_648728913b2931::t_49aceb571c894d 1-102
+scraper-api/internal/httpx/middleware_test.go
+  s_648728913b2931::t_255c4f579f4ee4 1-68
+scraper-api/internal/audit/onpage_test.go
+  s_648728913b2931::t_49af9369513923 1-94
+scraper-api/internal/audit/runner_test.go
+  s_648728913b2931::t_da163e9f77d73d 1-68
+scraper-api/internal/health/handler_test.go
+  s_648728913b2931::t_8488122e7a8b62 1-47
+scraper-api/internal/httpx/errors_test.go
+  s_648728913b2931::t_1b0131f8274c01 1-55
+scraper-api/internal/config/config_test.go
+  s_648728913b2931::t_e7596171aa756a 1-73
+dashboard-web/next.config.mjs
+  s_3a8de285f24107::t_95ac6ffab6bfba 13-14
+docker-compose.yml
+  s_3a8de285f24107::t_4ca90fc63e5699 1-60
+scraper-api/internal/audit/keywords_test.go
+  s_648728913b2931::t_3e4a298a0044ac 1-116
+Makefile
+  s_3a8de285f24107::t_25de75b4886a46 30
+  s_3a8de285f24107::t_8be7648aff05c9 139-140,143,145
+  s_3a8de285f24107::t_0cdfc785beb9f8 40,43-51
+  s_3a8de285f24107::t_2b53a4e2963bf4 115-129
+  s_3a8de285f24107::t_1d2a658f191f1b 1-21,25-29,31,35-39,41-42,52-114,130-138,141-142,144,146
+  s_3a8de285f24107::t_ce614f3917d9e9 22-24,32-34
+  s_3a8de285f24107::t_eaec69a75260d9 147-184
+.gitignore
+  s_3a8de285f24107::t_f05a7f738d8040 18-23
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.8",
+  "base_commit_sha": "2f197da3dd01a822e34ea3b08a9938e82d694d51",
+  "prompts": {},
+  "humans": {
+    "h_1fbfe28b518553": {
+      "author": "bue221 <camiloplaza3@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_3a8de285f24107": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fbbd6d32-672c-4856-9d0a-0592cec670e6",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "bue221 <camiloplaza3@gmail.com>"
+    },
+    "s_648728913b2931": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0751ea36-5503-4302-8941-870e3592298a",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "bue221 <camiloplaza3@gmail.com>"
+    }
+  }
+}
