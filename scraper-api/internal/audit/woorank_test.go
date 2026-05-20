@@ -26,9 +26,9 @@ func mustDoc(t *testing.T, html string) *goquery.Document {
 
 func TestCheckTitle(t *testing.T) {
 	cases := []struct {
-		name   string
-		html   string
-		want   WoorankStatus
+		name string
+		html string
+		want WoorankStatus
 	}{
 		{"missing", `<html></html>`, WoorankFail},
 		{"too short", `<title>short</title>`, WoorankWarn},
@@ -364,5 +364,32 @@ func TestRunWoorankDeterministic(t *testing.T) {
 	}
 	if r1.Score <= 0 || r1.Score > 1 {
 		t.Fatalf("score out of range: %v", r1.Score)
+	}
+}
+
+func TestOriginOf(t *testing.T) {
+	if got := originOf("https://example.com/path?a=1"); got != "https://example.com" {
+		t.Fatalf("got %q", got)
+	}
+	if got := originOf("not a url"); got != "not a url" {
+		t.Fatalf("got %q", got)
+	}
+}
+
+func TestFetchStringRespectsMaxBytes(t *testing.T) {
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		_, _ = w.Write([]byte("abcdefghijklmnopqrstuvwxyz"))
+	}))
+	defer srv.Close()
+
+	body, status, err := fetchString(context.Background(), srv.Client(), srv.URL, 5)
+	if err != nil {
+		t.Fatalf("fetchString err: %v", err)
+	}
+	if status != 200 {
+		t.Fatalf("status = %d", status)
+	}
+	if body != "abcde" {
+		t.Fatalf("body = %q, want %q", body, "abcde")
 	}
 }

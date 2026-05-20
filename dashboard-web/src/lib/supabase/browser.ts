@@ -1,9 +1,12 @@
-'use client';
+"use client";
 
-import { useSession } from '@clerk/nextjs';
-import { createClient as createSupabaseClient, type SupabaseClient } from '@supabase/supabase-js';
-import { useMemo } from 'react';
-import { env } from '@/lib/env';
+import { useSession } from "@clerk/nextjs";
+import {
+	createClient as createSupabaseClient,
+	type SupabaseClient,
+} from "@supabase/supabase-js";
+import { useMemo } from "react";
+import { env } from "@/lib/env";
 
 /**
  * Hook para obtener un cliente Supabase en Client Components.
@@ -15,18 +18,18 @@ import { env } from '@/lib/env';
  * consumidores deben manejar el caso (loading / no-auth) antes de querear.
  */
 export function useSupabase(): SupabaseClient | null {
-  const { session } = useSession();
+	const { session } = useSession();
 
-  return useMemo(() => {
-    if (!session) return null;
-    return createSupabaseClient(
-      env.NEXT_PUBLIC_SUPABASE_URL,
-      env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-      {
-        async accessToken() {
-          return (await session.getToken()) ?? null;
-        },
-      },
-    );
-  }, [session]);
+	return useMemo(() => {
+		if (!session) return null;
+		return createSupabaseClient(
+			env.NEXT_PUBLIC_SUPABASE_URL,
+			env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
+			{
+				async accessToken() {
+					return (await session.getToken()) ?? null;
+				},
+			},
+		);
+	}, [session]);
 }

@@ -1,6 +1,6 @@
-import { auth } from '@clerk/nextjs/server';
-import { createClient as createSupabaseClient } from '@supabase/supabase-js';
-import { env } from '@/lib/env';
+import { auth } from "@clerk/nextjs/server";
+import { createClient as createSupabaseClient } from "@supabase/supabase-js";
+import { env } from "@/lib/env";
 
 /**
  * Cliente Supabase para Server Components / Server Actions / Route Handlers.
@@ -16,14 +16,14 @@ import { env } from '@/lib/env';
  * Sigue siendo `async` por compatibilidad con call-sites existentes (`await createClient()`).
  */
 export async function createClient() {
-  return createSupabaseClient(
-    env.NEXT_PUBLIC_SUPABASE_URL,
-    env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-    {
-      async accessToken() {
-        const { getToken } = await auth();
-        return (await getToken()) ?? null;
-      },
-    },
-  );
+	return createSupabaseClient(
+		env.NEXT_PUBLIC_SUPABASE_URL,
+		env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
+		{
+			async accessToken() {
+				const { getToken } = await auth();
+				return (await getToken()) ?? null;
+			},
+		},
+	);
 }

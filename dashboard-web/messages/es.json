@@ -270,7 +270,7 @@
           "viewport": "Meta viewport mobile",
           "charset": "Charset declarado (UTF-8)",
           "https": "Servido sobre HTTPS",
-          "langAttr": "Atributo <html lang>",
+          "langAttr": "Atributo &lt;html lang&gt;",
           "canonical": "Link canónico",
           "robotsTxt": "robots.txt accesible",
           "sitemapXml": "sitemap.xml accesible",
@@ -289,6 +289,7 @@
       "UPSTREAM_BOTH_FAILED": "Fallaron ambos upstream",
       "INVALID_URL": "URL inválida",
       "UNAUTHORIZED": "No autorizado",
+      "SNAPSHOT_SAVE_FAILED": "No se pudo guardar el snapshot en la base de datos",
       "UNKNOWN": "Error desconocido"
     }
   },
