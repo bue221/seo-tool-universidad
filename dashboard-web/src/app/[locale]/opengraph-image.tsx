@@ -164,6 +164,7 @@ export default async function OpengraphImage({ params }: Props) {
           <div style={{ display: 'flex', gap: 10 }}>
             {['PageSpeed', 'Scraper', 'Keywords', 'Análisis'].map((label) => (
               <div
+                key={label}
                 style={{
                   padding: '9px 18px',
                   borderRadius: 999,

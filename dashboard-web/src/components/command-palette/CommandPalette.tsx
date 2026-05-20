@@ -100,6 +100,7 @@ export function CommandPalette({ locale, labels }: Props) {
                      data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0"
         />
         <DialogPrimitive.Content
+          id="command-palette-dialog"
           aria-label={labels.ariaLabel}
           className="fixed left-1/2 top-[20%] z-50 w-full max-w-lg -translate-x-1/2
                      overflow-hidden rounded-xl border border-border/60 bg-popover/95

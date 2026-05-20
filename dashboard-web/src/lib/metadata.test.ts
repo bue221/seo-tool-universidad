@@ -70,7 +70,7 @@ describe('buildMetadata', () => {
   it('openGraph contiene siteName, locale, type website', () => {
     const m = buildMetadata(baseInput);
     expect(m.openGraph).toMatchObject({
-      siteName: 'SEO Custom Tool',
+      siteName: 'LumoSEO',
       locale: 'es',
       type: 'website',
     });

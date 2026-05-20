@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Command as CommandIcon, Search } from 'lucide-react';
+import { Command as CommandIcon } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 
@@ -30,16 +30,28 @@ import { cn } from '@/lib/utils';
 interface CommandBarProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onClick'> {
   placeholder?: string;
   kbd?: string;
+  controlsId?: string;
   onOpen?: () => void;
 }
 
 export const CommandBar = React.forwardRef<HTMLButtonElement, CommandBarProps>(
-  ({ placeholder = 'Buscar…', kbd = 'ENTER', onOpen, className, ...props }, ref) => {
+  (
+    {
+      placeholder = 'Buscar…',
+      kbd = 'ENTER',
+      controlsId = 'command-palette-dialog',
+      onOpen,
+      className,
+      ...props
+    },
+    ref,
+  ) => {
     return (
       <button
         ref={ref}
         type="button"
         role="combobox"
+        aria-controls={controlsId}
         aria-expanded={false}
         aria-haspopup="dialog"
         onClick={onOpen}

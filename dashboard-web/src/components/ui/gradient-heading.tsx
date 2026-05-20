@@ -24,9 +24,9 @@ import { cn } from '@/lib/utils';
  * útil para no romper consumidores que migren progresivamente.
  */
 type Size = 'lg' | 'sm';
-type Tag = 'h1' | 'h2' | 'h3';
+type Tag = 'h1' | 'h2' | 'h3' | 'p';
 
-interface GradientHeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
+interface GradientHeadingProps extends React.HTMLAttributes<HTMLElement> {
   as?: Tag;
   size?: Size;
   accent?: React.ReactNode;

@@ -3,9 +3,9 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import type { GscRange } from '@/lib/gsc/types';
+import { parseRangeParam } from '../_lib/range';
 
 interface RangeSelectorProps {
-  current: GscRange;
   labels: Record<GscRange, string>;
 }
 
@@ -13,10 +13,11 @@ interface RangeSelectorProps {
  * URL-driven range selector. Writes `?range=` so the page is shareable.
  * `router.replace` keeps the browser history clean across toggles.
  */
-export function RangeSelector({ current, labels }: RangeSelectorProps) {
+export function RangeSelector({ labels }: RangeSelectorProps) {
   const router = useRouter();
   const pathname = usePathname();
   const params = useSearchParams();
+  const current = parseRangeParam(params.get('range') ?? undefined);
 
   const onChange = (value: string) => {
     if (!value) return; // empty when user deselects — toggle-group quirk
