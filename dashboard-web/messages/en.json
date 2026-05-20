@@ -17,7 +17,7 @@
         "insights": "Insights"
       },
       "items": {
-        "dashboard": "Nexus Panel",
+        "dashboard": "Dashboard",
         "audit": "SEO Audit",
         "compare": "Compare",
         "gsc": "Search Console",
@@ -164,7 +164,7 @@
   },
   "Dashboard": {
     "title": "Command",
-    "titleAccent": "Nexus",
+    "titleAccent": "Center",
     "description": "Hi {name}. Advanced SEO matrix and visibility signals in one place.",
     "deployAudit": "Deploy audit",
     "indicatorsAria": "Main indicators",

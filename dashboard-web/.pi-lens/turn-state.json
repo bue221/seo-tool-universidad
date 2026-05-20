@@ -1,0 +1,128 @@
+{
+  "files": {
+    "src/app/[locale]/layout.tsx": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 144
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-20T03:29:41.892Z"
+    },
+    "src/middleware.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 59
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-20T04:11:34.570Z"
+    },
+    "src/app/[locale]/page.tsx": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 345
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-20T03:34:55.779Z"
+    },
+    "src/app/[locale]/(protected)/audit/_actions/run-audit.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 49
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-20T03:39:52.033Z"
+    },
+    "src/lib/env.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 148
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-20T03:54:43.652Z"
+    },
+    "src/lib/supabase/server.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 30
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-20T03:47:05.291Z"
+    },
+    "src/lib/supabase/browser.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 36
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-20T03:47:05.220Z"
+    },
+    "src/lib/audit/scraper.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 95
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-20T03:55:34.753Z"
+    },
+    "src/app/[locale]/(protected)/layout.tsx": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 144
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-20T03:55:34.575Z"
+    },
+    "src/lib/audit/run.test.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 112
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-20T03:56:56.914Z"
+    },
+    "src/lib/gsc/generator.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 335
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-20T04:08:21.387Z"
+    },
+    "src/lib/gsc/generator.test.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 107
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-20T04:08:45.929Z"
+    }
+  },
+  "turnCycles": 0,
+  "maxCycles": 3,
+  "lastUpdated": "2026-05-20T04:11:34.570Z",
+  "sessionId": "lens-mpdj91xz-c222b7e2"
+}

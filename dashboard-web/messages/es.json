@@ -17,7 +17,7 @@
         "insights": "Insights"
       },
       "items": {
-        "dashboard": "Panel Nexus",
+        "dashboard": "Panel",
         "audit": "Auditoría SEO",
         "compare": "Comparar",
         "gsc": "Search Console",
@@ -163,8 +163,8 @@
     }
   },
   "Dashboard": {
-    "title": "Comando",
-    "titleAccent": "Nexus",
+    "title": "Centro",
+    "titleAccent": "SEO",
     "description": "Hola {name}. Matriz avanzada de SEO y señales de visibilidad en un solo lugar.",
     "deployAudit": "Desplegar auditoría",
     "indicatorsAria": "Indicadores principales",

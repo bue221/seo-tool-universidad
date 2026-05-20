@@ -1,0 +1,17 @@
+{
+  "files": {
+    "internal/audit/woorank_test.go": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 396
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-20T03:56:57.394Z"
+    }
+  },
+  "turnCycles": 0,
+  "maxCycles": 3,
+  "lastUpdated": "2026-05-20T03:56:57.394Z"
+}
