@@ -15,6 +15,12 @@ dist/
 bin/
 vendor/
 
+# Test coverage (vitest + go cover)
+coverage/
+coverage.out
+coverage.html
+*.lcov
+
 # Playwright
 ms-playwright/
 test-results/

@@ -13,7 +13,7 @@ type Config struct {
 
 func Load() Config {
 	return Config{
-		Port:              getEnv("PORT", "8080"),
+		Port:              getEnv("PORT", "9743"),
 		PlaywrightHeadless: getEnv("PLAYWRIGHT_HEADLESS", "true") != "false",
 		AllowedOrigin:     getEnv("ALLOWED_ORIGIN", "*"),
 		BrowserPoolSize:   3,

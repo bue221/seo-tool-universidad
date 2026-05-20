@@ -1,0 +1,60 @@
+# =============================================================================
+# seo-custom-tool — orquestación local con Docker Compose
+#
+# Servicios:
+#   - scraper-api    → Go + Playwright (Chromium)  :8080
+#   - dashboard-web  → Next.js 15 (standalone)     :3000
+#
+# Uso:
+#   docker compose up --build           # primera vez
+#   docker compose up -d                # detached
+#   docker compose down                 # detener
+#   docker compose logs -f dashboard-web
+# =============================================================================
+
+services:
+  scraper-api:
+    build:
+      context: ./scraper-api
+      dockerfile: Dockerfile
+    container_name: seo-scraper-api
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      PORT: 8080
+      PLAYWRIGHT_HEADLESS: "true"
+      ALLOWED_ORIGIN: "http://localhost:3000"
+      BROWSER_POOL_SIZE: 3
+      LOG_LEVEL: info
+      VERSION: v0.1.0
+    healthcheck:
+      # La imagen mcr.microsoft.com/playwright trae curl preinstalado.
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      # start_period generoso porque Playwright tarda en levantar el browser pool.
+      start_period: 30s
+
+  dashboard-web:
+    build:
+      context: ./dashboard-web
+      dockerfile: Dockerfile
+    container_name: seo-dashboard-web
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    # Carga Clerk + Supabase desde el env local. Si no existe, créalo con:
+    #   make env
+    env_file:
+      - ./dashboard-web/.env.local
+    environment:
+      NODE_ENV: production
+      # DNS interno de compose — el front habla con el scraper por nombre de servicio
+      # cuando llama desde el server (API routes, server actions).
+      SCRAPER_API_URL: http://scraper-api:8080
+    depends_on:
+      scraper-api:
+        # Espera al healthcheck del scraper antes de arrancar el front.
+        condition: service_healthy

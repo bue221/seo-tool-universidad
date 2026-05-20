@@ -1,0 +1,34 @@
+# Build artifacts y caches
+node_modules
+.next
+.next/cache
+out
+dist
+
+# Logs y env locales
+*.log
+npm-debug.log*
+.env*.local
+
+# VCS y editor
+.git
+.gitignore
+.vscode
+.idea
+
+# Tests y docs
+coverage
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+**/*.spec.tsx
+README.md
+SMOKE.md
+
+# Lighthouse y configs locales
+.lighthouserc.json
+tsconfig.tsbuildinfo
+
+# Docker
+Dockerfile
+.dockerignore

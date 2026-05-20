@@ -10,6 +10,8 @@ const __dirname = path.dirname(__filename);
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Bundle mínimo para Docker (genera .next/standalone con server.js).
+  output: 'standalone',
   // Monorepo root explícito para evitar inferencia incorrecta por lockfiles externos.
   outputFileTracingRoot: path.join(__dirname, '..'),
 };
