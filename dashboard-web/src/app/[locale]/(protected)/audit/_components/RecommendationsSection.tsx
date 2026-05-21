@@ -4,6 +4,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import type { AuditResult } from "@/lib/audit/types";
 
+import { AiExplainButton } from "./AiExplainButton";
+import { AiPrivacyNotice } from "./AiPrivacyNotice";
+import { AiCacheControls } from "./AiCacheControls";
+
 export async function RecommendationsSection({
 	result,
 }: {
@@ -34,6 +38,9 @@ export async function RecommendationsSection({
 
 	return (
 		<div className="space-y-3">
+			<AiPrivacyNotice />
+			<AiCacheControls />
+
 			{recs.map((rec) => (
 				<Card key={rec.id}>
 					<CardHeader className="pb-2">
@@ -51,6 +58,32 @@ export async function RecommendationsSection({
 					</CardHeader>
 					<CardContent>
 						<p className="text-sm text-muted-foreground">{rec.reason}</p>
+
+						<AiExplainButton
+							siteUrl={result.url}
+							rec={rec}
+							context={{
+								globalScore: result.globalScore,
+								pagespeed: result.pagespeed
+									? {
+											performance: result.pagespeed.performance,
+											accessibility: result.pagespeed.accessibility,
+											bestPractices: result.pagespeed.bestPractices,
+											seo: result.pagespeed.seo,
+										}
+									: undefined,
+								onPage: result.scraper
+									? {
+											title: result.scraper.onPage?.title?.value,
+											metaDescription:
+												result.scraper.onPage?.metaDescription?.value,
+											h1Count: result.scraper.onPage?.h1?.count,
+											imageAltCoverage:
+												result.scraper.onPage?.images?.altCoverage,
+										}
+									: undefined,
+							}}
+						/>
 					</CardContent>
 				</Card>
 			))}
