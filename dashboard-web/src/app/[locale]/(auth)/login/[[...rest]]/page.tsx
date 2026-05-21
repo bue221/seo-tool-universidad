@@ -1,4 +1,6 @@
-import { SignIn } from '@clerk/nextjs';
+import { SignIn } from "@clerk/nextjs";
+
+import { routing } from "@/i18n/routing";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -13,13 +15,17 @@ type Props = { params: Promise<{ locale: string }> };
  * → User & Authentication → Social Connections. No requiere código acá.
  */
 export default async function LoginPage({ params }: Props) {
-  const { locale } = await params;
-  return (
-    <SignIn
-      path={`/${locale}/login`}
-      routing="path"
-      signUpUrl={`/${locale}/signup`}
-      forceRedirectUrl={`/${locale}/dashboard`}
-    />
-  );
+	const { locale } = await params;
+
+	// With `localePrefix: 'as-needed'`, default locale paths are unprefixed.
+	const prefix = locale === routing.defaultLocale ? "" : `/${locale}`;
+
+	return (
+		<SignIn
+			path={`${prefix}/login`}
+			routing="path"
+			signUpUrl={`${prefix}/signup`}
+			forceRedirectUrl={`${prefix}/dashboard`}
+		/>
+	);
 }
