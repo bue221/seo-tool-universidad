@@ -10,7 +10,12 @@ Auditor de seguridad **estático** del repo. Aplica la metodología de 6 fases d
 
 ## Contrato
 
-1. Producir `security/reports/owasp-review-<YYYYMMDD-HHMM>.md` priorizado por severidad CVSS estimada.
+1. Producir `security/reports/owasp-review-<YYYYMMDD-HHMM>.md` priorizado por severidad CVSS estimada, **con formato de informe académico estilo APA 7 (edición 7)**:
+   - Portada (formato “student paper”): título, autor, institución, curso, docente y fecha.
+   - Tabla de contenido.
+   - Citas en el texto cuando corresponda.
+   - Sección final **Referencias** con entradas en **normas APA 7**.
+   - Si faltan datos de portada, **preguntarlos al inicio** (Autor, Institución, Curso/Materia, Docente, Fecha). Si el usuario no responde, usar placeholders y marcar “Pendiente de completar” en la portada.
 2. Al finalizar, **preguntar al usuario si desea remediar** los hallazgos. Si dice que sí, abrir un plan de remediación (idealmente vía `/sdd-init security-remediation-<fecha>` si la feature lo amerita; si son fixes puntuales, lista de tareas inline).
 3. Nunca commitear ni pushear cambios sin aprobación explícita.
 
@@ -85,10 +90,36 @@ Para cada hallazgo:
 
 ### Fase 6 — Informe y Priorización
 
-Generar el reporte markdown con esta estructura exacta:
+Generar el reporte markdown con esta estructura exacta (estilo APA 7, adaptado a Markdown):
 
 ```markdown
-# OWASP / UCentral Vulnerability Review — <repo> — <fecha>
+# Portada (APA 7 — student paper)
+
+**Título:** OWASP / UCentral Vulnerability Review — <repo> — <fecha>
+
+**Autor:** <Nombre Apellido>
+
+**Institución:** <Institución>
+
+**Curso/Materia:** <Curso>
+
+**Docente:** <Docente>
+
+**Fecha:** <YYYY-MM-DD>
+
+---
+
+# Tabla de contenido
+
+- [1. Resumen ejecutivo](#1-resumen-ejecutivo)
+- [2. Superficie de ataque](#2-superficie-de-ataque)
+- [3. Herramientas ejecutadas](#3-herramientas-ejecutadas)
+- [4. Hallazgos](#4-hallazgos)
+- [5. Limitaciones del análisis](#5-limitaciones-del-análisis)
+- [6. Próximos pasos](#6-próximos-pasos)
+- [Referencias](#referencias)
+
+---
 
 ## 1. Resumen ejecutivo
 - Total hallazgos: N (Críticos: x, Altos: y, Medios: z, Bajos: w, Info: v)
@@ -102,6 +133,7 @@ Generar el reporte markdown con esta estructura exacta:
 | Herramienta | Estado | Resultado resumido |
 
 ## 4. Hallazgos
+
 ### F-001 — <título corto>
 - **Severidad:** Crítica | Alta | Media | Baja | Info
 - **CVSS v3.1:** <score> (<vector>)
@@ -113,6 +145,7 @@ Generar el reporte markdown con esta estructura exacta:
 - **PoC conceptual:**
 - **Remediación sugerida:**
 - **Esfuerzo estimado:** S | M | L
+- **Referencias (si aplica):** (Autor, año) …
 
 (repetir por hallazgo, ordenados por severidad descendente)
 
@@ -121,7 +154,15 @@ Generar el reporte markdown con esta estructura exacta:
 
 ## 6. Próximos pasos
 - Plan de remediación propuesto.
+
+## Referencias
+(Entradas en formato APA 7; incluir **al menos** OWASP Top 10, CVSS v3.1 y el PDF UCentral si fue usado como marco.)
 ```
+
+Notas APA mínimas para este contexto:
+- Citas en texto: (Organización, 2021) / (Autor, 2019). Si no hay fecha: (Organización, s. f.).
+- Referencias: autor/organización, año, título en cursiva (en Markdown: *Título*), y URL.
+- Si el informe usa herramientas (npm audit, govulncheck, gosec, gitleaks), referenciarlas como software/documentación oficial cuando se cite evidencia o metodología.
 
 ## Cierre obligatorio (interacción con el usuario)
 
@@ -130,7 +171,8 @@ Después de escribir el reporte, mostrar al usuario:
 1. Path absoluto del reporte.
 2. Conteo por severidad.
 3. Top 3 hallazgos en una línea cada uno.
-4. **Pregunta explícita**, idéntica en intención: `¿Querés que arme un plan de remediación para estos hallazgos? (sí / solo críticos / no)`
+4. Si la portada quedó con placeholders, pedir los datos para completarla (Autor, Institución, Curso/Materia, Docente, Fecha).
+5. **Pregunta explícita**, idéntica en intención: `¿Querés que arme un plan de remediación para estos hallazgos? (sí / solo críticos / no)`
 
 Según la respuesta:
 
@@ -145,4 +187,4 @@ Según la respuesta:
 - No modificar código en la fase de auditoría — solo lectura + escritura del reporte.
 - Si un hallazgo es Sospecha sin evidencia razonable, descartalo o bajalo a Info; nada de inflar el reporte.
 - El reporte va en `security/reports/` (crear dir si no existe). Agregar `security/reports/` a `.gitignore` si el usuario lo pide; por defecto **queda versionado**.
-- Idioma del reporte: español rioplatense, técnico y sobrio.
+- Idioma del reporte: español rioplatense, técnico y sobrio, manteniendo estructura de informe académico (APA 7) en lo posible dentro de Markdown.
