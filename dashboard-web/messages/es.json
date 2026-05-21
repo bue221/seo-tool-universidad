@@ -291,6 +291,39 @@
           "impact": "Impacto",
           "effort": "Esfuerzo"
         },
+        "ai": {
+          "badges": {
+            "runsLocally": "Corre localmente",
+            "noServerCalls": "Sin llamadas al servidor",
+            "webgpuReady": "WebGPU listo",
+            "webgpuMissing": "WebGPU no disponible"
+          },
+          "privacyBody": "La AI corre completamente en tu navegador usando WebGPU. Tu prompt y la respuesta no se envían a nuestros servidores. La primera vez se descarga un modelo y se cachea localmente.",
+          "loading": {
+            "start": "Iniciando WebLLM…",
+            "downloading": "Descargando modelo…"
+          },
+          "errors": {
+            "webgpuRequired": "Se requiere WebGPU para correr AI local en este navegador.",
+            "generic": "No se pudo correr AI en este navegador."
+          },
+          "explain": {
+            "button": "Explicar con AI",
+            "running": "Explicando…",
+            "show": "Mostrar",
+            "hide": "Ocultar",
+            "outputTitle": "Explicación AI",
+            "streaming": "Streaming…"
+          },
+          "cache": {
+            "title": "Cache AI",
+            "body": "Borra caches del modelo WebLLM guardadas en este navegador (best-effort).",
+            "clearButton": "Borrar cache AI",
+            "clearing": "Borrando…",
+            "cleared": "Cache AI borrada (IndexedDB: {indexedDb}, Cache: {caches}).",
+            "clearError": "No se pudo borrar la cache AI."
+          }
+        },
         "structure": {
           "title": "Árbol de estructura del sitio",
           "unavailable": "Estructura del sitio no disponible.",
@@ -390,18 +423,6 @@
       "url": "URL",
       "date": "Fecha",
       "score": "Score"
-    }
-  },
-  "Settings": {
-    "title": "Ajustes",
-    "description": "Gestioná el perfil de tu workspace, preferencias e integraciones por defecto.",
-    "profile": {
-      "title": "Perfil",
-      "description": "Nombre, contacto y defaults del negocio (próximamente)."
-    },
-    "preferences": {
-      "title": "Preferencias",
-      "description": "Locale, tema y preferencias de reportes (próximamente)."
     }
   },
   "Onboarding": {

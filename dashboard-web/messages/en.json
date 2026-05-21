@@ -291,6 +291,39 @@
           "impact": "Impact",
           "effort": "Effort"
         },
+        "ai": {
+          "badges": {
+            "runsLocally": "Runs locally",
+            "noServerCalls": "No server calls",
+            "webgpuReady": "WebGPU ready",
+            "webgpuMissing": "WebGPU not available"
+          },
+          "privacyBody": "AI runs entirely in your browser using WebGPU. Your prompt and output are not sent to our servers. The first run downloads a model and caches it locally.",
+          "loading": {
+            "start": "Starting WebLLM…",
+            "downloading": "Downloading model…"
+          },
+          "errors": {
+            "webgpuRequired": "WebGPU is required to run local AI in this browser.",
+            "generic": "AI could not run in this browser."
+          },
+          "explain": {
+            "button": "Explain with AI",
+            "running": "Explaining…",
+            "show": "Show",
+            "hide": "Hide",
+            "outputTitle": "AI explanation",
+            "streaming": "Streaming…"
+          },
+          "cache": {
+            "title": "AI cache",
+            "body": "Clears WebLLM model caches stored in this browser (best-effort).",
+            "clearButton": "Clear AI cache",
+            "clearing": "Clearing…",
+            "cleared": "AI cache cleared (IndexedDB: {indexedDb}, Cache: {caches}).",
+            "clearError": "Could not clear AI cache."
+          }
+        },
         "structure": {
           "title": "Site structure tree",
           "unavailable": "Site structure unavailable.",
