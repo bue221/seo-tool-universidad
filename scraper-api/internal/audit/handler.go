@@ -6,18 +6,19 @@ import (
 	"time"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/gofiber/fiber/v2"
-	"github.com/playwright-community/playwright-go"
 	"github.com/cplaza/seo-custom-tool/scraper-api/internal/browser"
 	"github.com/cplaza/seo-custom-tool/scraper-api/internal/httpx"
+	"github.com/gofiber/fiber/v2"
+	"github.com/playwright-community/playwright-go"
 )
 
 type Handler struct {
-	Pool *browser.Pool
+	Pool          *browser.Pool
+	MaxCrawlPages int
 }
 
 func NewHandler(pool *browser.Pool) *Handler {
-	return &Handler{Pool: pool}
+	return &Handler{Pool: pool, MaxCrawlPages: crawlMaxPages}
 }
 
 func validURL(raw string) bool {
@@ -34,6 +35,8 @@ func (h *Handler) PostAudit(c *fiber.Ctx) error {
 		return httpx.Error(c, fiber.StatusBadRequest, "INVALID_URL")
 	}
 
+	recorder := newStageRecorder()
+
 	ctx, err := h.Pool.Acquire(c.Context())
 	if err != nil {
 		return httpx.Error(c, fiber.StatusInternalServerError, "INTERNAL")
@@ -46,18 +49,40 @@ func (h *Handler) PostAudit(c *fiber.Ctx) error {
 	}
 	defer page.Close()
 
-	_, err = page.Goto(req.URL, playwright.PageGotoOptions{Timeout: playwright.Float(25000), WaitUntil: playwright.WaitUntilStateDomcontentloaded})
-	if err != nil {
+	var (
+		html     string
+		doc      *goquery.Document
+		finalURL = req.URL
+	)
+
+	recorder.measure("fetch", func() (StageStatus, string) {
+		_, gotoErr := page.Goto(req.URL, playwright.PageGotoOptions{Timeout: playwright.Float(25000), WaitUntil: playwright.WaitUntilStateDomcontentloaded})
+		if gotoErr != nil {
+			return StageStatusError, "TIMEOUT"
+		}
+		content, contentErr := page.Content()
+		if contentErr != nil {
+			return StageStatusError, "INTERNAL"
+		}
+		html = content
+		if page.URL() != "" {
+			finalURL = page.URL()
+		}
+		return StageStatusOK, ""
+	})
+	if html == "" {
 		return httpx.Error(c, fiber.StatusGatewayTimeout, "TIMEOUT")
 	}
 
-	html, err := page.Content()
-	if err != nil {
-		return httpx.Error(c, fiber.StatusInternalServerError, "INTERNAL")
-	}
-
-	doc, err := goquery.NewDocumentFromReader(strings.NewReader(html))
-	if err != nil {
+	recorder.measure("parse", func() (StageStatus, string) {
+		parsedDoc, parseErr := goquery.NewDocumentFromReader(strings.NewReader(html))
+		if parseErr != nil {
+			return StageStatusError, "INTERNAL"
+		}
+		doc = parsedDoc
+		return StageStatusOK, ""
+	})
+	if doc == nil {
 		return httpx.Error(c, fiber.StatusInternalServerError, "INTERNAL")
 	}
 
@@ -74,30 +99,45 @@ func (h *Handler) PostAudit(c *fiber.Ctx) error {
 			withAlt++
 		}
 	})
-
 	text := strings.TrimSpace(doc.Text())
 
-	finalURL := page.URL()
-	if finalURL == "" {
-		finalURL = req.URL
-	}
-
 	resp, _ := Run(c.Context(), RawInput{
-		URL: req.URL,
-		Text: text,
-		HTML: html,
+		URL:       req.URL,
+		Text:      text,
+		HTML:      html,
 		OnPageRaw: OnPageRaw{Title: title, MetaDescription: metaDesc, H1Values: h1s, ImagesTotal: total, ImagesWithAlt: withAlt},
 	})
 	resp.FetchedAt = time.Now().UTC().Format(time.RFC3339)
 
-	// Run WooRank in-line: it reuses the parsed DOM and issues 3 short
-	// parallel sub-requests for robots/sitemap/favicon (timeout 5s each).
-	resp.Woorank = RunWoorank(c.Context(), WoorankInput{
-		FinalURL:    finalURL,
-		Document:    doc,
-		RawHTML:     html,
-		AltCoverage: resp.OnPage.Images.AltCoverage,
+	recorder.measure("woorank", func() (StageStatus, string) {
+		resp.Woorank = RunWoorank(c.Context(), WoorankInput{
+			FinalURL:    finalURL,
+			Document:    doc,
+			RawHTML:     html,
+			AltCoverage: resp.OnPage.Images.AltCoverage,
+		})
+		return StageStatusOK, ""
 	})
+
+	recorder.measure("crawl", func() (StageStatus, string) {
+		crawl, tree, crawlErr := buildSiteTree(c.Context(), finalURL, doc, h.MaxCrawlPages)
+		if crawlErr != nil {
+			return StageStatusWarn, "CRAWL_PARTIAL"
+		}
+		resp.Crawl = crawl
+		resp.SiteStructure = tree
+		if crawl.Truncated {
+			return StageStatusWarn, "CRAWL_TRUNCATED"
+		}
+		return StageStatusOK, ""
+	})
+
+	recorder.measure("recommendations", func() (StageStatus, string) {
+		resp.Recommendations = BuildRecommendations(resp)
+		return StageStatusOK, ""
+	})
+
+	resp.Observability = recorder.build()
 
 	return c.JSON(resp)
 }

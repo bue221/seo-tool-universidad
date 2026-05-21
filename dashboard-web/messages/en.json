@@ -217,7 +217,10 @@
         "woorank": "WooRank",
         "tracking": "Tracking",
         "keywords": "Keywords",
-        "sentiment": "Sentiment"
+        "sentiment": "Sentiment",
+        "recommendations": "Recommendations",
+        "structure": "Structure",
+        "observability": "Observability"
       }
     },
     "Form": {
@@ -280,6 +283,28 @@
           "structuredData": "Structured data (JSON-LD)",
           "imageAltCoverage": "Image alt coverage"
         }
+      },
+      "Intelligence": {
+        "recommendations": {
+          "unavailable": "Recommendations unavailable.",
+          "empty": "No high-priority recommendations for this snapshot.",
+          "impact": "Impact",
+          "effort": "Effort"
+        },
+        "structure": {
+          "title": "Site structure tree",
+          "unavailable": "Site structure unavailable.",
+          "empty": "No crawl structure available for this snapshot.",
+          "pages": "pages",
+          "depth": "Depth",
+          "truncated": "Truncated",
+          "children": "children"
+        },
+        "observability": {
+          "unavailable": "Observability unavailable.",
+          "empty": "No stage metrics collected for this snapshot.",
+          "totalDuration": "Total duration"
+        }
       }
     },
     "Errors": {
@@ -296,6 +321,10 @@
   "GBP": {
     "title": "GBP Simulator",
     "description": "Manage your business profile, posts, reviews and insights.",
+    "simulated": {
+      "title": "Simulated data",
+      "body": "This module uses an academic Google Business Profile simulation and does not call Google's private API in real time."
+    },
     "tabs": {
       "profile": "Profile",
       "posts": "Posts",
@@ -395,11 +424,19 @@
       "range28d": "Last 28 days",
       "range90d": "Last 3 months",
       "backToProperties": "All properties",
-      "property": "Property"
+      "property": "Property",
+      "simulated": {
+        "title": "Simulated data",
+        "body": "Search Console here is a structural simulation based on your snapshots, not official Google API data."
+      }
     },
     "Landing": {
       "title": "Search Console",
       "subtitle": "Verified properties derived from your recent audits (simulated dataset).",
+      "simulated": {
+        "title": "Simulated data",
+        "body": "The Search Console dataset is deterministic and reproducible for academic use."
+      },
       "empty": {
         "body": "You don't have any audited properties yet. Run an audit first and come back.",
         "cta": "Run an audit"
@@ -496,6 +533,11 @@
       "shared": "Shared",
       "competitorsOnly": "Only on competitors",
       "empty": "Nothing here."
+    },
+    "History": {
+      "title": "Recent comparisons",
+      "empty": "No saved comparisons yet.",
+      "ranAt": "Ran"
     }
   }
 }

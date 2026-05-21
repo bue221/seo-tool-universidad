@@ -52,6 +52,51 @@ const scraperSchema: z.ZodType<ScraperAudit> = z.object({
 			),
 		})
 		.optional(),
+	crawl: z
+		.object({
+			pagesVisited: z.number(),
+			maxPages: z.number(),
+			truncated: z.boolean(),
+			maxDepth: z.number(),
+		})
+		.optional(),
+	siteStructure: z
+		.object({
+			root: z.string(),
+			nodes: z.array(
+				z.object({
+					id: z.string(),
+					label: z.string(),
+					depth: z.number(),
+					children: z.array(z.string()),
+				}),
+			),
+		})
+		.optional(),
+	observability: z
+		.object({
+			stages: z.array(
+				z.object({
+					name: z.string(),
+					status: z.enum(["ok", "warn", "error", "skipped"]),
+					durationMs: z.number(),
+					code: z.string().optional(),
+				}),
+			),
+			totalDurationMs: z.number(),
+		})
+		.optional(),
+	recommendations: z
+		.array(
+			z.object({
+				id: z.string(),
+				title: z.string(),
+				impact: z.enum(["low", "medium", "high"]),
+				effort: z.enum(["low", "medium", "high"]),
+				reason: z.string(),
+			}),
+		)
+		.optional(),
 });
 
 function mapStatus(status: number): PartialFailureCode {

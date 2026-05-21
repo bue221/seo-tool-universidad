@@ -52,6 +52,70 @@ type Sentiment struct {
 	Score    float64 `json:"score"`
 }
 
+// Crawl metadata for bounded internal traversal used by siteStructure.
+type Crawl struct {
+	PagesVisited int  `json:"pagesVisited"`
+	MaxPages     int  `json:"maxPages"`
+	Truncated    bool `json:"truncated"`
+	MaxDepth     int  `json:"maxDepth"`
+}
+
+// Flat node list used by dashboard-web to render a hierarchical tree.
+type SiteNode struct {
+	ID       string   `json:"id"`
+	Label    string   `json:"label"`
+	Depth    int      `json:"depth"`
+	Children []string `json:"children"`
+}
+
+type SiteStructure struct {
+	Root  string     `json:"root"`
+	Nodes []SiteNode `json:"nodes"`
+}
+
+type StageStatus string
+
+const (
+	StageStatusOK      StageStatus = "ok"
+	StageStatusWarn    StageStatus = "warn"
+	StageStatusError   StageStatus = "error"
+	StageStatusSkipped StageStatus = "skipped"
+)
+
+type StageMetric struct {
+	Name       string      `json:"name"`
+	Status     StageStatus `json:"status"`
+	DurationMs int64       `json:"durationMs"`
+	Code       string      `json:"code,omitempty"`
+}
+
+type Observability struct {
+	Stages          []StageMetric `json:"stages"`
+	TotalDurationMs int64         `json:"totalDurationMs"`
+}
+
+type RecommendationImpact string
+
+type RecommendationEffort string
+
+const (
+	ImpactLow    RecommendationImpact = "low"
+	ImpactMedium RecommendationImpact = "medium"
+	ImpactHigh   RecommendationImpact = "high"
+
+	EffortLow    RecommendationEffort = "low"
+	EffortMedium RecommendationEffort = "medium"
+	EffortHigh   RecommendationEffort = "high"
+)
+
+type Recommendation struct {
+	ID     string               `json:"id"`
+	Title  string               `json:"title"`
+	Impact RecommendationImpact `json:"impact"`
+	Effort RecommendationEffort `json:"effort"`
+	Reason string               `json:"reason"`
+}
+
 // WooRank-style technical SEO hygiene checks. See openspec/changes/woorank-checker.
 type WoorankStatus string
 
@@ -76,13 +140,17 @@ type WoorankResult struct {
 }
 
 type Response struct {
-	URL       string         `json:"url"`
-	FetchedAt string         `json:"fetchedAt"`
-	OnPage    OnPage         `json:"onPage"`
-	Tracking  Tracking       `json:"tracking"`
-	Keywords  Keywords       `json:"keywords"`
-	Sentiment Sentiment      `json:"sentiment"`
-	Woorank   *WoorankResult `json:"woorank,omitempty"`
+	URL             string           `json:"url"`
+	FetchedAt       string           `json:"fetchedAt"`
+	OnPage          OnPage           `json:"onPage"`
+	Tracking        Tracking         `json:"tracking"`
+	Keywords        Keywords         `json:"keywords"`
+	Sentiment       Sentiment        `json:"sentiment"`
+	Woorank         *WoorankResult   `json:"woorank,omitempty"`
+	Crawl           *Crawl           `json:"crawl,omitempty"`
+	SiteStructure   *SiteStructure   `json:"siteStructure,omitempty"`
+	Observability   *Observability   `json:"observability,omitempty"`
+	Recommendations []Recommendation `json:"recommendations,omitempty"`
 }
 
 type ErrorResponse struct {

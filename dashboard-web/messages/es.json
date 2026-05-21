@@ -217,7 +217,10 @@
         "woorank": "WooRank",
         "tracking": "Tracking",
         "keywords": "Keywords",
-        "sentiment": "Sentimiento"
+        "sentiment": "Sentimiento",
+        "recommendations": "Recomendaciones",
+        "structure": "Estructura",
+        "observability": "Observabilidad"
       }
     },
     "Form": {
@@ -280,6 +283,28 @@
           "structuredData": "Datos estructurados (JSON-LD)",
           "imageAltCoverage": "Cobertura de alt en imágenes"
         }
+      },
+      "Intelligence": {
+        "recommendations": {
+          "unavailable": "Recomendaciones no disponibles.",
+          "empty": "No hay recomendaciones de alta prioridad para este snapshot.",
+          "impact": "Impacto",
+          "effort": "Esfuerzo"
+        },
+        "structure": {
+          "title": "Árbol de estructura del sitio",
+          "unavailable": "Estructura del sitio no disponible.",
+          "empty": "No hay estructura de crawl disponible para este snapshot.",
+          "pages": "páginas",
+          "depth": "Profundidad",
+          "truncated": "Truncado",
+          "children": "hijos"
+        },
+        "observability": {
+          "unavailable": "Observabilidad no disponible.",
+          "empty": "No se recolectaron métricas de etapas para este snapshot.",
+          "totalDuration": "Duración total"
+        }
       }
     },
     "Errors": {
@@ -296,6 +321,10 @@
   "GBP": {
     "title": "Simulador GBP",
     "description": "Gestioná tu perfil de negocio, posts, reseñas e insights.",
+    "simulated": {
+      "title": "Datos simulados",
+      "body": "Este módulo usa simulación académica de Google Business Profile; no consume la API privada de Google en tiempo real."
+    },
     "tabs": {
       "profile": "Perfil",
       "posts": "Posts",
@@ -392,11 +421,19 @@
       "range28d": "Últimos 28 días",
       "range90d": "Últimos 3 meses",
       "backToProperties": "Todas las propiedades",
-      "property": "Propiedad"
+      "property": "Propiedad",
+      "simulated": {
+        "title": "Datos simulados",
+        "body": "Search Console acá es una simulación estructural basada en tus snapshots; no son datos oficiales de la API de Google."
+      }
     },
     "Landing": {
       "title": "Search Console",
       "subtitle": "Propiedades verificadas derivadas de tus auditorías recientes (dataset simulado).",
+      "simulated": {
+        "title": "Datos simulados",
+        "body": "El dataset de Search Console es determinista y reproducible para fines académicos."
+      },
       "empty": {
         "body": "Todavía no tenés propiedades auditadas. Corré una auditoría primero y volvé.",
         "cta": "Correr auditoría"
@@ -508,6 +545,11 @@
       "shared": "Compartidas",
       "competitorsOnly": "Solo en competidores",
       "empty": "Nada por acá."
+    },
+    "History": {
+      "title": "Comparaciones recientes",
+      "empty": "Todavía no hay comparaciones guardadas.",
+      "ranAt": "Ejecutada"
     }
   }
 }
